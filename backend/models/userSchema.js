@@ -4,13 +4,17 @@ import { validator } from 'mongoose-validator';
 import flight from './flightSchema';
 const Schema = mongoose.Schema;
 /** 
- * Flights information:
- * flight number as a string.
- * trip_time as a combined time {departure_time and arrival_time} both strings.
- * trip_date as a date.
- * seat_number as a combined seat (economy, business, first) all Numbers.
- * airport as a combined airport (from, to) all strings.
- * 
+ * User information:
+ * Username : required strings
+ * passowrd: required strings to be encrypted later; min length of a password is 8
+ * Name: consists of First_name and Last_name separated.
+ * Address: Home_address and Country_code separated
+ * Telephone: default:0 ; a telephone number min length is 11 could add more than one number.
+ * Email: with validations email
+ * passport: string 
+ * isActive: boolean default false to indicate if this is the active user
+ * isAdmin: boolean default false to indicate if this is the admin user
+ * reserved_Flights: an array of flights that are reserved by this user; Type of data is Flights.
  * /
  * /* */
 const userSchema = new Schema({
@@ -52,6 +56,7 @@ const userSchema = new Schema({
         
         type: Number,
         required: true,
+        minlength:11,
         default:0
     }],
     Email: {
@@ -83,10 +88,10 @@ const userSchema = new Schema({
     }]
 },{collection: users}); //supposed to be in the collection made already.
 
-//Creating flights
+//Creating User
 const User = mongoose.model('User', userSchema);
 
 
-// Exporting the flightsSchema
+// Exporting the Users
 
 module.exports = User;

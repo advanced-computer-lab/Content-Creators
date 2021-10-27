@@ -60,6 +60,6 @@ const flightsSchema = new Schema({
 const Flights = mongoose.model('Flight', flightsSchema);
 
 
-// Exporting the flightsSchema
+// Exporting the Flights
 
 module.exports = Flights;
