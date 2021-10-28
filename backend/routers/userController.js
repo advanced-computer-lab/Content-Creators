@@ -25,3 +25,12 @@ routerUser.post('/create-flight', async (req, res) => {
 
 });
 
+//Sign out from the website
+routerUser.get('/signout', (req, res) => {
+    if(req.session.User.isActive()) {
+        req.session.User.isActive = false; // make sure the user is not active anymore ?
+
+        req.session.User.signOut(); // supposed to signOut ??? 
+    }
+
+});
