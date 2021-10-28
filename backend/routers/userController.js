@@ -32,5 +32,5 @@ routerUser.get('/signout', (req, res) => {
 
         req.session.User.signOut(); // supposed to signOut ??? 
     }
-
+    res.redirect('/view-all-flights');
 });
