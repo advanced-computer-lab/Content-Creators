@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
  * trip_date as a date.
  * seat_number as a combined seat (economy, business, first) all Numbers.
  * airport as a combined airport (from, to) all strings.
- * 
+ * Number for price
  * /
  * /* */
 const flightsSchema = new Schema({
@@ -53,6 +53,10 @@ const flightsSchema = new Schema({
     airport: {
         from:{type: String, required: true},
         to:{type: String, required: true}
+    },
+    price: {
+        type: Number,
+        required: true
     }
 })
 
