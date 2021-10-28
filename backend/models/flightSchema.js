@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
-import express from 'express';
+const express = require("express");
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-/** 
+/**
  * Flights information:
  * flight number as a string.
  * trip_time as a combined time {departure_time and arrival_time} both strings.
@@ -13,56 +13,55 @@ const Schema = mongoose.Schema;
  * /
  * /* */
 const flightsSchema = new Schema({
-    flight_number: {
-        type: String,
-        required: true,
-        unique: true
+  flight_number: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  trip_time: {
+    departure_time: {
+      type: String,
+      required: true,
     },
-    trip_time: {
-        departure_time: {
-            type: String,
-            required: true
-        },
-        arrival_time: {
-            type: String,
-            required: true
-        }
+    arrival_time: {
+      type: String,
+      required: true,
     },
-    trip_date: {
-        type: Date,
-        required: true,
-        default: Date.now()
+  },
+  trip_date: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  },
+  seat_number: {
+    economy: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    seat_number: {
-        economy: {
-            type: Number,
-            required: true,
-            default:0
-        },
-        business: {
-            type: Number,
-            required: true,
-            default:0
-        },
-        First: {
-            type: Number,
-            required: true,
-            default:0
-        }
+    business: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    airport: {
-        from:{type: String, required: true},
-        to:{type: String, required: true}
+    First: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    price: {
-        type: Number,
-        required: true
-    }
-})
+  },
+  airport: {
+    from: { type: String, required: true },
+    to: { type: String, required: true },
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+});
 
 //Creating flights
-const Flights = mongoose.model('Flight', flightsSchema);
-
+const Flights = mongoose.model("Flight", flightsSchema);
 
 // Exporting the Flights
 
