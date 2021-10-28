@@ -25,3 +25,13 @@ routerUser.post('/create-flight', async (req, res) => {
 
 });
 
+//user sign in with redirection to the view-all-page (admin home page)
+routerUser.get('/sign-in', (req, res) => {
+    if(!req.session.User.isActive){
+        req.session.User =  User.find({username: req.body.username, password: req.body.password}); // change the session user to the  user from the body
+        req.session.User.isActive = true; //make sure the user is active
+    }
+    // render? or redirect ????
+    //res.render('/view-all-flights/'); 
+    res.redirect('/view-all-flights/');
+});
