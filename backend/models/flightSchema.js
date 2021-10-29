@@ -12,52 +12,53 @@ const Schema = mongoose.Schema;
  * Number for price
  * /
  * /* */
+//flights
 const flightsSchema = new Schema({
-  flight_number: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  trip_time: {
-    departure_time: {
-      type: String,
-      required: true,
+    flight_number: {
+        type: String,
+        required: true,
+        unique: true
     },
-    arrival_time: {
-      type: String,
-      required: true,
+    trip_time: {
+        departure_time: {
+            type: String,
+            required: true
+        },
+        arrival_time: {
+            type: String,
+            required: true
+        }
     },
-  },
-  trip_date: {
-    type: Date,
-    required: true,
-    default: Date.now(),
-  },
-  seat_number: {
-    economy: {
-      type: Number,
-      required: true,
-      default: 0,
+    trip_date: {
+        type: String,
+        required: true,
+        //default: Date.now()
     },
-    business: {
-      type: Number,
-      required: true,
-      default: 0,
+    seat_number: {
+        economy: {
+            type: Number,
+            required: true,
+            default:0
+        },
+        business: {
+            type: Number,
+            required: true,
+            default:0
+        },
+        First: {
+            type: Number,
+            required: true,
+            default:0
+        }
     },
-    First: {
-      type: Number,
-      required: true,
-      default: 0,
+    airport: {
+        from:{type: String, required: true},
+        to:{type: String, required: true}
     },
-  },
-  airport: {
-    from: { type: String, required: true },
-    to: { type: String, required: true },
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
+    price: {
+        type: Number,
+        required: true
+    }
 });
 
 //Creating flights
