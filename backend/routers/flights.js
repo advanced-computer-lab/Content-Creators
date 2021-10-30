@@ -68,15 +68,24 @@ router.get('/search-flight', async (req, res)=>{
       if(req.body != null){
       
       const flight = await Flight.find(searchFlight.flights);  
-     // console.log(searchFlight.flights);
       res.send(flight);
       
-       //await Flights.find({}) 
       }else{
           await res.send("not found");}
    
  //}
 
  });
+//UPDATE_FLIGHT
+router.put('/update-flight', async (req, res) => {
+  const searchFlight = req.body;
+  if(req.body != null){
+  
+  const flight = await Flight.findOneAndUpdate(searchFlight.flights);  
+  res.send(flight);
+  
+  }else{
+      await res.send("not found");}
 
+})
 module.exports = router;
