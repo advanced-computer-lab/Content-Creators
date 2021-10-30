@@ -60,4 +60,23 @@ router.delete('/delete-flight', async (req, res)=>{
    await res.send(count); //return the number of deleted flight objects
  });
 
+ //SEARCH_FLIGHT
+router.get('/search-flight', async (req, res)=>{
+  // if(req.session.User.isAdmin==true){
+    
+      const searchFlight = req.body;
+      if(req.body != null){
+      
+      const flight = await Flight.find(searchFlight.flights);  
+     // console.log(searchFlight.flights);
+      res.send(flight);
+      
+       //await Flights.find({}) 
+      }else{
+          await res.send("not found");}
+   
+ //}
+
+ });
+
 module.exports = router;
