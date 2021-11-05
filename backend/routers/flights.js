@@ -88,9 +88,10 @@ router.get("/search-flight", async (req, res) => {
     const searchFlight = req.body;
     if (req.body != null) {
         const flight = await Flight.find(searchFlight.flights);
-        res.send(flight);
+           await res.status(200).send(flight).sendStatus;
+
     } else {
-        await res.send("not found");
+        await res.status(400).send({ success : false, message :'No information available'}).sendStatus;
     }
 });
 
