@@ -5,7 +5,7 @@ const bp = require("body-parser");
 const User = require("../models/userSchema"); //for confirmation purposes later dont know how to use session
 
 //list all
-router.get('/view-all-flights', async (req, res) => {
+router.get('/all-flights', async (req, res) => {
         const allFlights = await Flight.find();
         
         await res.status(200).send(allFlights).sendStatus;
