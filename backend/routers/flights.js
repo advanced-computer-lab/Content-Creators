@@ -4,6 +4,15 @@ const Flight = require("../models/flightSchema");
 const bp = require("body-parser");
 const User = require("../models/userSchema"); //for confirmation purposes later dont know how to use session
 
+//list all
+router.get('/view-all-flights', async (req, res) => {
+        const allFlights = await Flight.find();
+        
+        await res.status(200).send(allFlights).sendStatus;
+
+
+});
+
 //Creating new flight object and saving it to the database.
 router.post("/create-flight", async (req, res) => {
     try {
