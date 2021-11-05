@@ -95,7 +95,7 @@ const userSchema = new Schema(
 ); //supposed to be in the collection made already.
 
 //Creating User
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("users", userSchema);
 
 // Exporting the Users
 
