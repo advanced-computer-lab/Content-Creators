@@ -1,0 +1,41 @@
+/* Bordered form */
+.SignIn.form {
+  border: 3px solid #ffffff;
+  padding: 0  580px;
+  
+}
+
+.SignIn{ 
+    position: relative;
+    text-align: left;    
+}
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 0.5px solid rgb(0, 0, 0);
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+.button {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 14px 20px;
+  margin: middle;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+
+
+
+/* Add padding to containers */
+.container {
+  padding: 250px;
+}
+

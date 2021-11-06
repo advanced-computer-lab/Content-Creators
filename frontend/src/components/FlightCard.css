@@ -1,0 +1,37 @@
+.flightCard{
+        border: 0.1rem #c0c0c0 solid;
+        background-color: #f8f8f8;
+        border-radius: 0.5rem;
+        margin: 1rem;  
+        font-family: 'Courier New', Courier, monospace;
+}
+
+.flightCard-body{
+    padding: 1rem;
+    text-align: center;
+}
+
+.Flightbtns{
+    position:relative;
+    left: 1400px;
+    right: 100px;
+}
+
+.col1{
+    text-align: left;
+}
+.col2{
+    text-align: center;
+}
+.col3{
+    text-align: right;
+}
+.col4{
+    text-align: right;
+}
+
+.edit{
+    position: relative;
+    height: 50px;
+    width: 50px;
+}

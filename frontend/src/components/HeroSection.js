@@ -6,10 +6,10 @@ import './HeroSection.css';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <video src='/videos/video-1.mp4' autoPlay loop muted />
-      <h1>ADVENTURE AWAITS</h1>
+      <img src="/images/pattern.jpeg" alt="" height="1050" width="1679"/>
+      <h1>Where the journey begins!</h1>
       <p>What are you waiting for?</p>
-      <div className='hero-btns'>
+      {/* <div className='hero-btns'>
         <Button
           className='btns'
           buttonStyle='btn--outline'
@@ -25,7 +25,7 @@ function HeroSection() {
         >
           WATCH TRAILER <i className='far fa-play-circle' />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

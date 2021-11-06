@@ -1,0 +1,9 @@
+.searchBar{
+    width: 200px;
+}
+
+.createButton{
+    position:relative;
+    left: 1600px;
+    right: 100px;
+}

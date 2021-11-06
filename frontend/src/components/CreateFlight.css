@@ -1,0 +1,79 @@
+/* Bordered form */
+.CreateFlight.form {
+    border: 3px solid #ffffff;
+    padding: 0  450px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 30px;
+  }
+
+
+  .CreateFlight{ 
+    position: relative; 
+    text-align: left;  
+    display: flex; 
+ 
+}
+
+.flight_number{
+    width: 50px;
+}
+  /* Full-width inputs */
+  input[type=text], input[type=password],input[type=number] {
+    width: 120%;
+    padding: 10px 15px;
+    margin: 10px 0;
+    display: grid;
+    border: 0.5px solid rgb(0, 0, 0);
+    box-sizing: border-box;
+  }
+  
+  /* Set a style for all buttons */
+ .createbutton {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    margin: middle;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    /* text-decoration: none; */
+    text-decoration-color: #ffffff;
+    
+
+  }
+  .createbutton:hover {
+    background-color: #ffffff; 
+    color: rgb(2, 2, 2);
+    text-align: center;
+    text-decoration: none;
+    
+  }
+  .cancelButton {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: middle;
+    border: 0.5px solid rgb(0, 0, 0);
+    cursor: pointer;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+  }
+  .cancelButton:hover {
+    background-color: #490000; 
+    color: rgb(255, 255, 255);
+  }
+  
+  /* Add padding to containers */
+  .createContainer.container {
+    padding: 0 150px 0 150px;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    height: 750px;
+
+  }

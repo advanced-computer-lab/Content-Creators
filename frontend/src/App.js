@@ -11,6 +11,9 @@ import {
 import Flights from "./components/pages/Flights";
 import Products from "./components/pages/Products";
 import SignUp from "./components/pages/SignUp";
+import SignIn from "./components/pages/SignIn.js";
+import AboutUs from "./components/pages/AboutUs";
+import CreateFlight from "./components/pages/CreateFlight";
 
 function App() {
     return (
@@ -20,8 +23,9 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/flights" component={Flights} />
-                    <Route path="/about" component={Products} />
-                    <Route path="/sign-up" component={SignUp} />
+                    <Route path="/aboutus" component={AboutUs} />
+                    <Route path="/users/login" component={SignIn} />
+                    <Route path="/create-flight" component={CreateFlight} />
                 </Switch>
             </Router>
         </>
