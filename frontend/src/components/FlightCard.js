@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import { Component, useState, useEffect } from "react";
 import axios from "axios";
-import '../components/FlightCard.css';
+import "../components/FlightCard.css";
 import Icon from "react-crud-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function FlightCard() {
     const [data, setData] = useState([]);
@@ -12,8 +12,6 @@ export default function FlightCard() {
         axios
             .get("http://localhost:8000/flights/all-flights")
             .then((res) => {
-                console.log(res);
-                console.log(res.data);
                 setData(res.data);
             })
             .catch((err) => {
@@ -21,16 +19,50 @@ export default function FlightCard() {
                 console.log("error");
             });
     }, []);
-    
+
+    const deleteHandler = async (flightNumber) => {
+        try {
+            console.log(`Attempting to delete flightNumber: ${flightNumber}`);
+            const response = await axios.delete(
+                `http://localhost:8000/flights/delete-flight/${flightNumber}`
+            );
+            setData((prevState) => {
+                return prevState.filter((elem) => elem.flight_number != flightNumber);
+            });
+            console.log(`successfully deleted ${flightNumber}`);
+        } catch (err) {
+            console.log(`not able to delete ${flightNumber}`);
+            console.log(err);
+        }
+    };
+
+    const editHandler = (flightNumber) => {
+        console.log(`Attempting to edit ${flightNumber}`);
+    };
+
     return (
         <div>
             {data.map((data) => {
                 return (
                     <div key={data.flight_number} className="flightCard">
-                        <div className="flightCard-body"> <h3>Flight Number: {data.flight_number} </h3>
-                        <button className="FlightBtns" type="button" onClick>Edit Flight</button>
-                        <br />
-                        <button className="FlightBtns" type="button" onClick>Delete Flight</button>
+                        <div className="flightCard-body">
+                            {" "}
+                            <h3>Flight Number: {data.flight_number} </h3>
+                            <button
+                                className="FlightBtns"
+                                type="button"
+                                onClick={() => editHandler(data.flight_number)}
+                            >
+                                Edit Flight
+              </button>
+                            <br />
+                            <button
+                                className="FlightBtns"
+                                type="button"
+                                onClick={() => deleteHandler(data.flight_number)}
+                            >
+                                Delete Flight
+              </button>
                         </div>
                         <div className="col1">
                             <h5> Trip Time</h5>
@@ -55,4 +87,3 @@ export default function FlightCard() {
         </div>
     );
 }
-
