@@ -5,7 +5,7 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 import axios from "axios";
 
-export default function SearchFilter({ data, setDataParent, fullData }) {
+export default function SearchFilter({ data, setDataParent }) {
     const [departureTime, setDepartureTime] = useState("");
     const [arrivalTime, setArrivalTime] = useState("");
     const [flightDate, setFlightDate] = useState("");
@@ -96,22 +96,6 @@ export default function SearchFilter({ data, setDataParent, fullData }) {
         setAirportTo("");
         setAirportFrom("");
     };
-
-    useEffect(() => {
-        console.log(
-            `departureTime is ${departureTime} ,bool: ${Boolean(departureTime)}`
-        );
-        console.log(`arrivalTime is ${arrivalTime} ,bool: ${Boolean(arrivalTime)}`);
-        console.log(`flightDate is ${flightDate} ,bool: ${Boolean(flightDate)}`);
-        console.log(`airportTo is ${airportTo} ,bool: ${Boolean(airportTo)}`);
-        console.log(`airportFrom is ${airportFrom} ,bool: ${Boolean(airportFrom)}`);
-
-        console.log("CHILD: normal data is");
-        console.log(data);
-
-        console.log("CHILD: FULL DATA IS:");
-        console.log(fullData);
-    });
 
     return (
         <>

@@ -10,11 +10,7 @@ import SearchFilter from "../search_bar/SearchFilter";
 
 export default function Flights() {
     const [data, setData] = useState([]);
-    const [fullData, setFullData] = useState([]);
-
-    const resetAllFlights = () => {
-        setData(fullData);
-    };
+    const [advancedSearch, setAdvancedSearch] = useState(false);
 
     const getAllFlights = async (callFunc) => {
         try {
@@ -22,8 +18,6 @@ export default function Flights() {
                 "http://localhost:8000/flights/all-flights"
             );
             callFunc(response.data);
-            // setData(response.data);
-            // setFullData(response.data);
         } catch (err) {
             console.log(err);
         }
@@ -33,19 +27,7 @@ export default function Flights() {
         getAllFlights(setData);
     }, []);
 
-    useEffect(() => {
-        // console.log("fullData is:");
-        // console.log(fullData);
-        console.log("PARENT:normal data is ");
-        console.log(data);
-
-        console.log("PARENT:FULL DATA is ");
-        console.log(fullData);
-    });
-
     const history = useHistory();
-
-    const [advancedSearch, setAdvancedSearch] = useState(false);
 
     const routeChange = (path) => {
         history.push(path);
@@ -94,12 +76,7 @@ export default function Flights() {
             >
                 Create Flight <i class="material-icons">create_new_folder</i>
             </button>
-            <FlightCard
-                data={data}
-                setDataParent={setData}
-                resetAllFlights={resetAllFlights}
-                fullData={fullData}
-            />
+            <FlightCard data={data} setDataParent={setData} />
         </div>
     );
 }
