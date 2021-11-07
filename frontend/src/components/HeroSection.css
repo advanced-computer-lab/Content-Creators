@@ -17,6 +17,10 @@ video {
   object-fit: contain;
 }
 
+.black{
+  color: black;
+}
+
 .hero-container > h1 {
   position: absolute;
   color: #fff;

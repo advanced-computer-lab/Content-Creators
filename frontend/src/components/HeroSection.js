@@ -7,8 +7,8 @@ function HeroSection() {
   return (
     <div className='hero-container'>
       <img src="/images/pattern.jpeg" alt="" height="1050" width="1679"/>
-      <h1>Where the journey begins!</h1>
-      <p>What are you waiting for?</p>
+      <h1 className="black">Where the journey begins!</h1>
+      <p className="black">What are you waiting for?</p>
       {/* <div className='hero-btns'>
         <Button
           className='btns'
