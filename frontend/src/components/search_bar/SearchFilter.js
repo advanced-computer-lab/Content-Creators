@@ -3,45 +3,120 @@ import "./SearchFilter.css";
 import { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
+import axios from "axios";
 
-export default function SearchFilter() {
+export default function SearchFilter({ data, setDataParent, fullData }) {
     const [departureTime, setDepartureTime] = useState("");
     const [arrivalTime, setArrivalTime] = useState("");
     const [flightDate, setFlightDate] = useState("");
     const [airportTo, setAirportTo] = useState("");
     const [airportFrom, setAirportFrom] = useState("");
 
+    const [filterData, setFilterData] = useState(data);
+
     const handleAirportTo = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setAirportTo(value);
-        console.log(`name: ${name}, value: ${value}`);
     };
 
     const handleAirportFrom = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setAirportFrom(value);
-        console.log(`name: ${name}, value: ${value}`);
     };
 
     const handleChangeDepTime = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setDepartureTime(value);
-        console.log(`name: ${name}, value: ${value}`);
     };
     const handleChangeArrTime = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setArrivalTime(value);
-        console.log(`name: ${name}, value: ${value}`);
     };
+    const handleFilterSubmit = (e) => {
+        e.preventDefault();
+        console.log(`submitted filter form`);
+        console.log(`data is:`);
+        console.log(data);
+
+        let newData = filterData;
+
+        if (departureTime) {
+            newData = filterData.filter(
+                (flight) => flight.trip_time.departure_time == departureTime
+            );
+        }
+        if (arrivalTime) {
+            newData = filterData.filter(
+                (flight) => flight.trip_time.arrival_time == arrivalTime
+            );
+        }
+        if (flightDate) {
+            newData = filterData.filter((flight) => flight.trip_date == flightDate);
+        }
+        if (airportTo) {
+            newData = filterData.filter((flight) => flight.airport.to == airportTo);
+        }
+        if (airportFrom) {
+            newData = filterData.filter(
+                (flight) => flight.airport.from == airportFrom
+            );
+        }
+        setDataParent(newData);
+
+        //         console.log(
+        //             `departureTime is ${departureTime} ,bool: ${Boolean(departureTime)}`
+        //         );
+        //         console.log(`arrivalTime is ${arrivalTime} ,bool: ${Boolean(arrivalTime)}`);
+        //         console.log(`flightDate is ${flightDate} ,bool: ${Boolean(flightDate)}`);
+        //         console.log(`airportTo is ${airportTo} ,bool: ${Boolean(airportTo)}`);
+        //         console.log(`airportFrom is ${airportFrom} ,bool: ${Boolean(airportFrom)}`);
+    };
+
+    //takes a state setter function & fetches all data and binds it to the state variable
+    const getAllFlights = async (callFunc) => {
+        try {
+            const response = await axios.get(
+                "http://localhost:8000/flights/all-flights"
+            );
+            callFunc(response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleResetDefaults = (e) => {
+        getAllFlights(setFilterData);
+        setDepartureTime("");
+        setArrivalTime("");
+        setFlightDate("");
+        setAirportTo("");
+        setAirportFrom("");
+    };
+
+    useEffect(() => {
+        console.log(
+            `departureTime is ${departureTime} ,bool: ${Boolean(departureTime)}`
+        );
+        console.log(`arrivalTime is ${arrivalTime} ,bool: ${Boolean(arrivalTime)}`);
+        console.log(`flightDate is ${flightDate} ,bool: ${Boolean(flightDate)}`);
+        console.log(`airportTo is ${airportTo} ,bool: ${Boolean(airportTo)}`);
+        console.log(`airportFrom is ${airportFrom} ,bool: ${Boolean(airportFrom)}`);
+
+        console.log("CHILD: normal data is");
+        console.log(data);
+
+        console.log("CHILD: FULL DATA IS:");
+        console.log(fullData);
+    });
 
     return (
         <>
             <div class="s002">
-                <form>
+                <form onSubmit={(e) => handleFilterSubmit(e)}>
                     <div class="inner-form">
                         <div class="input-field second-wrap">
                             <label>FROM</label>
@@ -149,8 +224,11 @@ export default function SearchFilter() {
                             />
                         </div>
                         <div class="input-field fifth-wrap">
-                            <button class="btn-search" type="button">
+                            <button class="btn-search" type="submit">
                                 SET FILTERS
+              </button>
+                            <button type="button" onClick={(e) => handleResetDefaults(e)}>
+                                RESET DEFAULTS
               </button>
                         </div>
                     </div>
