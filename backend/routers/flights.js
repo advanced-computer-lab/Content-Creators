@@ -6,7 +6,8 @@ const User = require("../models/userSchema"); //for confirmation purposes later 
 
 //list all
 router.get('/all-flights', async (req, res) => {
-        const allFlights = await Flight.find();
+        const filter =req.query;
+        const allFlights = await Flight.find(filter);
         
         await res.status(200).send(allFlights).sendStatus;
 
@@ -91,17 +92,5 @@ router.put("/update-flight/:flight_number", async (req, res) => {
     }
 });
 
-//SEARCH_FLIGHT
-//admin checker to be added
-router.get("/search-flight", async (req, res) => {
-    const searchFlight = req.body;
-    if (req.body != null) {
-        const flight = await Flight.find(searchFlight.flights);
-           await res.status(200).send(flight).sendStatus;
-
-    } else {
-        await res.status(400).send({ success : false, message :'No information available'}).sendStatus;
-    }
-});
 
 module.exports = router;
