@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import "../../App.css";
 import axios from "axios";
-import '../CreateFlight.css';
+import "../CreateFlight.css";
 
 function CreateFlight() {
     const emptyFlight = {
@@ -85,8 +85,7 @@ function CreateFlight() {
     };
     const cancel = (e) => {
         window.location.replace(`flights/all-flights`);
-  
-      };
+    };
 
     const createFlightAxios = async (readyFlight) => {
         try {
@@ -109,10 +108,14 @@ function CreateFlight() {
 
     return (
         <>
-        <div className="CreateFlight">
-            <div action="post" className="CreateFlight form" onSubmit={handleSubmit}>
-                <div className="form-control">
-                <p className="display-4 text-center">Flight Number:</p>
+            <div className="CreateFlight">
+                <div
+                    action="post"
+                    className="CreateFlight form"
+                    onSubmit={handleSubmit}
+                >
+                    <div className="form-control">
+                        <p className="display-4 text-center">Flight Number:</p>
                         <input
                             type="text"
                             id="flight_number"
@@ -123,8 +126,8 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Departure Time:</p>
-                  <input
+                        <p className="display-4 text-center">Departure Time:</p>
+                        <input
                             type="text"
                             id="departure_time"
                             name="departure_time"
@@ -134,7 +137,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Arrival Time:</p>
+                        <p className="display-4 text-center">Arrival Time:</p>
                         <input
                             type="text"
                             id="arrival_time"
@@ -145,7 +148,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Trip Date:</p>
+                        <p className="display-4 text-center">Trip Date:</p>
                         <input
                             type="text"
                             id="trip_date"
@@ -156,7 +159,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Number of Economy Seats:</p>
+                        <p className="display-4 text-center">Number of Economy Seats:</p>
                         <input
                             type="number"
                             id="economy"
@@ -167,7 +170,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Number of Business Seats:</p>
+                        <p className="display-4 text-center">Number of Business Seats:</p>
                         <input
                             type="number"
                             id="business"
@@ -178,7 +181,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Number of First Seats:</p>
+                        <p className="display-4 text-center">Number of First Seats:</p>
                         <input
                             type="number"
                             id="First"
@@ -189,7 +192,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Departure Airport:</p>
+                        <p className="display-4 text-center">Departure Airport:</p>
                         <input
                             type="text"
                             id="airport_from"
@@ -200,7 +203,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Arrival Airport:</p>
+                        <p className="display-4 text-center">Arrival Airport:</p>
                         <input
                             type="text"
                             id="airport_to"
@@ -211,7 +214,7 @@ function CreateFlight() {
                     </div>
                     <br />
                     <div className="form-control">
-                    <p className="display-4 text-center">Price:</p>
+                        <p className="display-4 text-center">Price:</p>
                         <input
                             type="number"
                             id="price"
@@ -221,27 +224,27 @@ function CreateFlight() {
                         />
                     </div>
                     <br />
-                    <button 
-                                className ="createbutton"
-                                type="submit"
-                                value="Create"
-                                onClick={handleSubmit}
-                                 >
-                                   Create Flight
-                                   </button>
-                                   <br />
-                                   <br />
+                    <button
+                        className="createbutton"
+                        type="submit"
+                        value="Create"
+                        onClick={handleSubmit}
+                    >
+                        Create Flight
+          </button>
+                    <br />
+                    <br />
 
                     <button
-                                type="submit"
-                               value="Cancel"
-                              className="cancelButton"
-                              onClick={cancel}
-                              >
-                              Cancel
-                               </button>
-                    </div>
-        </div>
+                        type="submit"
+                        value="Cancel"
+                        className="cancelButton"
+                        onClick={cancel}
+                    >
+                        Cancel
+          </button>
+                </div>
+            </div>
         </>
     );
 }
