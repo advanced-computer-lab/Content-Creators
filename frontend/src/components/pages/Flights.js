@@ -33,7 +33,7 @@ export default function Flights() {
             <div className="searching">
             <input
                 className="searchBar"
-                type="search"
+                type="text"
                 placeholder="Search by flight number..."
             />
             <button className="searchButton" type="button">
