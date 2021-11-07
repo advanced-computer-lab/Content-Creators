@@ -1,8 +1,9 @@
 .flightsearchBar{
-    width: 200px;
+    width: 600px;
     padding: auto;
     position: relative;
     margin: middle;
+    left: 500px;
     
 }
 
@@ -19,6 +20,7 @@
         /* text-decoration: none; */
         text-decoration-color: #ffffff;
         position: relative;
+        left: 1400px;
        
         
       }
@@ -46,3 +48,25 @@
         text-decoration: none;
         
       }
+
+      .searching{
+        position: relative;
+        left: 500px;
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+.searchBar{
+    width: 600px;
+    display: inline-block;
+}      
+.searchButton{
+    display: inline-block;
+}
+.advancedSearch{
+    display: inline-block;
+}
+
+
+
+      

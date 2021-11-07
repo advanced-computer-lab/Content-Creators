@@ -30,8 +30,9 @@ export default function Flights() {
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
             />
 
+            <div className="searching">
             <input
-                className="form-control"
+                className="searchBar"
                 type="search"
                 placeholder="Search by flight number..."
             />
@@ -39,6 +40,7 @@ export default function Flights() {
                 <i class="fa fa-search"></i>
             </button>
             <button
+                className="advancedSearch"
                 type="button"
                 onClick={() => {
                     setAdvancedSearch((prevState) => !prevState);
@@ -48,6 +50,7 @@ export default function Flights() {
       </button>
 
             {advancedSearch && <SearchFilter />}
+            </div>
 
             <br />
             <button
