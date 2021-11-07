@@ -83,6 +83,10 @@ function CreateFlight() {
             console.log("Not entire form is filled");
         }
     };
+    const cancel = (e) => {
+        window.location.replace(`flights/all-flights`);
+  
+      };
 
     const createFlightAxios = async (readyFlight) => {
         try {
@@ -108,7 +112,7 @@ function CreateFlight() {
         <div className="CreateFlight">
             <div action="post" className="CreateFlight form" onSubmit={handleSubmit}>
                 <div className="form-control">
-                        <label htmlFor="flight_number">Flight Number </label>
+                <p className="display-4 text-center">Flight Number:</p>
                         <input
                             type="text"
                             id="flight_number"
@@ -117,9 +121,10 @@ function CreateFlight() {
                             onChange={handleChangeFlight}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="departure_time">Departure Time</label>
-                        <input
+                    <p className="display-4 text-center">Departure Time:</p>
+                  <input
                             type="text"
                             id="departure_time"
                             name="departure_time"
@@ -127,8 +132,9 @@ function CreateFlight() {
                             onChange={handleChangeTripTime}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="arrival_time">Arrival Time : </label>
+                    <p className="display-4 text-center">Arrival Time:</p>
                         <input
                             type="text"
                             id="arrival_time"
@@ -137,8 +143,9 @@ function CreateFlight() {
                             onChange={handleChangeTripTime}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="trip_date">Trip Date : </label>
+                    <p className="display-4 text-center">Trip Date:</p>
                         <input
                             type="text"
                             id="trip_date"
@@ -147,8 +154,9 @@ function CreateFlight() {
                             onChange={handleChangeFlight}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="economy">Economy : </label>
+                    <p className="display-4 text-center">Number of Economy Seats:</p>
                         <input
                             type="number"
                             id="economy"
@@ -157,8 +165,9 @@ function CreateFlight() {
                             onChange={handleChangeSeatNumber}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="business">Business : </label>
+                    <p className="display-4 text-center">Number of Business Seats:</p>
                         <input
                             type="number"
                             id="business"
@@ -167,8 +176,9 @@ function CreateFlight() {
                             onChange={handleChangeSeatNumber}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="First">First : </label>
+                    <p className="display-4 text-center">Number of First Seats:</p>
                         <input
                             type="number"
                             id="First"
@@ -177,8 +187,9 @@ function CreateFlight() {
                             onChange={handleChangeSeatNumber}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="airport_from">Airport From : </label>
+                    <p className="display-4 text-center">Departure Airport:</p>
                         <input
                             type="text"
                             id="airport_from"
@@ -187,8 +198,9 @@ function CreateFlight() {
                             onChange={handleChangeAirport}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="airport_to">Airport To : </label>
+                    <p className="display-4 text-center">Arrival Airport:</p>
                         <input
                             type="text"
                             id="airport_to"
@@ -197,8 +209,9 @@ function CreateFlight() {
                             onChange={handleChangeAirport}
                         />
                     </div>
+                    <br />
                     <div className="form-control">
-                        <label htmlFor="price">Price : </label>
+                    <p className="display-4 text-center">Price:</p>
                         <input
                             type="number"
                             id="price"
@@ -207,6 +220,7 @@ function CreateFlight() {
                             onChange={handleChangeFlight}
                         />
                     </div>
+                    <br />
                     <button 
                                 className ="createbutton"
                                 type="submit"
@@ -215,6 +229,17 @@ function CreateFlight() {
                                  >
                                    Create Flight
                                    </button>
+                                   <br />
+                                   <br />
+
+                    <button
+                                type="submit"
+                               value="Cancel"
+                              className="cancelButton"
+                              onClick={cancel}
+                              >
+                              Cancel
+                               </button>
                     </div>
         </div>
         </>

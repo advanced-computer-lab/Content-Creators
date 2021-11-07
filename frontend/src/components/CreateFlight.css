@@ -1,7 +1,7 @@
 /* Bordered form */
 .CreateFlight.form {
     border: 3px solid #ffffff;
-    padding: 0  450px;
+    padding: 100px  700px;
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-gap: 30px;
@@ -42,6 +42,7 @@
     /* text-decoration: none; */
     text-decoration-color: #ffffff;
     
+    
 
   }
   .createbutton:hover {
@@ -70,7 +71,7 @@
   
   /* Add padding to containers */
   .createContainer.container {
-    padding: 0 150px 0 150px;
+    padding: 0 150px 0 50px;
     display : flex;
     justify-content: center;
     align-items: center;
