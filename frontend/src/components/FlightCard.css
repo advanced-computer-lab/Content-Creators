@@ -4,11 +4,15 @@
         border-radius: 0.5rem;
         margin: 1rem;  
         font-family: 'Courier New', Courier, monospace;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .flightCard-body{
     padding: 1rem;
     text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 30px;
 }
 
 .Flightbtns{
@@ -17,21 +21,24 @@
     right: 100px;
 }
 
-.col1{
-    text-align: left;
-}
+
 .col2{
     text-align: center;
-}
-.col3{
-    text-align: right;
-}
-.col4{
-    text-align: right;
+    position: relative;
 }
 
-.edit{
-    position: relative;
-    height: 50px;
-    width: 50px;
-}
+.btn--flightcard {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 10px 10px;
+    margin: middle;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    height: 30px;
+   text-align: center;
+  }
+  .flightCard:hover {
+    background-color: #b89768; 
+    color: rgb(255, 255, 255);
+  }

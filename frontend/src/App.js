@@ -9,12 +9,10 @@ import {
     // Routes,
 } from "react-router-dom";
 import Flights from "./components/pages/Flights";
-import Products from "./components/pages/Products";
-import SignUp from "./components/pages/SignUp";
 import SignIn from "./components/pages/SignIn.js";
 import AboutUs from "./components/pages/AboutUs";
 import CreateFlight from "./components/pages/CreateFlight";
-
+import UpdateFlight from "./components/pages/UpdateFlight";
 function App() {
     return (
         <>
@@ -26,6 +24,7 @@ function App() {
                     <Route path="/aboutus" component={AboutUs} />
                     <Route path="/users/login" component={SignIn} />
                     <Route path="/create-flight" component={CreateFlight} />
+                    <Route path="/update-flight" component={UpdateFlight} />
                 </Switch>
             </Router>
         </>
