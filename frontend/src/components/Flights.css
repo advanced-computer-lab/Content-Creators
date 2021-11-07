@@ -1,9 +1,48 @@
-.searchBar{
+.flightsearchBar{
     width: 200px;
+    padding: auto;
+    position: relative;
+    margin: middle;
+    
 }
 
-.createButton{
-    position:relative;
-    left: 1600px;
-    right: 100px;
-}
+.createButtonViewall{
+        background-color: #705c40;
+        color: rgb(250, 249, 249);
+        padding: 15px 14px 50px 0;
+        margin: middle;
+        border: none;
+        cursor: pointer;
+        width: 240px;
+        height: 60px;
+        text-align: center;
+        /* text-decoration: none; */
+        text-decoration-color: #ffffff;
+        position: relative;
+       
+        
+      }
+.createButtonViewall:hover {
+        background-color: #ffffff; /* Green */
+        color: rgb(2, 2, 2);
+        text-align: center;
+        text-decoration: none;
+        
+      }
+      .searchButton{
+        border: none;
+        background-color: beige;
+        text-align: center;
+        cursor:pointer;
+        width: 60px;
+        height: 45px;
+        color: black;
+    }
+    
+    .searchButton:hover {
+        background-color: #705c40; 
+        color: rgb(2, 2, 2);
+        text-align: center;
+        text-decoration: none;
+        
+      }
