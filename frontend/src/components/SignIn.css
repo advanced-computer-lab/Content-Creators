@@ -35,7 +35,8 @@ input[type=text], input[type=password] {
 
 
 /* Add padding to containers */
-.container {
-  padding: 250px;
+.signcontainer {
+  padding-left: 750px;
+  display: flex;
 }
 
