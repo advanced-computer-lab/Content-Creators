@@ -1,7 +1,9 @@
 import React from "react";
 import "../../App.css";
 import { Component, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory ,BrowserRouter as Router,
+    Link,
+    useLocation } from "react-router-dom";
 import axios from "axios";
 import FlightCard from "../FlightCard";
 import "../Flights.css";
@@ -11,6 +13,12 @@ import SearchFilter from "../search_bar/SearchFilter";
 export default function Flights() {
     const history = useHistory();
 
+    function useQuery() {
+        const { search } = useLocation();
+      
+        return React.useMemo(() => new URLSearchParams(search), [search]);
+      }
+      let query = useQuery();
     const [advancedSearch, setAdvancedSearch] = useState(false);
 
     const routeChange = (path) => {
@@ -19,6 +27,17 @@ export default function Flights() {
     const createFlightbutton = (e) => {
         routeChange(`../create-flight`);
     };
+
+    const onChange = (e) =>{
+        
+       routeChange(`../flights?${e.target.value}`);
+        
+    };
+    const onEnter = (e) =>{
+        if(e.key == 'Enter'){
+            window.location.assign(`../flights?${e.target.value}`)
+        }
+    }
     return (
         <div>
             <link
@@ -35,6 +54,8 @@ export default function Flights() {
                 className="searchBar"
                 type="text"
                 placeholder="Search by flight number..."
+                onChange={onChange}
+                onKeyPress={onEnter}
             />
             <button className="searchButton" type="button">
                 <i class="fa fa-search"></i>

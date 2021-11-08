@@ -2,16 +2,38 @@ import React from "react";
 import { Component, useState, useEffect } from "react";
 import axios from "axios";
 import "../components/FlightCard.css";
-import { useHistory } from "react-router-dom";
+import { useHistory ,BrowserRouter as Router,
+    Link,
+    useLocation} from "react-router-dom";
 // import Icon from "react-crud-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function FlightCard() {
     const [data, setData] = useState([]);
 
+    function useQuery() {
+        const { search } = useLocation();
+      
+        return React.useMemo(() => new URLSearchParams(search), [search]);
+      }
+      let query = useQuery();
+
+;
     useEffect(() => {
         axios
-            .get("http://localhost:8000/flights/all-flights")
+            .get("http://localhost:8000/flights/all-flights",{
+                params:{
+            flight_number: query.flight_number,
+                departure_time: query.departure_time,
+                arrival_time: query.arrival_time,
+                economy : query.economy,
+                First : query.first,
+                business : query.business,
+                from : query.from,
+                to : query.to,
+                 price : query.price,
+
+           }})
             .then((res) => {
                 setData(res.data);
             })
