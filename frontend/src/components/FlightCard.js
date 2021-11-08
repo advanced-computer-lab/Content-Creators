@@ -7,7 +7,7 @@ import { useHistory ,BrowserRouter as Router,
     useLocation} from "react-router-dom";
 // import Icon from "react-crud-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import {Qs} from "qs"
 
 function useQuery() {
     const { search } = useLocation();
@@ -15,32 +15,58 @@ function useQuery() {
     return React.useMemo(() => new URLSearchParams(search), [search]);
   }
 
+  let trip_time = {
+        departure_time:String,
+        arrival_time:String,
+  };
 export default function FlightCard() {
     const [data, setData] = useState([]);
 
     let query = useQuery();
 
-
 ;
+
     useEffect(() => {
+        // axios.interceptors.request.use(config => {
+        //     config.paramsSerializer = params => {
+        //       // Qs is already included in the Axios package
+        //       return Qs.stringify(params, {
+        //         arrayFormat: "brackets",
+        //         encode: false, 
+        //         allowDots: true,
+        //       });
+        //     };
+        //     return config;
+        //   });
         axios
+
             .get("http://localhost:8000/flights/all-flights",{
                 params:{
-                         flight_number: query.flight_number,
-                            trip_time: query.trip_time,    
-            // departure_time: query.departure_time,
-            //     arrival_time: query.arrival_time,
-                        seat_number: query.seat_number,
-                // economy : query.economy,
-                // First : query.first,
-                // business : query.business,
-                         airport : query.airport,
-                // from : query.from,
-                // to : query.to,
-                         price : query.price,
+                         flight_number: query.get("fnumber"),
+                            // trip_time:{
+                            departure_time: query.get("dT"),
+                            arrival_time: query.get("aT"),
+                            // },
+
+                        // seat_number: { 
+                            economy : query.get("E"),
+                            First : query.get("F"),
+                            business : query.get("B"),
+                        // },
+
+                        //  airport : {
+                           from : query.get("from"),
+                            to : query.get("to"),
+                        // },
+
+                         price : query.get("price"),
 
            }
-        })
+        //    ,            
+        //    paramsSerializer: function (params) {
+        //     return Qs.stringify(params, {arrayFormat: 'brackets'})
+        //   },
+        }) 
             .then((res) => {
                 setData(res.data);
             })

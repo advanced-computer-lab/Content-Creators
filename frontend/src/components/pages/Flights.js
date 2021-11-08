@@ -35,7 +35,8 @@ export default function Flights() {
     };
     const onEnter = (e) =>{
         if(e.key == 'Enter'){
-            window.location.assign(`../flights?${e.target.value}`)
+            window.location.assign(`../flights?${e.target.value}`);
+            
         }
     }
     return (
@@ -57,9 +58,7 @@ export default function Flights() {
                 onChange={onChange}
                 onKeyPress={onEnter}
             />
-            <button className="searchButton" type="button">
-                <i class="fa fa-search"></i>
-            </button>
+          
             <button
                 className="advancedSearch"
                 type="button"
