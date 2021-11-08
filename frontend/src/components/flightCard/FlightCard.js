@@ -74,6 +74,7 @@ export default function FlightCard({ data, setDataParent }) {
                 <h5> Trip Time:</h5>
                 <p>Departure: {data.trip_time.departure_time}</p>
                 <p>Arrival: {data.trip_time.arrival_time}</p>
+                <p>Date: {data.trip_date}</p>
               </div>
               <div className="col2">
                 <h5>Seat Number</h5>
