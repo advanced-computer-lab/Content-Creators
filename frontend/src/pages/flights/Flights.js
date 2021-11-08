@@ -7,6 +7,7 @@ import FlightCard from "../../components/flightCard/FlightCard";
 import "./Flights.css";
 import "../../components/searchFilter/SearchFilter.css";
 import SearchFilter from "../../components/searchFilter/SearchFilter";
+import SearchBar from "../../components/searchBar/SearchBar";
 
 export default function Flights() {
     const [data, setData] = useState([]);
@@ -35,32 +36,18 @@ export default function Flights() {
     const createFlightbutton = (e) => {
         routeChange(`../create-flight`);
     };
+    const toggleAdvancedSearch = () => {
+        setAdvancedSearch((prevState) => !prevState);
+    };
+
     return (
         <div>
-            <link
-                href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                rel="stylesheet"
-            />
-            <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-            />
-
             <div className="searching">
-                <input
-                    className="searchBar"
-                    type="search"
-                    placeholder="Search by flight number..."
-                />
-                <button className="searchButton" type="button">
-                    <i class="fa fa-search"></i>
-                </button>
+                <SearchBar />
                 <button
                     className="advancedSearch"
                     type="button"
-                    onClick={() => {
-                        setAdvancedSearch((prevState) => !prevState);
-                    }}
+                    onClick={() => toggleAdvancedSearch()}
                 >
                     Advanced Search
         </button>
