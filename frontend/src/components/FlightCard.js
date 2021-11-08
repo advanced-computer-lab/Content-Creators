@@ -60,7 +60,7 @@ export default function FlightCard() {
                         // },
 
                          price : query.get("price"),
-
+                         trip_date : query.get("date"),
            }
         //    ,            
         //    paramsSerializer: function (params) {
