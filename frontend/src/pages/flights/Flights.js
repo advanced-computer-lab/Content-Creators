@@ -13,19 +13,19 @@ export default function Flights() {
     const [data, setData] = useState([]);
     const [advancedSearch, setAdvancedSearch] = useState(false);
 
-    const getAllFlights = async (callFunc) => {
+    const getAllFlights = async () => {
         try {
             const response = await axios.get(
                 "http://localhost:8000/flights/all-flights"
             );
-            callFunc(response.data);
+            setData(response.data);
         } catch (err) {
             console.log(err);
         }
     };
 
     useEffect(() => {
-        getAllFlights(setData);
+        getAllFlights();
     }, []);
 
     const history = useHistory();
@@ -43,7 +43,7 @@ export default function Flights() {
     return (
         <div>
             <div className="searching">
-                <SearchBar />
+                <SearchBar data={data} setDataParent={setData} />
                 <button
                     className="advancedSearch"
                     type="button"

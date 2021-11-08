@@ -76,25 +76,27 @@ export default function SearchFilter({ data, setDataParent }) {
         //         console.log(`airportFrom is ${airportFrom} ,bool: ${Boolean(airportFrom)}`);
     };
 
-    //takes a state setter function & fetches all data and binds it to the state variable
-    const getAllFlights = async (callFunc) => {
-        try {
-            const response = await axios.get(
-                "http://localhost:8000/flights/all-flights"
-            );
-            callFunc(response.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    ////takes a state setter function & fetches all data and binds it to the state variable
+    //const getAllFlights = async () => {
+    //    try {
+    //        const response = await axios.get(
+    //            "http://localhost:8000/flights/all-flights"
+    //        );
+    //        setFilterData(response.data);
+    //    } catch (err) {
+    //        console.log(err);
+    //    }
+    //};
 
     const handleResetDefaults = (e) => {
-        getAllFlights(setFilterData);
+        // getAllFlights();
         setDepartureTime("");
         setArrivalTime("");
         setFlightDate("");
         setAirportTo("");
         setAirportFrom("");
+        console.log("filter data after");
+        console.log(filterData);
     };
 
     return (
