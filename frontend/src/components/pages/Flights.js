@@ -55,7 +55,7 @@ export default function Flights() {
                 className="searchBar"
                 type="text"
                 placeholder="Search by flight number..."
-                onChange={onChange}
+                // onChange={onChange}
                 onKeyPress={onEnter}
             />
           
