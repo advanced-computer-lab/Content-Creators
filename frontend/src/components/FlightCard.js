@@ -8,32 +8,39 @@ import { useHistory ,BrowserRouter as Router,
 // import Icon from "react-crud-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+
+function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+
 export default function FlightCard() {
     const [data, setData] = useState([]);
 
-    function useQuery() {
-        const { search } = useLocation();
-      
-        return React.useMemo(() => new URLSearchParams(search), [search]);
-      }
-      let query = useQuery();
+    let query = useQuery();
+
 
 ;
     useEffect(() => {
         axios
             .get("http://localhost:8000/flights/all-flights",{
                 params:{
-            flight_number: query.flight_number,
-                departure_time: query.departure_time,
-                arrival_time: query.arrival_time,
-                economy : query.economy,
-                First : query.first,
-                business : query.business,
-                from : query.from,
-                to : query.to,
-                 price : query.price,
+                         flight_number: query.flight_number,
+                            trip_time: query.trip_time,    
+            // departure_time: query.departure_time,
+            //     arrival_time: query.arrival_time,
+                        seat_number: query.seat_number,
+                // economy : query.economy,
+                // First : query.first,
+                // business : query.business,
+                         airport : query.airport,
+                // from : query.from,
+                // to : query.to,
+                         price : query.price,
 
-           }})
+           }
+        })
             .then((res) => {
                 setData(res.data);
             })

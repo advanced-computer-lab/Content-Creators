@@ -9,15 +9,15 @@ import FlightCard from "../FlightCard";
 import "../Flights.css";
 import "../search_bar/SearchFilter.css";
 import SearchFilter from "../search_bar/SearchFilter";
-
+function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
 export default function Flights() {
     const history = useHistory();
 
-    function useQuery() {
-        const { search } = useLocation();
-      
-        return React.useMemo(() => new URLSearchParams(search), [search]);
-      }
+
       let query = useQuery();
     const [advancedSearch, setAdvancedSearch] = useState(false);
 
