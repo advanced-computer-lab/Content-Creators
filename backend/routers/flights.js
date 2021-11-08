@@ -5,13 +5,16 @@ const bp = require("body-parser");
 const User = require("../models/userSchema"); //for confirmation purposes later dont know how to use session
 
 //list all
-router.get('/all-flights', async (req, res) => {
-        const filter =req.query;
-        const allFlights = await Flight.find(filter);
-        
-        await res.status(200).send(allFlights).sendStatus;
+router.get("/all-flights", async (req, res) => {
+    const allFlights = await Flight.find();
+    await res.status(200).send(allFlights).sendStatus;
+});
 
-
+//search flights by flight_number only for now
+router.get("/search", async (req, res) => {
+    const filter = req.query;
+    const allFlights = await Flight.find(filter);
+    await res.status(200).send(allFlights);
 });
 
 //Creating new flight object and saving it to the database.
@@ -91,6 +94,5 @@ router.put("/update-flight/:flight_number", async (req, res) => {
         });
     }
 });
-
 
 module.exports = router;
