@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import "../../App.css";
 import axios from "axios";
-import "../CreateFlight.css";
+import "./CreateFlight.css";
 
 function CreateFlight() {
     const emptyFlight = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Component, useState, useEffect } from "react";
 import axios from "axios";
-import "../components/FlightCard.css";
+import "./FlightCard.css";
 import { useHistory } from "react-router-dom";
 // import Icon from "react-crud-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

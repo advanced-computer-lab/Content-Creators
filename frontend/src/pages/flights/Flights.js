@@ -3,10 +3,10 @@ import "../../App.css";
 import { Component, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import FlightCard from "../FlightCard";
-import "../Flights.css";
-import "../search_bar/SearchFilter.css";
-import SearchFilter from "../search_bar/SearchFilter";
+import FlightCard from "../../components/flightCard/FlightCard";
+import "./Flights.css";
+import "../../components/searchFilter/SearchFilter.css";
+import SearchFilter from "../../components/searchFilter/SearchFilter";
 
 export default function Flights() {
     const [data, setData] = useState([]);

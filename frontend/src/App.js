@@ -1,18 +1,18 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navBar/Navbar";
 import "./App.css";
-import Home from "./components/pages/Home";
+import Home from "./pages/home/Home";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     // Routes,
 } from "react-router-dom";
-import Flights from "./components/pages/Flights";
-import SignIn from "./components/pages/SignIn.js";
-import AboutUs from "./components/pages/AboutUs";
-import CreateFlight from "./components/pages/CreateFlight";
-import UpdateFlight from "./components/pages/UpdateFlight";
+import Flights from "./pages/flights/Flights";
+import SignIn from "./pages/signIn/SignIn.js";
+import AboutUs from "./pages/aboutUs/AboutUs";
+import CreateFlight from "./pages/createFlight/CreateFlight";
+import UpdateFlight from "./pages/updateFlight/UpdateFlight";
 function App() {
     return (
         <>
