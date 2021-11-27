@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DIR="./backend/node_modules"
+if [ ! -d "$DIR" ]; then
+  echo "Installing npm packages in ${DIR}..."
+  npm install --prefix ./backend
+fi
+
+DIR="./frontend/node_modules"
+if [ ! -d "$DIR" ]; then
+  echo "Installing npm packages in ${DIR}..."
+  npm install --prefix ./frontend
+fi
+
+echo "All npm packages are installed!"
