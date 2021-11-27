@@ -50,8 +50,7 @@ function UpdateFlight() {
         setAirport({ ...airport, [name]: value });
     };
     const cancel = (e) => {
-        window.location.replace("../");
-    };
+        window.location.replace("../flights");    };
 
     const handleSubmit = (e) => {
         e.preventDefault();

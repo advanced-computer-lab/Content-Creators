@@ -1,5 +1,5 @@
 .flightsearchBar{
-    width: 600px;
+    width: 120px;
     padding: auto;
     position: relative;
     margin: middle;
@@ -51,14 +51,17 @@
 
       .searching{
         position: relative;
-        left: 500px;
+        left: 750px;
         white-space: nowrap;
-        overflow-x: auto;
+        overflow-x: hidden;
+        display: table;
+        width: 500px;
     }
 
 .searchBar{
-    width: 600px;
-    display: inline-block;
+    width: 200px;
+    display: flex;
+    position: relative;
 }      
 .searchButton{
     display: inline-block;

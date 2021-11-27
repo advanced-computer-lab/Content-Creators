@@ -61,7 +61,7 @@ export default function Flights() {
                 type="button"
                 onClick={createFlightbutton}
             >
-                Create Flight <i class="material-icons">create_new_folder</i>
+                Create Flight <i class="material-icons"></i>
             </button>
             <FlightCard data={data} setDataParent={setData} />
         </div>
