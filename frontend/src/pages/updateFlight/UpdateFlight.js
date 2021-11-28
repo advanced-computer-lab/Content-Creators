@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
+import Flatpickr from "react-flatpickr";
 
 import { Button } from "../../components/button/Button";
 import "../../App.css";
@@ -28,10 +29,28 @@ function UpdateFlight() {
     const [airport, setAirport] = useState(emptyAirport);
 
     const handleChangeFlight = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setFlight({ ...flight, [name]: value });
+        console.log(` e = ${e}`);
+        console.log(`typeof e = ${typeof e}`);
+
+        console.log(` e = ${e.target}`);
+        console.log(`typeof e = ${typeof e.target}`);
+
+        if (typeof e.target === "object") {
+            const name = e.target.name;
+            const value = e.target.value;
+            setFlight({ ...flight, [name]: value });
+        } else {
+            // setFlight({ ...flight, ["trip_date"]: e.toString() });
+            setFlight({
+                ...flight,
+                ["trip_date"]: new Date(e).toISOString().slice(0, 10),
+            }); //.slice(0, 10) });
+        }
     };
+
+    // onChange={(date) => {
+    //     setFlightDate(date.toString());
+    // }}
 
     const handleChangeTripTime = (e) => {
         const name = e.target.name;
@@ -127,11 +146,12 @@ function UpdateFlight() {
                             <br />
                             {/* </div> */}
 
-                            <div className="form-group">
+                            <div class="form-group">
                                 <p className="display-4 text-center">Departure Time:</p>
                                 <input
-                                    type="text"
-                                    // id="departure_time"
+                                    type="time"
+                                    min="09:00"
+                                    max="18:00"
                                     name="departure_time"
                                     className="form-control"
                                     value={tripTime.departure_time}
@@ -139,14 +159,14 @@ function UpdateFlight() {
                                     required
                                 />
                             </div>
+
                             <br />
-
-                            <div className="form-group">
+                            <div class="form-group">
                                 <p className="display-4 text-center">Arrival Time:</p>
-
                                 <input
-                                    type="text"
-                                    // id="arrival_time"
+                                    type="time"
+                                    min="09:00"
+                                    max="18:00"
                                     name="arrival_time"
                                     className="form-control"
                                     value={tripTime.arrival_time}
@@ -156,18 +176,19 @@ function UpdateFlight() {
                             </div>
                             <br />
 
-                            <div className="form-group">
+                            <div class="form-group">
                                 <p className="display-4 text-center">Trip Date:</p>
-                                <input
-                                    type="text"
-                                    // id="trip_date"
+                                <Flatpickr
+                                    data-disable-time
                                     name="trip_date"
                                     className="form-control"
-                                    value={flight.trip_date}
+                                    placeholder={flight.trip_date}
+                                    value={tripTime.trip_date}
                                     onChange={handleChangeFlight}
                                     required
                                 />
                             </div>
+
                             <br />
 
                             <div className="form-group">
@@ -220,6 +241,7 @@ function UpdateFlight() {
                                 <p className="display-4 text-center">Departure Airport:</p>
                                 <input
                                     type="text"
+                                    maxlength="3"
                                     // id="airport_from"
                                     name="from"
                                     className="form-control"
@@ -234,6 +256,7 @@ function UpdateFlight() {
                                 <p className="display-4 text-center">Arrival Airport:</p>
                                 <input
                                     type="text"
+                                    maxlength="3"
                                     // id="airport_to"
                                     name="to"
                                     className="form-control"
