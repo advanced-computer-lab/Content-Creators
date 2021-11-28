@@ -4,6 +4,7 @@ const User = require("../models/userSchema");
 
 
 
+
 //should fetch all users from DB and send json data
 router.get("/all-users", async (req, res) => {
   const searchUser =await User.find();
@@ -34,4 +35,18 @@ router.post("/login", async (req, res) => {
   
 }
 });
+
+router.put('/sign-up', async (req, res) => {
+  const newUser = req.body;
+  
+  if(req.body ==null){
+    await  await res.status(400).send({ success : false, message :'No information available'}).sendStatus;
+  }else{
+    const addedUser = await User.create(newUser);
+
+  }
+
+});
+
+
 module.exports = router;
