@@ -25,7 +25,7 @@ const reservationSchema = new Schema(
             trim: true,
             required: true,
         },
-        class : {
+        cabinClass : {
             type : String,
             required: true,
             trim: true,
@@ -51,6 +51,6 @@ const reservationSchema = new Schema(
     },
     { collection: "reservations" }
     );
-const Reservation = mongoose.model("reservations", userSchema);
+const Reservation = mongoose.model("reservations", reservationSchema);
 
 module.exports = Reservation;
