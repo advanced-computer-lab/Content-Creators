@@ -4,6 +4,7 @@ const User = require("../models/userSchema");
 
 
 
+
 //should fetch all users from DB and send json data
 router.get("/all-users", async (req, res) => {
   const searchUser =await User.find();
@@ -46,4 +47,6 @@ router.put('/sign-up', async (req, res) => {
   }
 
 });
+
+
 module.exports = router;
