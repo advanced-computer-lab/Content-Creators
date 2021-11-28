@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.PORT || "8000";
 const flights = require("./routers/flights");
 const users = require("./routers/users");
+const reservations = require("./routers/reservations");
 const bp = require("body-parser");
 
 //add routers here
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use("/flights", flights);
 app.use("/users", users);
+app.use("/reservations", reservations);
 
 //database connection.
 mongoose
