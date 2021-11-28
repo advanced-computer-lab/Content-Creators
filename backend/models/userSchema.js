@@ -85,20 +85,7 @@ const userSchema = new Schema(
       default: false,
     },
     // //produces some errors (reconsider)
-    reserved_Flights: [{
-      reserved_flight:{
-       flight_number: {
-        type: String,
-      },
-      total_money:{
-        type: Number,
-      },
-      seats_reserved:[{
-        type: String,
-      }],
-    },
 
-    }]
   },
   { collection: "users" }
 ); //supposed to be in the collection made already.
