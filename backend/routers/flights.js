@@ -20,8 +20,33 @@ router.get("/search", async (req, res) => {
 //Creating new flight object and saving it to the database.
 router.post("/create-flight", async (req, res) => {
     try {
-        const { flight_number, trip_time, trip_date, cabin_classes, airport, price, baggage_allowance, seats } =
-            req.body.flights;
+        const {
+            flight_number,
+            trip_time,
+            trip_date,
+            cabin_classes,
+            airport,
+            price,
+            baggage_allowance,
+        } = req.body.flights;
+
+        const { economy, business, first } = cabin_classes;
+
+        let seats = [];
+
+        for (let i = 0; i < economy; i++) {
+            const seat = { seat_number: `E${i}`, reserved: false };
+            seats.push(seat);
+        }
+        for (let i = 0; i < business; i++) {
+            const seat = { seat_number: `B${i}`, reserved: false };
+            seats.push(seat);
+        }
+        for (let i = 0; i < first; i++) {
+            const seat = { seat_number: `F${i}`, reserved: false };
+            seats.push(seat);
+        }
+        console.log(seats);
 
         const newFlight = new Flight({
             flight_number: flight_number,
