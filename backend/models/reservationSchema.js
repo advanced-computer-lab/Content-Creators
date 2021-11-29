@@ -5,16 +5,21 @@ const { validator } = require("mongoose-validator");
 const flight = require("./flightSchema");
 const Schema = mongoose.Schema;
 
-
+let counter = 0;
+let CountedId = {type: Number, unique: true,default: () => counter++};
 
 const reservationSchema = new Schema(
     {
-        booking_id : {
+        booking_id : 
+        {
             type: Number,
             trim: true,
-            required: true,
+            // required: true,
             unique: true,
-        },
+            // auto_increment: true,
+            default: () => counter++,
+        }
+        ,
         username : {
             type : String,
             trim: true,
