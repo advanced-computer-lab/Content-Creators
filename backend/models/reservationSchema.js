@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 
 const reservationSchema = new Schema(
     {
-        Booking_id : {
+        booking_id : {
             type: Number,
             trim: true,
             required: true,
@@ -25,16 +25,16 @@ const reservationSchema = new Schema(
             trim: true,
             required: true,
         },
-        cabinClass : {
+        cabin_class : {
             type : String,
             required: true,
             trim: true,
         },
-        no_of_Adults : {
+        no_of_adults : {
             type : Number,
             required: true,
         },
-        no_of_Children : {
+        no_of_children : {
             type : Number,
             required: true,
         },
@@ -51,6 +51,6 @@ const reservationSchema = new Schema(
     },
     { collection: "reservations" }
     );
-const Reservation = mongoose.model("reservations", reservationSchema);
+const reservation = mongoose.model("reservations", reservationSchema);
 
-module.exports = Reservation;
+module.exports = reservation;
