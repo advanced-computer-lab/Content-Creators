@@ -224,6 +224,19 @@ function CreateFlight() {
                         />
                     </div>
                     <br />
+                    <div className="form-group">
+                        <p className="display-4 text-center">Baggage Allowance:</p>
+                        <input
+                            type="number"
+                            id="baggage_allowance"
+                            name="baggage_allowance"
+                            className="form-control"
+                            value={flight.baggage_allowance}
+                            onChange={handleChangeFlight}
+                            required
+                        />
+                    </div>
+                    <br />
                     <button
                         className="createbutton"
                         type="submit"
@@ -231,7 +244,7 @@ function CreateFlight() {
                         onClick={handleSubmit}
                     >
                         Create Flight
-          </button>
+                    </button>
                     <br />
                     <br />
 
@@ -242,7 +255,7 @@ function CreateFlight() {
                         onClick={cancel}
                     >
                         Cancel
-          </button>
+                    </button>
                 </div>
             </div>
         </>

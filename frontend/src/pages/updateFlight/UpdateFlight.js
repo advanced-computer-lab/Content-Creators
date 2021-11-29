@@ -11,40 +11,39 @@ import "./UpdateFlight.css";
 function UpdateFlight() {
     // const location = useLocation();
     const history = useHistory();
-    const { flight_number, trip_time, trip_date, seat_number, price } =
-        history.flight_data;
+    const {
+        flight_number,
+        trip_time,
+        trip_date,
+        cabin_classes,
+        price,
+        baggage_allowance,
+    } = history.flight_data;
 
     const emptyFlight = {
         flight_number: history.flight_data.flight_number,
         trip_date: history.flight_data.trip_date,
         price: history.flight_data.price,
     };
-    const emptySeatNumber = seat_number;
+    const emptyCabinClasses = cabin_classes;
     const emptyTripTime = trip_time;
     const emptyAirport = history.flight_data.airport;
 
     const [flight, setFlight] = useState(emptyFlight);
     const [tripTime, setTripTime] = useState(emptyTripTime);
-    const [seatNumber, setSeatNumber] = useState(emptySeatNumber);
+    const [cabinClasses, setCabinClasses] = useState(emptyCabinClasses);
     const [airport, setAirport] = useState(emptyAirport);
 
     const handleChangeFlight = (e) => {
-        console.log(` e = ${e}`);
-        console.log(`typeof e = ${typeof e}`);
-
-        console.log(` e = ${e.target}`);
-        console.log(`typeof e = ${typeof e.target}`);
-
         if (typeof e.target === "object") {
             const name = e.target.name;
             const value = e.target.value;
             setFlight({ ...flight, [name]: value });
         } else {
-            // setFlight({ ...flight, ["trip_date"]: e.toString() });
             setFlight({
                 ...flight,
                 ["trip_date"]: new Date(e).toISOString().slice(0, 10),
-            }); //.slice(0, 10) });
+            });
         }
     };
 
@@ -57,10 +56,10 @@ function UpdateFlight() {
         const value = e.target.value;
         setTripTime({ ...tripTime, [name]: value });
     };
-    const handleChangeSeatNumber = (e) => {
+    const handleChangeCabinClasses = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setSeatNumber({ ...seatNumber, [name]: value });
+        setCabinClasses({ ...cabinClasses, [name]: value });
     };
     const handleChangeAirport = (e) => {
         const name = e.target.name;
@@ -77,9 +76,9 @@ function UpdateFlight() {
             (flight.flight_number && tripTime.departure_time) ||
             tripTime.arrival_time ||
             flight.trip_date ||
-            seatNumber.economy ||
-            seatNumber.business ||
-            seatNumber.First ||
+            cabinClasses.economy ||
+            cabinClasses.business ||
+            cabinClasses.First ||
             airport.from ||
             airport.to ||
             flight.price;
@@ -91,7 +90,7 @@ function UpdateFlight() {
                 flights: {
                     ...flight,
                     trip_time: tripTime,
-                    seat_number: seatNumber,
+                    cabin_classes: cabinClasses,
                     airport: airport,
                 },
             };
@@ -200,8 +199,8 @@ function UpdateFlight() {
                                     // id="economy"
                                     name="economy"
                                     className="form-control"
-                                    value={seatNumber.economy}
-                                    onChange={handleChangeSeatNumber}
+                                    value={cabinClasses.economy}
+                                    onChange={handleChangeCabinClasses}
                                     required
                                 />
                             </div>
@@ -216,8 +215,8 @@ function UpdateFlight() {
                                     // id="business"
                                     name="business"
                                     className="form-control"
-                                    value={seatNumber.business}
-                                    onChange={handleChangeSeatNumber}
+                                    value={cabinClasses.business}
+                                    onChange={handleChangeCabinClasses}
                                     required
                                 />
                             </div>
@@ -228,10 +227,10 @@ function UpdateFlight() {
                                 <input
                                     type="number"
                                     // id="First"
-                                    name="First"
+                                    name="first"
                                     className="form-control"
-                                    value={seatNumber.First}
-                                    onChange={handleChangeSeatNumber}
+                                    value={cabinClasses.First}
+                                    onChange={handleChangeCabinClasses}
                                     required
                                 />
                             </div>
@@ -275,6 +274,19 @@ function UpdateFlight() {
                                     name="price"
                                     className="form-control"
                                     value={flight.price}
+                                    onChange={handleChangeFlight}
+                                    required
+                                />
+                            </div>
+                            <br />
+                            <div className="form-group">
+                                <p className="display-4 text-center">Baggage Allowance:</p>
+                                <input
+                                    type="number"
+                                    // id="price"
+                                    name="baggage_allowance"
+                                    className="form-control"
+                                    value={flight.baggage_allowance}
                                     onChange={handleChangeFlight}
                                     required
                                 />
