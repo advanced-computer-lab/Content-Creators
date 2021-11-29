@@ -1,30 +1,72 @@
-import React from "react";
+import React,{ useEffect, useState } from "react";
 import "./Footer.css";
 import { Button } from "../button/Button";
 import { Link } from "react-router-dom";
+var nodemailer = require("nodemailer");
 
 function Footer() {
+    const emptyEmail = "";
+    const [subscribingEmail, setSubEmail] = useState("");
+
+   const onChangeEmail = (e) =>{
+       const name = e.target.name;
+       const value = e.target.value;
+      setSubEmail(value);
+    };
+    
+    const subscribe = (e) =>{
+        e.preventDefault();
+        var transporter = nodemailer.createTransport({
+            service: "outlook",
+            auth: {
+                user: "ibnfirnas_acl@outlook.com",
+                pass: "firnas123",
+            },
+        });
+
+        var mailOptions = {
+            from: "ibnfirnas_acl@outlook.com",
+            to: subscribingEmail,
+            subject: "Thank you for subscribing",
+            text: "You are now subscribed to the most successful airline company you will ever KNOW <3",
+        };
+
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        });
+        setSubEmail("");
+    };
     return (
         <div className="footer-container">
-            <section className="footer-subscription">
-                <p className="footer-subscription-heading">
-                    Join the Adventure newsletter to receive our best vacation deals
-        </p>
-                <p className="footer-subscription-text">
-                    You can unsubscribe at any time.
-        </p>
-                <div className="input-areas">
+            {/* <section className="footer-subscription">
+                <p className="footer-subscription-heading"> */}
+                    {/* Join the Adventure newsletter to receive our best vacation deals */}
+        {/* </p> */}
+                {/* <p className="footer-subscription-text"> */}
+                    {/* You can unsubscribe at any time. */}
+        {/* </p> */}
+                {/* <div className="input-areas"> */}
+                {/* <div
+                    // action="post"
+                    onSubmit={subscribe}
+                >
                     <form>
                         <input
                             className="footer-input"
                             name="email"
-                            type="email"
+                            type="text"
                             placeholder="Your Email"
+                            value={subscribingEmail}
+                            onChange={onChangeEmail}
                         />
-                        <Button buttonStyle="btn--outline">Subscribe</Button>
+                        <Button buttonStyle="btn--outline" onClick={subscribe}>Subscribe</Button>
                     </form>
-                </div>
-            </section>
+                </div> */}
+            {/* </section> */}
             {/* <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
@@ -69,7 +111,7 @@ function Footer() {
                         </Link>
                     </div>
                     <small class="website-rights">Ibn Firnas Airlines © 2021</small>
-                    <div class="social-icons">
+                    {/* <div class="social-icons">
                         <Link
                             class="social-icon-link facebook"
                             to="/"
@@ -110,7 +152,7 @@ function Footer() {
                         >
                             <i class="fab fa-linkedin" />
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </div>

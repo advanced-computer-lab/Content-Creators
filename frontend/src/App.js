@@ -22,7 +22,7 @@ function App() {
                     <Route path="/" exact component={Home} />
                     <Route path="/flights" component={Flights} />
                     <Route path="/aboutus" component={AboutUs} />
-                    <Route path="/users/login" component={SignIn} />
+                    <Route path="/login" component={SignIn} />
                     <Route path="/create-flight" component={CreateFlight} />
                     <Route path="/update-flight" component={UpdateFlight} />
                 </Switch>
