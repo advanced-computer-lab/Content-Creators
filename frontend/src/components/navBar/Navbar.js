@@ -62,7 +62,7 @@ function Navbar() {
 
                         <li>
                             <Link
-                                to='localhost:8000/users/login'
+                                to='/login'
                                 className='nav-links-mobile'
                                 onClick={closeMobileMenu}
                             >

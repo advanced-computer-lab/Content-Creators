@@ -14,9 +14,7 @@ const reservationSchema = new Schema(
         {
             type: Number,
             trim: true,
-            // required: true,
             unique: true,
-            // auto_increment: true,
             default: () => counter++,
         }
         ,
