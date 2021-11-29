@@ -58,7 +58,7 @@ router.delete("/delete-reservation/:booking_id", async (req, res) => {
 router.post("/add-reservation", async (req, res) => {
     try {
         const {
-            booking_id,
+            // booking_id,
             username,
             flight_number,
             cabin_class,
@@ -69,7 +69,7 @@ router.post("/add-reservation", async (req, res) => {
         } = req.body.reservation;
 
         const newReservation = new Reservation({
-            booking_id: booking_id,
+            // booking_id: booking_id,
             username: username,
             flight_number: flight_number,
             cabin_class: cabin_class,
@@ -93,7 +93,7 @@ router.post("/add-reservation", async (req, res) => {
 
         var mailOptions = {
             from: "ibnfirnas_acl@outlook.com",
-            to: "alirmazhar1@gmail.com",
+            to: "mohamedams14@gmail.com",
             subject: "Reservation Confirmation Notice ",
             text: "Your reservation has been made!",
         };
