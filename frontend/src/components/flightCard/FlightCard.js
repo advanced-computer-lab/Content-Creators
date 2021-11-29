@@ -78,10 +78,10 @@ export default function FlightCard({ data, setDataParent }) {
                                 <p>Date: {data.trip_date}</p>
                             </div>
                             <div className="col2">
-                                <h5>Seat Number</h5>
-                                <p>Economy: {data.seat_number.economy}</p>
-                                <p>Business: {data.seat_number.business}</p>
-                                <p>First-Class: {data.seat_number.First}</p>
+                                <h5>Cabin Classes</h5>
+                                <p>Economy: {data.cabin_classes.economy}</p>
+                                <p>Business: {data.cabin_classes.business}</p>
+                                <p>First-Class: {data.cabin_classes.first}</p>
                             </div>
                             <div className="col2">
                                 <h5>Airport</h5>
@@ -89,10 +89,12 @@ export default function FlightCard({ data, setDataParent }) {
                                 <p>To: {data.airport.to}</p>
                             </div>
                             <div className="col2">
+                                <p>Baggage Allowance: {data.baggage_allowance}</p>
+                            </div>
+                            <div className="col2">
                                 <p> Price: {data.price} </p>
                             </div>
                         </div>
-            //{" "}
                     </div>
                 );
             })}

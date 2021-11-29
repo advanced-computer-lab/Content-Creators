@@ -44,7 +44,7 @@ const flightsSchema = new Schema({
             required: true,
             default: 0,
         },
-        first_class: {
+        first: {
             type: Number,
             required: true,
             default: 0,
