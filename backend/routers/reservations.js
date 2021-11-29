@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var nodemailer = require("nodemailer");
-const users = require("./routers/users");
+const users = require("../routers/users");
 const Reservation = require("../models/reservationSchema");
 
 router.use("/users", users);
