@@ -13,6 +13,8 @@ import SignIn from "./pages/signIn/SignIn.js";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import CreateFlight from "./pages/createFlight/CreateFlight";
 import UpdateFlight from "./pages/updateFlight/UpdateFlight";
+import flightDetails from "./pages/flightDetails/flightDetails";
+import bookingSeats from "./pages/bookingSeats/bookingSeats";
 function App() {
     return (
         <>
@@ -25,7 +27,7 @@ function App() {
                     <Route path="/login" component={SignIn} />
                     <Route path="/create-flight" component={CreateFlight} />
                     <Route path="/update-flight" component={UpdateFlight} />
-                    <Route path="/flight-details" component={FlightDetails} />
+                    <Route path="/flight-details" component={flightDetails} />
                 </Switch>
             </Router>
         </>

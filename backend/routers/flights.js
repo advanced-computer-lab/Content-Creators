@@ -90,6 +90,25 @@ router.delete("/delete-flight/:flight_number", async (req, res) => {
   }
 });
 
+
+
+router.get("/flight-details/:flight_number", async (req, res) => {
+  try {
+      const { flight_number } = req.params;
+      await Flight.find({ flight_number: flight_number });
+      console.log(`finding ${flight_number} is successful`);
+      res.status(201).send({ success: true });
+  } catch (err) {
+      console.log(err);
+      res.status(500).send({
+          success: false,
+          message: `finding ${flight_number} is unsuccessful`,
+          error: err,
+      });
+  }
+});
+
+
 //UPDATE_FLIGHT
 // admin checker to be added
 router.put("/update-flight/:flight_number", async (req, res) => {
