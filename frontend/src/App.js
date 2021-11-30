@@ -25,6 +25,7 @@ function App() {
                     <Route path="/login" component={SignIn} />
                     <Route path="/create-flight" component={CreateFlight} />
                     <Route path="/update-flight" component={UpdateFlight} />
+                    <Route path="/flight-details" component={FlightDetails} />
                 </Switch>
             </Router>
         </>
