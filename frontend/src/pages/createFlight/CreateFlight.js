@@ -8,11 +8,12 @@ function CreateFlight() {
         flight_number: "",
         trip_date: "",
         price: "",
+        baggage_allowance:"",
     };
     const emptySeatNumber = {
         economy: "",
         business: "",
-        First: "",
+        first: "",
     };
     const emptyTripTime = {
         departure_time: "",
@@ -22,7 +23,7 @@ function CreateFlight() {
 
     const [flight, setFlight] = useState(emptyFlight);
     const [tripTime, setTripTime] = useState(emptyTripTime);
-    const [seatNumber, setSeatNumber] = useState(emptySeatNumber);
+    const [cabin_classes, setSeatNumber] = useState(emptySeatNumber);
     const [airport, setAirport] = useState(emptyAirport);
 
     const handleChangeFlight = (e) => {
@@ -39,7 +40,7 @@ function CreateFlight() {
     const handleChangeSeatNumber = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setSeatNumber({ ...seatNumber, [name]: value });
+        setSeatNumber({ ...cabin_classes, [name]: value });
     };
     const handleChangeAirport = (e) => {
         const name = e.target.name;
@@ -54,12 +55,13 @@ function CreateFlight() {
             tripTime.departure_time &&
             tripTime.arrival_time &&
             flight.trip_date &&
-            seatNumber.economy &&
-            seatNumber.business &&
-            seatNumber.First &&
+            cabin_classes.economy &&
+            cabin_classes.business &&
+            cabin_classes.first &&
             airport.from &&
             airport.to &&
-            flight.price;
+            flight.price&& 
+            flight.baggage_allowance;
 
         if (nonEmpty) {
             console.log("Data fully submitted!!");
@@ -68,7 +70,7 @@ function CreateFlight() {
                 flights: {
                     ...flight,
                     trip_time: tripTime,
-                    seat_number: seatNumber,
+                    cabin_classes: cabin_classes,
                     airport: airport,
                 },
             };
@@ -164,7 +166,7 @@ function CreateFlight() {
                             type="number"
                             id="economy"
                             name="economy"
-                            value={seatNumber.economy}
+                            value={cabin_classes.economy}
                             onChange={handleChangeSeatNumber}
                         />
                     </div>
@@ -175,7 +177,7 @@ function CreateFlight() {
                             type="number"
                             id="business"
                             name="business"
-                            value={seatNumber.business}
+                            value={cabin_classes.business}
                             onChange={handleChangeSeatNumber}
                         />
                     </div>
@@ -184,9 +186,9 @@ function CreateFlight() {
                         <p className="display-4 text-center">Number of First Seats:</p>
                         <input
                             type="number"
-                            id="First"
-                            name="First"
-                            value={seatNumber.First}
+                            id="first"
+                            name="first"
+                            value={cabin_classes.first}
                             onChange={handleChangeSeatNumber}
                         />
                     </div>
