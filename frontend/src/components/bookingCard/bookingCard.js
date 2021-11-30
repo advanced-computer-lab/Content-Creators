@@ -46,9 +46,11 @@ export default function BookingCard() {
     const seatB=false; 
     const seatF=false; 
     const seatE=false;
-    const cabin=""; 
-    const depAirport=""; 
-    const arrAirport ="";
+    let cabin={
+
+    }; 
+    let depAirport=""; 
+    let arrAirport ="";
     const handleSubmit = (e) => {
         e.preventDefault();
         const nonEmpty =
@@ -60,17 +62,17 @@ export default function BookingCard() {
         flight.from &&
         flight.to;
         if (flight.seat_type== "economy") {
-             seatE = true;
+            // seatE = true;
              cabin = {
                  economy : flight.adults + flight.children
              }
         }else if (flight.seat_type== "First"){
-             seatF =true;
+            // seatF =true;
              cabin = {
                 First : flight.adults + flight.children
             }
         }else{
-             seatB =true;
+            // seatB =true;
              cabin = {
                 business : flight.adults + flight.children
             }
@@ -95,7 +97,7 @@ export default function BookingCard() {
                 airport : arrAirport
             };
             this.props.history.push({
-                pathname: '/reserve_a_flight', // use this pathname for reserving a flight page
+                pathname: '/flights', // use this pathname for reserving a flight page
                   state: departureTrip, arrivalTrip
               })
             setRetDate(departureTripDate);
