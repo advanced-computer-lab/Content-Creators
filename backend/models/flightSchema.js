@@ -62,6 +62,23 @@ const flightsSchema = new Schema({
         type: Number,
         required: true,
     },
+    remaining_seats: {
+        economy: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        business: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        first: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+    },
     seats: [{ seat_number: String, reserved: Boolean }],
 });
 
