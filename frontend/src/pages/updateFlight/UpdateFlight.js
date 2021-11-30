@@ -1,38 +1,59 @@
-import React, { Component, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 
-import { Button } from "../../components/button/Button";
 import "../../App.css";
 import "./UpdateFlight.css";
 
 function UpdateFlight() {
-    // const location = useLocation();
+    let location = useLocation();
     const history = useHistory();
-    const {
-        flight_number,
-        trip_time,
-        trip_date,
-        cabin_classes,
-        price,
-        baggage_allowance,
-    } = history.flight_data;
 
-    const emptyFlight = {
-        flight_number: history.flight_data.flight_number,
-        trip_date: history.flight_data.trip_date,
-        price: history.flight_data.price,
+    const [data, setData] = useState([]);
+    const flightNumber = location.pathname.split("/").at(-1);
+
+    const getFlightAxios = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:8000/flights/search?flight_number=${flightNumber}`
+            );
+            setData(response.data[0]);
+            const {
+                flight_number,
+                trip_time,
+                trip_date,
+                cabin_classes,
+                airport,
+                price,
+                baggage_allowance,
+            } = response.data[0];
+
+            const originalFlight = {
+                flight_number: flight_number,
+                trip_date: trip_date,
+                price: price,
+                baggage_allowance: baggage_allowance,
+            };
+            setFlight(originalFlight);
+            setTripTime(trip_time);
+            setCabinClasses(cabin_classes);
+            setAirport(airport);
+            console.log("Data is: ", data);
+            console.log("Response Data is: ", response.data);
+        } catch (err) {
+            console.log(err);
+        }
     };
-    const emptyCabinClasses = cabin_classes;
-    const emptyTripTime = trip_time;
-    const emptyAirport = history.flight_data.airport;
 
-    const [flight, setFlight] = useState(emptyFlight);
-    const [tripTime, setTripTime] = useState(emptyTripTime);
-    const [cabinClasses, setCabinClasses] = useState(emptyCabinClasses);
-    const [airport, setAirport] = useState(emptyAirport);
+    useEffect(() => {
+        getFlightAxios();
+    }, []);
+
+    const [flight, setFlight] = useState("");
+    const [tripTime, setTripTime] = useState("");
+    const [cabinClasses, setCabinClasses] = useState("");
+    const [airport, setAirport] = useState("");
 
     const handleChangeFlight = (e) => {
         if (typeof e.target === "object") {
@@ -46,10 +67,6 @@ function UpdateFlight() {
             });
         }
     };
-
-    // onChange={(date) => {
-    //     setFlightDate(date.toString());
-    // }}
 
     const handleChangeTripTime = (e) => {
         const name = e.target.name;
@@ -94,13 +111,7 @@ function UpdateFlight() {
                     airport: airport,
                 },
             };
-            // console.log(fullFlight);
             createFlightAxios(fullFlight);
-
-            // setFlight(emptyFlight);
-            // setTripTime(emptyTripTime);
-            // setSeatNumber(emptySeatNumber);
-            // setAirport(emptyAirport);
         } else {
             console.log("Not entire form is filled");
         }
@@ -135,7 +146,7 @@ function UpdateFlight() {
                 <div className="row">
                     <div className="col-md-8 m-auto">
                         <h1 className="display-4 text-center">
-                            Update Flight: {history.flight_data.flight_number}
+                            Update Flight: {flightNumber}
                         </h1>
                         <div
                             action="put"
@@ -229,7 +240,7 @@ function UpdateFlight() {
                                     // id="First"
                                     name="first"
                                     className="form-control"
-                                    value={cabinClasses.First}
+                                    value={cabinClasses.first}
                                     onChange={handleChangeCabinClasses}
                                     required
                                 />
