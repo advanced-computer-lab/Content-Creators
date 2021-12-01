@@ -7,7 +7,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Button } from "../../components/button/Button";
 
-export default function FlightCard() {
+export default function ReservedFlight() {
 
     let location = useLocation();
 
@@ -21,7 +21,7 @@ export default function FlightCard() {
             const response = await axios.get(
                 `http://localhost:8000/reservations/all-reservations/${username}`, /* Send username in the body */
             );
-            setData(response.data[0])
+            setData(response.data)
         } catch (err) {
             console.log(err);
         }
@@ -44,7 +44,11 @@ export default function FlightCard() {
          {data.map((data) => {
              return (
                  <div>
-                     {data}
+                     Booking Id:
+                     {data.booking_id}
+                     <br />
+                     Flight Number:
+                     {data.flight_number}
                  </div>
              );
          })}
