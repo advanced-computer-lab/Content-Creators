@@ -5,7 +5,7 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 import axios from "axios";
 
-export default function SearchFilter({ data }) {
+export default function BookingFilter({ data, setData }) {
     const [airportFrom, setAirportFrom] = useState(data.airportFrom);
     const [airportTo, setAirportTo] = useState(data.airportTo);
     const [departureDate, setDepartureDate] = useState(data.departureDate);
@@ -26,6 +26,7 @@ export default function SearchFilter({ data }) {
             adultsNumber,
             cabinClass,
         };
+        setData(data);
 
         console.log(`submitted filter form`);
         console.log(`data is:`);
