@@ -14,6 +14,7 @@ import AboutUs from "./pages/aboutUs/AboutUs";
 import CreateFlight from "./pages/createFlight/CreateFlight";
 import UpdateFlight from "./pages/updateFlight/UpdateFlight";
 import FlightDetails from "./pages/flightDetails/flightDetails";
+import reservedFlights from "./pages/reservedFlights/reservedFlights"
 function App() {
     return (
         <>
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/create-flight" component={CreateFlight} />
                     <Route path="/update-flight" component={UpdateFlight} />
                     <Route path="/flight-details" component={FlightDetails} />
+                    <Route path="/all-reservations" component={reservedFlights} />
                 </Switch>
             </Router>
         </>

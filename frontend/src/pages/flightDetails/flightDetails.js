@@ -64,31 +64,30 @@ export default function FlightDetails(){
     };
     return (
         <div>
-            
                 <div key={data.flight_number}>
-                    <div>Trip Number: {data.flight_number}</div>
-                <div className="col2">
-                                <h5> Trip Time:</h5>
+                    <h1>Trip Number: {data.flight_number}</h1>
+                            <div className="col2">
+                                <h3>Trip Time:</h3>
                                 <p>Departure: {trip_time.departure_time}</p>
                                 <p>Arrival: {trip_time.arrival_time}</p>
                                 <p>Date: {data.trip_date}</p>
                             </div>
                             <div className="col2">
-                                <h5>Cabin Classes</h5>
+                                <h3>Cabin Classes:</h3>
                                 <p>Economy: {cabin_classes.economy}</p>
                                 <p>Business: {cabin_classes.business}</p>
                                 <p>First-Class: {cabin_classes.first}</p>
                             </div>
                             <div className="col2">
-                                <h5>Airport</h5>
+                                <h3>Airport:</h3>
                                 <p>From: {airport.from}</p>
                                 <p>To: {airport.to}</p>
                             </div>
                             <div className="col2">
-                                <p>Baggage Allowance: {data.baggage_allowance}</p>
+                                <h3>Baggage Allowance: {data.baggage_allowance}</h3>
                             </div>
                             <div className="col2">
-                                <p> Price: {data.price} </p>
+                                <h3> Price: {data.price} </h3>
                             </div>
                     <button type="FlightBtns" value="submit" className="button" onClick={submitHandler}> Book this Flight </button>
                 </div>

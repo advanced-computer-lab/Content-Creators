@@ -1,0 +1,9 @@
+ .col1 {
+    flex: 1 1 25rem;
+}
+.col2 {
+    flex: 2 1 50rem;
+}
+.row.center {
+    justify-content: center;
+}
