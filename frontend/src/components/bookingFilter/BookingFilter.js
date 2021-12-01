@@ -5,7 +5,7 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 import axios from "axios";
 
-export default function SearchFilter({ data }) {
+export default function BookingFilter({ data, setData }) {
     const [airportFrom, setAirportFrom] = useState(data.airportFrom);
     const [airportTo, setAirportTo] = useState(data.airportTo);
     const [departureDate, setDepartureDate] = useState(data.departureDate);
@@ -26,14 +26,11 @@ export default function SearchFilter({ data }) {
             adultsNumber,
             cabinClass,
         };
+        setData(data);
 
         console.log(`submitted filter form`);
         console.log(`data is:`);
         console.log(data);
-    };
-
-    const handleResetOriginals = () => {
-        console.log("handling reset defaults");
     };
 
     return (
@@ -150,24 +147,21 @@ export default function SearchFilter({ data }) {
                             />
                         </div>
 
-                        {/* <div class="input-field second-wrap"> */}
-                        {/*     <label>CABIN CLASS</label> */}
-                        {/*     <input */}
-                        {/*         type="text" */}
-                        {/*         value={cabinClass} */}
-                        {/*         onChange={(e) => setCabinClass(e.target.value)} */}
-                        {/*         name="cabin_class" */}
-                        {/*         min="09:00" */}
-                        {/*         max="18:00" */}
-                        {/*     /> */}
-                        {/* </div> */}
+                        <div class="input-field second-wrap">
+                            <label>CABIN CLASS</label>
+                            <input
+                                type="text"
+                                value={cabinClass}
+                                onChange={(e) => setCabinClass(e.target.value)}
+                                name="cabin_class"
+                                min="09:00"
+                                max="18:00"
+                            />
+                        </div>
 
                         <div class="input-field fifth-wrap">
                             <button class="btn-search" type="submit">
                                 Edit Criteria
-                            </button>
-                            <button type="button" onClick={(e) => handleResetOriginals(e)}>
-                                RESET ORIGINAL
                             </button>
                         </div>
                     </div>

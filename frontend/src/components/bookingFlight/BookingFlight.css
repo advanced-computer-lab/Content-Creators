@@ -33,3 +33,20 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+.btn-cancel {
+  /* height: 70px; */
+  /* width: 100%; */
+  background-color: red;
+  white-space: nowrap;
+  border-radius: 0.5px;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.2s ease-out, color 0.2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
