@@ -29,10 +29,10 @@ export default function Booking() {
         <div>
             <BookingFilter data={data} />
 
-            <h3> Departure Flights: </h3>
+            <h1> Departure Flights: </h1>
             <BookingFlight data={data} />
 
-            <h3> Return Flights: </h3>
+            <h1> Return Flights: </h1>
             <BookingFlight data={data} />
         </div>
     );
