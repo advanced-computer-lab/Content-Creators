@@ -11,7 +11,37 @@ router.get("/all-users", async (req, res) => {
   await res.send(searchUser)
 
 });
+//MOSTAFA 3amal de <3 
+router.put('/update-user/:username' , async(req , res) => {
+  const { username } = req.params;
+  try {
+    const updateUsername = req.body.users;
+    const filter = { username : username };
+    const updated = await User.findOneAndUpdate(filter, updateUsername, {
+        rawResult: true,
+    });
 
+    if (updated.lastErrorObject.updatedExisting) {
+      console.log(`updating ${username} is successful`);
+      res.status(201).send({ success: true });
+  } else {
+      res.status(400).send({
+          success: false,
+          message: `updating ${username} is unsuccessful`,
+          error: err,
+      });
+  }
+
+} catch (err) {
+  console.log(err);
+  res.status(500).send({
+      success: false,
+      message: `updating ${username} is unsuccessful`,
+      error: err,
+  });
+}
+
+});
 //check if user is in the database
 //and authenticate it (password)
 //no encryption used
