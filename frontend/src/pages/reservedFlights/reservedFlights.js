@@ -39,16 +39,22 @@ export default function ReservedFlight() {
         history.push(path);
     };
 
+    const submitHandler = (flightNumber) => {
+        routeChange(`../reservation-details`);
+      };
+
     return (
         <div>
          {data.map((data) => {
              return (
-                 <div>
-                     Booking Id:
+                 <div key={data.flight_number} className = "flightReservationsCard" onClick = {() => submitHandler(data.flight_number)}>
+                     <h3>Booking Id:
                      {data.booking_id}
-                     <br />
-                     Flight Number:
+                     </h3>
+                     <h3>Flight Number:
                      {data.flight_number}
+                     </h3>
+                     <br />
                  </div>
              );
          })}
