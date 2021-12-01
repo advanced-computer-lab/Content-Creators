@@ -8,9 +8,11 @@ router.use("/users", users);
 
 //list all reservations
 router.get("/all-reservations", async (req, res) => {
-    const allReservations = await Reservation.find();
+    const filter = req.body.users;
+    const allReservations = await Reservation.find({username: filter.username});
     await res.status(200).send(allReservations).sendStatus;
 });
+
 
 //1- Removes reservation from user
 //2- Sends an email confirmation with refund

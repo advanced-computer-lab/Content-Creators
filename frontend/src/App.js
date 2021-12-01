@@ -13,6 +13,7 @@ import SignIn from "./pages/signIn/SignIn.js";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import CreateFlight from "./pages/createFlight/CreateFlight";
 import UpdateFlight from "./pages/updateFlight/UpdateFlight";
+import FlightDetails from "./pages/flightDetails/flightDetails";
 function App() {
     return (
         <>
