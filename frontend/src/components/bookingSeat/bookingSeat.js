@@ -2,6 +2,8 @@ import React, {Component} from 'react'
  
 import SeatPicker from 'react-seat-picker'
  
+// import BookingSeat from "../../components/bookingSeat/bookingSeat";
+
 export default class App extends Component {
   state = {
     loading: false
