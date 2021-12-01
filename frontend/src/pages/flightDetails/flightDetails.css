@@ -9,7 +9,9 @@
    border-radius: 0.3rem;
 }
 .flightdetailsbutton:hover{
-    background-color: #222222;
+    background-color: #ffffff;
+    transition: all 0.2s ease-out;
+    color: #000000;
 }
 .flightDetailsCard{
     display: grid;

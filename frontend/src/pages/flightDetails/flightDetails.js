@@ -91,8 +91,6 @@ export default function FlightDetails(){
                             </div>
                             <p></p>
                             <p></p>
-                            <p></p>
-                            <p></p>
                     <button className="flightdetailsbutton" value="submit" type="button" onClick={submitHandler}> Book this Flight </button>
                 </div>
         </div>
