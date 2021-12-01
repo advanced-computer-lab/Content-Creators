@@ -150,17 +150,17 @@ export default function SearchFilter({ data }) {
                             />
                         </div>
 
-                        {/* <div class="input-field second-wrap"> */}
-                        {/*     <label>CABIN CLASS</label> */}
-                        {/*     <input */}
-                        {/*         type="text" */}
-                        {/*         value={cabinClass} */}
-                        {/*         onChange={(e) => setCabinClass(e.target.value)} */}
-                        {/*         name="cabin_class" */}
-                        {/*         min="09:00" */}
-                        {/*         max="18:00" */}
-                        {/*     /> */}
-                        {/* </div> */}
+                        <div class="input-field second-wrap">
+                            <label>CABIN CLASS</label>
+                            <input
+                                type="text"
+                                value={cabinClass}
+                                onChange={(e) => setCabinClass(e.target.value)}
+                                name="cabin_class"
+                                min="09:00"
+                                max="18:00"
+                            />
+                        </div>
 
                         <div class="input-field fifth-wrap">
                             <button class="btn-search" type="submit">
