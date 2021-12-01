@@ -1,6 +1,6 @@
 import React from "react";
 import "../../App.css";
-import { Component, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Booking.css";
@@ -9,6 +9,7 @@ import BookingFlight from "../../components/bookingFlight/BookingFlight";
 
 export default function Booking() {
     const history = useHistory();
+    const [depChosen, setDepChosen] = useState(false);
     let data = history.booking_details;
 
     if (!data) {
@@ -29,11 +30,24 @@ export default function Booking() {
         <div>
             <BookingFilter data={data} />
 
-            <h1> Departure Flights: </h1>
-            <BookingFlight data={data} />
+            <button
+                onClick={() => {
+                    setDepChosen(!depChosen);
+                }}
+            >
+                TOGGLE{" "}
+            </button>
+            <BookingFlight
+                data={data}
+                setDepChosen={setDepChosen}
+                title={"Departure Flights:"}
+            />
 
-            <h1> Return Flights: </h1>
-            <BookingFlight data={data} />
+            {depChosen && (
+                <>
+                    <BookingFlight data={data} title={"Return Flights:"} />
+                </>
+            )}
         </div>
     );
 }

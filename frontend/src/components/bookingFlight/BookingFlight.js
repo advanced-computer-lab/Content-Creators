@@ -7,16 +7,18 @@ import { useHistory } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import Flatpickr from "react-flatpickr";
 
-export default function BookingFlight() {
+export default function BookingFlight({ title, setDepChosen }) {
+    //this data is supposed to be the data we get from history, different than data we will
+    //fetch from the database below
     // const {
     //     airportFrom,
     //     airportTo,
-    //     departureDate,
-    //     returnDate,
-    //     childrenNumber,
+    //     departureDate, //     returnDate, //     childrenNumber,
     //     adultsNumber,
     //     cabinClass,
     // } = data;
+
+    const [chosenFlightDep, setChosenFlightDep] = useState("");
 
     const data = [
         {
@@ -38,12 +40,33 @@ export default function BookingFlight() {
             baggage_allowance: 300,
         },
     ];
+    const handleFlightClick = () => {
+        console.log("AAAA", data.flight_number);
+
+        // console.log("BBB", data.flight_number);
+        const flight = data.flight_number;
+        setChosenFlightDep(data.flight_number);
+        setDepChosen((prevState) => !prevState);
+        console.log("chosenFlightDep", chosenFlightDep);
+    };
 
     return (
         <>
+            <h1>{`${title} ${chosenFlightDep}`}</h1>
             {data.map((data) => {
                 return (
-                    <div key={data.flight_number} className="flightCard">
+                    <div
+                        id={data.flight_number}
+                        key={data.flight_number}
+                        className="flightCard"
+                        // onClick={handleFlightClick}
+                        onClick={() => {
+                            console.log("AAAA", data.flight_number);
+                            setChosenFlightDep(data.flight_number);
+                            // setDepChosen((prevState) => !prevState);
+                            setDepChosen(true);
+                        }}
+                    >
                         <link
                             href="https://fonts.googleapis.com/icon?family=Material+Icons"
                             rel="stylesheet"
