@@ -44,6 +44,22 @@ export default function BookingFlight({
         getAllFlights();
     }, []);
 
+    const cancelHandler = () => {
+        getAllFlights();
+        setBgColor("");
+        if (title.includes("Departure")) {
+            setChosen(false);
+            setDepartureChosen(false);
+            setReturnChosen(false);
+        } else {
+            setChosen(false);
+            setReturnChosen(false);
+            // getAllFlights();
+            // console.log("canceled return");
+        }
+        console.log("button clicked");
+    };
+
     // const [flights, setFlights] = useState([
     //     {
     //         flight_number: "ABC123",
@@ -67,16 +83,6 @@ export default function BookingFlight({
 
     return (
         <>
-            {/* <div> */}
-            {/*     <p>{data.airportFrom}</p> */}
-            {/*     <p>{data.airportTo}</p> */}
-            {/*     <p>{data.departureDate}</p> */}
-            {/*     <p>{data.returnDate}</p> */}
-            {/*     <p>{data.childrenNumber}</p> */}
-            {/*     <p>{data.adultsNumber}</p> */}
-            {/*     <p>{data.cabinClass}</p> */}
-            {/* </div> */}
-
             <>
                 <h1>{`${title} ${chosenFlightData.flight_number
                         ? chosenFlightData.flight_number
@@ -89,22 +95,29 @@ export default function BookingFlight({
                     <div
                         id={flight.flight_number}
                         key={flight.flight_number}
+                        name="parentDiv"
                         className="flightCard"
                         style={{ backgroundColor: bgColor, position: "relative" }}
-                        onClick={() => {
-                            setFlights([flight]);
-                            setChosenFlightData(flight);
-                            setBgColor("#b89768");
-                            setChosen(true);
-                            if (title.includes("Departure")) {
-                                setDepartureChosen(true);
-                            } else {
-                                setReturnChosen(true);
+                        onClick={(e) => {
+                            if (e.target.id != "cancelButton") {
+                                setFlights([flight]);
+                                setChosenFlightData(flight);
+                                setBgColor("#b89768");
+                                setChosen(true);
+                                if (title.includes("Departure")) {
+                                    setDepartureChosen(true);
+                                } else {
+                                    setReturnChosen(true);
+                                }
                             }
                         }}
                     >
                         {chosen && (
-                            <button type="button" class="btn-cancel">
+                            <button
+                                id="cancelButton"
+                                class="btn-cancel"
+                                onClick={cancelHandler}
+                            >
                                 Cancel Flight
                             </button>
                         )}

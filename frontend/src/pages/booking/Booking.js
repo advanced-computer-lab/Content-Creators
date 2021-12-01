@@ -31,16 +31,10 @@ export default function Booking() {
         <div>
             <BookingFilter data={data} setData={setData} />
 
-            <button
-                onClick={() => {
-                    setDepartureChosen(!departureChosen);
-                }}
-            >
-                TOGGLE{" "}
-            </button>
             <BookingFlight
                 data={data}
                 setDepartureChosen={setDepartureChosen}
+                setReturnChosen={setReturnChosen}
                 title={"Departure Flight:"}
             />
 

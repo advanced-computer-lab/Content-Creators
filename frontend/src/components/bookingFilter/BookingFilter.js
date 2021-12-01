@@ -33,10 +33,6 @@ export default function BookingFilter({ data, setData }) {
         console.log(data);
     };
 
-    const handleResetOriginals = () => {
-        console.log("handling reset defaults");
-    };
-
     return (
         <>
             <div class="s002">
@@ -166,9 +162,6 @@ export default function BookingFilter({ data, setData }) {
                         <div class="input-field fifth-wrap">
                             <button class="btn-search" type="submit">
                                 Edit Criteria
-                            </button>
-                            <button type="button" onClick={(e) => handleResetOriginals(e)}>
-                                RESET ORIGINAL
                             </button>
                         </div>
                     </div>
