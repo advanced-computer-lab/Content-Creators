@@ -13,7 +13,6 @@ router.get("/all-reservations", async (req, res) => {
     await res.status(200).send(allReservations).sendStatus;
 });
 
-
 //1- Removes reservation from user
 //2- Sends an email confirmation with refund
 router.delete("/delete-reservation/:booking_id", async (req, res) => {

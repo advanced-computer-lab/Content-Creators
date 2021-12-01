@@ -64,9 +64,9 @@ export default function FlightDetails(){
     };
     return (
         <div>
-                <div key={data.flight_number}>
-                    <h1>Trip Number: {data.flight_number}</h1>
-                            <div className="col2">
+            <h1>Trip Number: {data.flight_number}</h1>
+                <div key={data.flight_number} className="flightDetailsCard">
+                            <div className="col11">
                                 <h3>Trip Time:</h3>
                                 <p>Departure: {trip_time.departure_time}</p>
                                 <p>Arrival: {trip_time.arrival_time}</p>
@@ -89,7 +89,11 @@ export default function FlightDetails(){
                             <div className="col2">
                                 <h3> Price: {data.price} </h3>
                             </div>
-                    <button type="FlightBtns" value="submit" className="button" onClick={submitHandler}> Book this Flight </button>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                    <button className="flightdetailsbutton" value="submit" type="button" onClick={submitHandler}> Book this Flight </button>
                 </div>
         </div>
     );
