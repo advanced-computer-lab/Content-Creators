@@ -28,7 +28,7 @@ function App() {
                     <Route path="/create-flight" component={CreateFlight} />
                     <Route path="/update-flight" component={UpdateFlight} />
                     <Route path="/flight-details" component={FlightDetails} />
-                    <Route path="/all-reservations" component={reservedFlights} />
+                    <Route path="/all-reservations/:username" component={reservedFlights} />
                 </Switch>
             </Router>
         </>

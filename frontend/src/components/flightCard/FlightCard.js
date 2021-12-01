@@ -78,23 +78,12 @@ export default function FlightCard({ data, setDataParent }) {
                             </button>
                             <div className="col2">
                                 <h5> Trip Time:</h5>
-                                <p>Departure: {data.trip_time.departure_time}</p>
-                                <p>Arrival: {data.trip_time.arrival_time}</p>
                                 <p>Date: {data.trip_date}</p>
-                            </div>
-                            <div className="col2">
-                                <h5>Cabin Classes</h5>
-                                <p>Economy: {data.cabin_classes.economy}</p>
-                                <p>Business: {data.cabin_classes.business}</p>
-                                <p>First-Class: {data.cabin_classes.first}</p>
                             </div>
                             <div className="col3">
                                 <h5>Airport</h5>
                                 <p>From: {data.airport.from}</p>
                                 <p>To: {data.airport.to}</p>
-                            </div>
-                            <div className="col3">
-                                <p>Baggage Allowance: {data.baggage_allowance}</p>
                             </div>
                             <div className="col3">
                                 <p> Price: {data.price} </p>

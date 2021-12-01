@@ -7,9 +7,9 @@ const Reservation = require("../models/reservationSchema");
 router.use("/users", users);
 
 //list all reservations
-router.get("/all-reservations", async (req, res) => {
-    const filter = req.body.users;
-    const allReservations = await Reservation.find({username: filter.username});
+router.get("/all-reservations/:username", async (req, res) => {
+    const {username} = req.params;
+    const allReservations = await Reservation.find({username: username});
     await res.status(200).send(allReservations).sendStatus;
 });
 

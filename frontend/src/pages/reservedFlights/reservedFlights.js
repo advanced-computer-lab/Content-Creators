@@ -1,4 +1,5 @@
 import React from "react";
+import "../../components/flightCard/FlightCard.css"
 import "../../App.css";
 import { Component, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
@@ -6,18 +7,25 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Button } from "../../components/button/Button";
 
-export default function FlightCard({ data, setDataParent }) {
+export default function FlightCard() {
+
+    let location = useLocation();
+
+    const locationPath = location.pathname.split("/");
+    const username = locationPath[locationPath.length -1];
+    
+    const [data, setData] = useState([]);
+
     const getReservationAxios = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8000/all-reservations`, /* Send username in the body */
+                `http://localhost:8000/reservations/all-reservations/${username}`, /* Send username in the body */
             );
-            setDataParent(response.data[0])
+            setData(response.data[0])
         } catch (err) {
             console.log(err);
         }
     };
-
 
     useEffect(() => {
         getReservationAxios();
@@ -31,11 +39,15 @@ export default function FlightCard({ data, setDataParent }) {
         history.push(path);
     };
 
-    // return (
-    //     {data.map((data) => {
-    //         return (
-    //             <div></div>
-    //         );
-    //     })}
-    // )
+    return (
+        <div>
+         {data.map((data) => {
+             return (
+                 <div>
+                     {data}
+                 </div>
+             );
+         })}
+        </div>
+    )
 }

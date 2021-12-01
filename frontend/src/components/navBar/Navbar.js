@@ -52,7 +52,8 @@ function Navbar() {
                         </li>
                         <li className='nav-item'>
                             <Link
-                                to='/all-reservations'
+                                to='/all-reservations/mohamedams'
+                                params={{username: "mohamedams"}}
                                 className='nav-links'
                                 onClick={closeMobileMenu}
                             >
