@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import { useHistory } from "react-router-dom";
 // import BookingSeat from "../../components/bookingSeat/bookingSeat";
-import BookingSeat from "../../components/bookingSeat/MovieSeatPicker";
+import BookingSeat from "../../components/bookingSeat/BookingSeat";
 function SeatPicker() {
     const history = useHistory();
     const pickSeatsHandler = () => {

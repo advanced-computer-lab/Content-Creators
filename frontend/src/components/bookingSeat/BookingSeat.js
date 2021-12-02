@@ -1,32 +1,40 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import SeatPicker from "react-seat-picker";
-import "./Movie.css";
+import axios from "axios";
+import "./BookingSeat.css";
 
+export default function BookingSeat({ cabinClass }) {
+    const [seatData, setSeatData] = useState({});
+    const [remainingSeats, setRemainingSeats] = useState(-1);
 
-export default function MoviewSeatPicker({ props }) {
+    //this should be passed from booking in previous page
+    cabinClass = "economy";
+
+    useEffect(() => {
+        getSeats("ZAB-921");
+    }, []);
+
     const addSeatCallback = ({ row, number, id }, addCb) => {
-        props.setSelected(`Added seat ${number}, row ${row}, id ${id}`);
-        const newTooltip = `tooltip for id-${id} added by callback`;
-        addCb(row, number, id, newTooltip);
-    };
-
-    const addSeatCallbackContinousCase = (
-        { row, number, id },
-        addCb,
-        params,
-        removeCb
-    ) => {
-        if (removeCb) {
-            removeCb(params.row, params.number);
-        }
-        props.setSelected(`Added seat ${number}, row ${row}, id ${id}`);
-        const newTooltip = `tooltip for id-${id} added by callback`;
-        addCb(row, number, id, newTooltip);
+        console.log("row", row);
+        console.log("number", number);
+        console.log("id", id);
     };
 
     const removeSeatCallback = ({ row, number, id }, removeCb) => {
-        const newTooltip = ["A", "B", "C"].includes(row) ? null : "";
-        removeCb(row, number, newTooltip);
+        console.log("row", row);
+        console.log("number", number);
+        console.log("id", id);
+    };
+
+    const getSeats = async (flightNumber) => {
+        try {
+            const url = `http://localhost:8000/flights/search?flight_number=${flightNumber}`;
+            const response = await axios.get(url);
+            setSeatData(response.data[0].seats);
+            setRemainingSeats(response.data[0].remaining_seats[cabinClass]);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const rows = [
@@ -93,6 +101,9 @@ export default function MoviewSeatPicker({ props }) {
         ],
     ];
 
+    console.log("Number of remaining Seats is: ", remainingSeats);
+    console.log("seatData is: ", seatData);
+
     return (
         <div>
             <h1>Seat Picker</h1>
@@ -102,29 +113,14 @@ export default function MoviewSeatPicker({ props }) {
                     removeSeatCallback={removeSeatCallback}
                     rows={rows}
                     maxReservableSeats={3}
-                    alpha
+                    alpha={false}
                     visible
                     selectedByDefault
                     loading={false}
                     tooltipProps={{ multiline: true }}
                 />
             </div>
-            <div style={{ marginTop: "30px" }}></div>
-            <h1>Seat Picker Continuous Case</h1>
-            <div style={{ marginTop: "10px" }}>
-                <SeatPicker
-                    addSeatCallback={addSeatCallbackContinousCase}
-                    removeSeatCallback={removeSeatCallback}
-                    rows={rows}
-                    maxReservableSeats={3}
-                    alpha
-                    visible
-                    selectedByDefault
-                    loading={false}
-                    tooltipProps={{ multiline: true }}
-                    continuous
-                />
-            </div>
+            <br style={{ marginBottom: "3em" }} />
         </div>
     );
 }
