@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import SeatPicker from "react-seat-picker";
 import axios from "axios";
 import "./BookingSeat.css";
+import createRows from "./createRows";
 
 export default function BookingSeat({ cabinClass, requestedSeats }) {
     const [seatData, setSeatData] = useState([
         { seat_number: "Z99", reserved: true },
     ]);
     const [remainingSeats, setRemainingSeats] = useState(-1);
-    // const [rows, setRows] = useState([
-    //     [
-    //         { id: "E0", number: "E0", isReserved: false },
-    //         { id: "E1", number: "E1", isReserved: false },
-    //     ],
-    // ]);
+    const [rows, setRows] = useState([
+        [
+            { id: "E0", number: "E0", isReserved: false },
+            { id: "E1", number: "E1", isReserved: false },
+        ],
+    ]);
 
     //this should be passed from booking in previous page
     //first off we have to check whether requestedSeatsNumber<= remainingSeats to continue picking seats
     requestedSeats = 4;
-    cabinClass = "economy";
+    cabinClass = "business";
 
     useEffect(() => {
         getSeats("QWR-235");
@@ -43,6 +44,7 @@ export default function BookingSeat({ cabinClass, requestedSeats }) {
             const seatFullData = response.data[0].seats[cabinClass];
             setSeatData(seatFullData);
             setRemainingSeats(response.data[0].remaining_seats[cabinClass]);
+            setRows(createRows(seatFullData));
             // setAllRowsBro();
             // setRows([
             //     seatFullData.map(({ seat_number, reserved }) => {
@@ -59,89 +61,54 @@ export default function BookingSeat({ cabinClass, requestedSeats }) {
         }
     };
 
-    const rows = [
-        [
-            { id: "E0", number: "E0", isReserved: false },
-            { id: "E1", number: "E1", isReserved: false },
-            { id: "E2", number: "E2", isReserved: false },
-            { id: "E3", number: "E3", isReserved: false },
-            null,
-            null,
-            { id: "E4", number: "E4", isReserved: false },
-            { id: "E5", number: "E5", isReserved: false },
-            { id: "E6", number: "E6", isReserved: false },
-            { id: "E7", number: "E7", isReserved: false },
-        ],
-        [
-            { id: "E8", number: "E8", isReserved: false },
-            { id: "E9", number: "E9", isReserved: false },
-            { id: "E10", number: "E10", isReserved: false },
-            { id: "E11", number: "E11", isReserved: false },
-            null,
-            null,
-            { id: "E12", number: "E12", isReserved: false },
-            { id: "E13", number: "E13", isReserved: false },
-            { id: "E14", number: "E14", isReserved: false },
-            { id: "E15", number: "E15", isReserved: false },
-        ],
-        [
-            { id: "E16", number: "E16", isReserved: false },
-            { id: "E17", number: "E17", isReserved: false },
-            { id: "E18", number: "E18", isReserved: false },
-            { id: "E19", number: "E19", isReserved: false },
-            null,
-            null,
-            { id: "E20", number: "E20", isReserved: false },
-            { id: "E21", number: "E21", isReserved: false },
-            { id: "E22", number: "E22", isReserved: false },
-            { id: "E23", number: "E23", isReserved: false },
-        ],
-        [
-            { id: "E24", number: "E24", isReserved: false },
-            { id: "E25", number: "E25", isReserved: false },
-            { id: "E26", number: "E26", isReserved: false },
-            { id: "E27", number: "E27", isReserved: false },
-            null,
-            null,
-            { id: "E28", number: "E28", isReserved: false },
-            { id: "E29", number: "E29", isReserved: false },
-            { id: "x", number: "x", isReserved: false },
-            { id: "x", number: "x", isReserved: false },
-        ],
-    ];
-
     // const rows = [
     //     [
     //         { id: "E0", number: "E0", isReserved: false },
     //         { id: "E1", number: "E1", isReserved: false },
     //         { id: "E2", number: "E2", isReserved: false },
     //         { id: "E3", number: "E3", isReserved: false },
+    //         null,
+    //         null,
     //         { id: "E4", number: "E4", isReserved: false },
     //         { id: "E5", number: "E5", isReserved: false },
     //         { id: "E6", number: "E6", isReserved: false },
     //         { id: "E7", number: "E7", isReserved: false },
+    //     ],
+    //     [
     //         { id: "E8", number: "E8", isReserved: false },
     //         { id: "E9", number: "E9", isReserved: false },
     //         { id: "E10", number: "E10", isReserved: false },
     //         { id: "E11", number: "E11", isReserved: false },
+    //         null,
+    //         null,
     //         { id: "E12", number: "E12", isReserved: false },
     //         { id: "E13", number: "E13", isReserved: false },
     //         { id: "E14", number: "E14", isReserved: false },
     //         { id: "E15", number: "E15", isReserved: false },
+    //     ],
+    //     [
     //         { id: "E16", number: "E16", isReserved: false },
     //         { id: "E17", number: "E17", isReserved: false },
     //         { id: "E18", number: "E18", isReserved: false },
     //         { id: "E19", number: "E19", isReserved: false },
+    //         null,
+    //         null,
     //         { id: "E20", number: "E20", isReserved: false },
     //         { id: "E21", number: "E21", isReserved: false },
     //         { id: "E22", number: "E22", isReserved: false },
     //         { id: "E23", number: "E23", isReserved: false },
+    //     ],
+    //     [
     //         { id: "E24", number: "E24", isReserved: false },
     //         { id: "E25", number: "E25", isReserved: false },
     //         { id: "E26", number: "E26", isReserved: false },
     //         { id: "E27", number: "E27", isReserved: false },
+    //         null,
+    //         null,
     //         { id: "E28", number: "E28", isReserved: false },
     //         { id: "E29", number: "E29", isReserved: false },
+    //         { id: "x", number: "x", isReserved: false },
+    //         { id: "x", number: "x", isReserved: false },
     //     ],
     // ];
 
