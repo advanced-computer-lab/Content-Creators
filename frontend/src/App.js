@@ -10,6 +10,9 @@ import CreateFlight from "./pages/createFlight/CreateFlight";
 import UpdateFlight from "./pages/updateFlight/UpdateFlight";
 import Booking from "./pages/booking/Booking";
 import ChoosingSeat from "./pages/choosingSeat/ChoosingSeats";
+import ReservationDetails from "./pages/reservationDetails/ReservationDetails";
+
+
 function App() {
     return (
         <>
@@ -23,7 +26,10 @@ function App() {
                     <Route path="/create-flight" component={CreateFlight} />
                     <Route path="/update-flight" component={UpdateFlight} />
                     <Route path="/booking" component={Booking} />
+                    <Route path="/reservation-details" component={ReservationDetails} />
+
                     <Route path="/choosing_seats" component={ChoosingSeat} />
+
                 </Switch>
             </Router>
         </>

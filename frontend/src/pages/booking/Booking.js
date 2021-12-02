@@ -13,6 +13,9 @@ export default function Booking() {
     const [returnChosen, setReturnChosen] = useState(false);
     const [data, setData] = useState(history.booking_details);
 
+    const [departureFlightNumber, setDepartureFlightNumber] = useState("");
+    const [returnFlightNumber, setReturnFlightNumber] = useState("");
+
     if (!data) {
         //generally we will get it from history this is just mock data in case url entered directly
         const allInfoTemp = {
@@ -27,6 +30,15 @@ export default function Booking() {
         setData(allInfoTemp);
     }
 
+    const confirmHandler = () => {
+        const tripInfo = {
+            departure_flight_number: departureFlightNumber,
+            return_flight_number: returnFlightNumber,
+        };
+        history.trip_info = tripInfo;
+        history.push("/reservation-details");
+    };
+
     return (
         <div>
             <BookingFilter data={data} setData={setData} />
@@ -35,6 +47,8 @@ export default function Booking() {
                 data={data}
                 setDepartureChosen={setDepartureChosen}
                 setReturnChosen={setReturnChosen}
+                setReturnFlightNumber={setReturnFlightNumber}
+                setDepartureFlightNumber={setDepartureFlightNumber}
                 title={"Departure Flight:"}
             />
 
@@ -43,13 +57,14 @@ export default function Booking() {
                     <BookingFlight
                         data={data}
                         setReturnChosen={setReturnChosen}
+                        setReturnFlightNumber={setReturnFlightNumber}
                         title={"Return Flight:"}
                     />
                 </>
             )}
             {returnChosen && (
                 <div style={{ textAlign: "center" }}>
-                    <button type="button" class="btn-confirm">
+                    <button type="button" class="btn-confirm" onClick={confirmHandler}>
                         CONTINUE BOOKING
                     </button>
                 </div>

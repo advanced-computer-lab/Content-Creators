@@ -8,6 +8,8 @@ export default function BookingFlight({
     title,
     setDepartureChosen,
     setReturnChosen,
+    setDepartureFlightNumber,
+    setReturnFlightNumber,
 }) {
     const history = useHistory();
 
@@ -80,8 +82,10 @@ export default function BookingFlight({
                                 setChosen(true);
                                 if (title.includes("Departure")) {
                                     setDepartureChosen(true);
+                                    setDepartureFlightNumber(flight.flight_number);
                                 } else {
                                     setReturnChosen(true);
+                                    setReturnFlightNumber(flight.flight_number);
                                 }
                             }
                         }}
