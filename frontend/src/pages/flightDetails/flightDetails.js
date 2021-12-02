@@ -7,6 +7,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Button } from "../../components/button/Button";
 import { deflateRawSync } from "zlib";
+import { Icon } from '@iconify/react';
 
 export default function FlightDetails(){
     const trip_time_state ={
@@ -63,36 +64,66 @@ export default function FlightDetails(){
         history.push(path);
     };
     return (
-        <div>
-            <h1>Trip Number: {data.flight_number}</h1>
+        <div styles = {{alignContent: 'center'}}>
+            <div key={data.flight_number} className="flightDetailsCard6">
+            <p />
+            <p />
+            <p />            
+            <Icon icon="icon-park-outline:round-trip" color="#111" width="48" height="48"/>
+            <h1>{data.flight_number}</h1>
+            </div>
+            <br />
+            <div key={data.flight_number} className="flightDetailsCard">
+            <p />
+            <Icon icon="ic:twotone-date-range" width="24" height="24"/>
+            <h2>{data.trip_date}</h2>
+            </div>
+            <br />
+            <br />
                 <div key={data.flight_number} className="flightDetailsCard">
-                            <div className="col11">
-                                <h3>Trip Time:</h3>
-                                <p>Departure: {trip_time.departure_time}</p>
-                                <p>Arrival: {trip_time.arrival_time}</p>
-                                <p>Date: {data.trip_date}</p>
-                            </div>
-                            <div className="col2">
-                                <h3>Cabin Classes:</h3>
-                                <p>Economy: {cabin_classes.economy}</p>
-                                <p>Business: {cabin_classes.business}</p>
-                                <p>First-Class: {cabin_classes.first}</p>
-                            </div>
-                            <div className="col2">
-                                <h3>Airport:</h3>
-                                <p>From: {airport.from}</p>
-                                <p>To: {airport.to}</p>
-                            </div>
-                            <div className="col2">
-                                <h3>Baggage Allowance: {data.baggage_allowance}</h3>
-                            </div>
-                            <div className="col2">
-                                <h3> Price: {data.price} </h3>
-                            </div>
-                            <p></p>
-                            <p></p>
-                    <button className="flightdetailsbutton" value="submit" type="button" onClick={submitHandler}> Book this Flight </button>
+                            {/* <div className="col2"> */}
+                            <Icon icon="ic:round-access-time-filled" color="#111" hFlip={true} />
+                                <h3>Departure: {trip_time.departure_time}</h3>
+                                <h3>Arrival: {trip_time.arrival_time}</h3>
                 </div>
+                <br />
+                <br />
+
+                <div key={data.flight_number} className="flightDetailsCard5">
+                <p />
+                <h3>{data.price} </h3>
+                <Icon icon="si-glyph:tag-price" color="#111" rotate={3} hFlip={true} />
+                <p />
+                <p />
+                <p />
+                <p />
+                <p />
+                <h3>{data.baggage_allowance}</h3>
+                <Icon icon="noto-v1:baggage-claim" hFlip={true} />
+                </div>
+                <br />
+                <br />
+
+                <div key={data.flight_number} className="flightDetailsCard2">
+                <Icon icon="emojione-monotone:airplane-departure" ></Icon>
+                            <h2>{airport.from}</h2>
+                            <Icon icon="emojione-monotone:airplane-arrival"/>
+                                <h2>{airport.to}</h2>
+                </div>
+                <br />
+                <br />
+                <div key={data.flight_number} className="flightDetailsCard1">
+                                <Icon icon="emojione:seat" />
+                                <p>Economy: {cabin_classes.economy}</p>
+                                <Icon icon="emojione-v1:seat" />
+                                <p>Business: {cabin_classes.business}</p>
+                                <Icon icon="fxemoji:seat" hFlip={true} />
+                                <p>First-Class: {cabin_classes.first}</p>
+                </div>
+                <br />
+                <br />
+                <button className="flightdetailsbutton" value="submit" type="button" onClick={submitHandler}> Book this Flight </button>
+
         </div>
     );
 }
