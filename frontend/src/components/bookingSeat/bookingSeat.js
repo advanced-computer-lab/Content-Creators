@@ -21,22 +21,7 @@ export default class App extends Component {
     })
   }
  
-  addSeatCallbackContinousCase = ({ row, number, id }, addCb, params, removeCb) => {
-    this.setState({
-      loading: true
-    }, async () => {
-      if (removeCb) {
-        await new Promise(resolve => setTimeout(resolve, 750))
-        console.log(`Removed seat ${params.number}, row ${params.row}, id ${params.id}`)
-        removeCb(params.row, params.number)
-      }
-      await new Promise(resolve => setTimeout(resolve, 750))
-      console.log(`Added seat ${number}, row ${row}, id ${id}`)
-      const newTooltip = `tooltip for id-${id} added by callback`
-      addCb(row, number, id, newTooltip)
-      this.setState({ loading: false })
-    })
-  }
+  
  
   removeSeatCallback = ({ row, number, id }, removeCb) => {
     this.setState({
@@ -53,47 +38,52 @@ export default class App extends Component {
  
   render() {
     const rows = [
-      [{id: 1, number: 1, isSelected: true, tooltip: 'Reserved by you'}, {id: 2, number: 2, tooltip: 'Cost: 15$'}, null, {id: 3, number: '3', isReserved: true, orientation: 'east', tooltip: 'Reserved by Rogger'}, {id: 4, number: '4', orientation: 'west'}, null, {id: 5, number: 5}, {id: 6, number: 6}],
-      [{id: 7, number: 1, isReserved: true, tooltip: 'Reserved by Matthias Nadler'}, {id: 8, number: 2, isReserved: true}, null, {id: 9, number: '3', isReserved: true, orientation: 'east'}, {id: 10, number: '4', orientation: 'west'}, null, {id: 11, number: 5}, {id: 12, number: 6}],
-      [{id: 13, number: 1}, {id: 14, number: 2}, null, {id: 15, number: 3, isReserved: true, orientation: 'east'}, {id: 16, number: '4', orientation: 'west'}, null, {id: 17, number: 5}, {id: 18, number: 6}],
-      [{id: 19, number: 1, tooltip: 'Cost: 25$'}, {id: 20, number: 2}, null, {id: 21, number: 3, orientation: 'east'}, {id: 22, number: '4', orientation: 'west'}, null, {id: 23, number: 5}, {id: 24, number: 6}],
-      [{id: 25, number: 1, isReserved: true}, {id: 26, number: 2, orientation: 'east'}, null, {id: 27, number: '3', isReserved: true}, {id: 28, number: '4', orientation: 'west'}, null,{id: 29, number: 5, tooltip: 'Cost: 11$'}, {id: 30, number: 6, isReserved: true}],
-      [{id: 31, number: 1, isReserved: true}, {id: 32, number: 2, orientation: 'east'}, null, {id: 33, number: '3', isReserved: true}, {id: 34, number: '4', orientation: 'west'}, null,{id: 35, number: 5, tooltip: 'Cost: 11$'}, {id: 36, number: 6, isReserved: true}],
-      [{id: 37, number: 1, isReserved: true}, {id: 38, number: 2, orientation: 'east'}, null, {id: 39, number: '3', isReserved: true}, {id: 40, number: '4', orientation: 'west'}, null,{id: 41, number: 5, tooltip: 'Cost: 11$'}, {id: 42, number: 6, isReserved: true}],
-
+      [{id: 1, number: 'A', isSelected: true, tooltip: 'Reserved'}, null, {id: 2, number: 'C', tooltip: 'Cost more: 15$'}, null,null, {id: 3, number: 'D', isReserved: true, orientation: 'east', tooltip: 'Reserved'}, null, {id: 4, number: 'K', orientation: 'west'} ],
+      [],
+      [{id: 1, number: 'A', isSelected: true, tooltip: 'Reserved'}, null, {id: 2, number: 'C', tooltip: 'Cost more: 15$'}, null,null, {id: 3, number: 'D', isReserved: true, orientation: 'east', tooltip: 'Reserved'}, null, {id: 4, number: 'K', orientation: 'west'} ],
+      [],
+      [{id: 1, number: 'A', isSelected: true, tooltip: 'Reserved'}, null, {id: 2, number: 'C', tooltip: 'Cost more: 15$'}, null, null,{id: 3, number: 'D', isReserved: true, orientation: 'east', tooltip: 'Reserved'}, null, {id: 4, number: 'K', orientation: 'west'} ],
+      [],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [],
+      [null,{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      [{id: 19, number: 'A', tooltip: 'Cost: 25$'}, {id: 20, number: 'B'},{id: 19, number: 'C', tooltip: 'Cost more: 25$'}, null,null,{id: 19, number: 'D', tooltip: 'Cost: 25$'}, {id: 21, number: 'E', orientation: 'east'}, {id: 22, number: 'K', orientation: 'west'}, null],
+      
     ]
     const {loading} = this.state
     return (
       <div>
         <h1>Seat Picker</h1>
-        <div style={{marginTop: '100px'}}>
+        <div style = {{marginLeft: '620px'}}>
+        <img src="/images/Airbus_Seat_map.jpg" alt="" height="1500" width="670"  />
+        <view style={{position: 'absolute', top: 520, left: 830, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+
           <SeatPicker
             addSeatCallback={this.addSeatCallback}
             removeSeatCallback={this.removeSeatCallback}
             rows={rows}
             maxReservableSeats={3}
-            alpha
-            visible
+            // alpha
+            // visible
             selectedByDefault
-            loading={loading}
+            // loading={loading}
             tooltipProps={{multiline: true}}
           />
+        </view>
         </div>
-        <h1>Seat Picker Continuous Case</h1>
-        <div style={{ marginTop: '100px' }}>
-          <SeatPicker
-            addSeatCallback={this.addSeatCallbackContinousCase}
-            removeSeatCallback={this.removeSeatCallback}
-            rows={rows}
-            maxReservableSeats={3}
-            alpha
-            visible
-            selectedByDefault
-            loading={loading}
-            tooltipProps={{ multiline: true }}
-            continuous
-          />
-        </div>
+
       </div>
     )
   }}
