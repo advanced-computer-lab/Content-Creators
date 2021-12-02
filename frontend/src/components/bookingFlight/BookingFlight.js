@@ -57,6 +57,10 @@ export default function BookingFlight({
         }
     };
 
+    const pickSeatsHandler = () => {
+        history.push("/seat-picker");
+    };
+
     return (
         <>
             <>
@@ -90,6 +94,16 @@ export default function BookingFlight({
                             }
                         }}
                     >
+                        {chosen && (
+                            <button
+                                id="Button"
+                                class="pickSeatButton"
+                                onClick={pickSeatsHandler}
+                            >
+                                Pick Seats
+                            </button>
+                        )}
+
                         {chosen && (
                             <button
                                 id="cancelButton"

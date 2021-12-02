@@ -9,9 +9,8 @@ import AboutUs from "./pages/aboutUs/AboutUs";
 import CreateFlight from "./pages/createFlight/CreateFlight";
 import UpdateFlight from "./pages/updateFlight/UpdateFlight";
 import Booking from "./pages/booking/Booking";
-import ChoosingSeat from "./pages/choosingSeat/ChoosingSeats";
+import SeatPicker from "./pages/seatPicker/SeatPicker";
 import ReservationDetails from "./pages/reservationDetails/ReservationDetails";
-
 
 function App() {
     return (
@@ -27,9 +26,7 @@ function App() {
                     <Route path="/update-flight" component={UpdateFlight} />
                     <Route path="/booking" component={Booking} />
                     <Route path="/reservation-details" component={ReservationDetails} />
-
-                    <Route path="/choosing_seats" component={ChoosingSeat} />
-
+                    <Route path="/seat-picker" component={SeatPicker} />
                 </Switch>
             </Router>
         </>
