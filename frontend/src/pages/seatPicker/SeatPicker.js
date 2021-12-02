@@ -1,7 +1,8 @@
 import React from "react";
 import "../../App.css";
 import { useHistory } from "react-router-dom";
-import BookingSeat from "../../components/bookingSeat/bookingSeat";
+// import BookingSeat from "../../components/bookingSeat/bookingSeat";
+import BookingSeat from "../../components/bookingSeat/MovieSeatPicker";
 function SeatPicker() {
     const history = useHistory();
     const pickSeatsHandler = () => {
