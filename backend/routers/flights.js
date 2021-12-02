@@ -37,21 +37,27 @@ router.post("/create-flight", async (req, res) => {
             first: first,
         };
 
-        let seats = [];
+        let economySeats = [];
+        let businessSeats = [];
+        let firstSeats = [];
 
         for (let i = 0; i < economy; i++) {
             const seat = { seat_number: `E${i}`, reserved: false };
-            seats.push(seat);
+            economySeats.push(seat);
         }
         for (let i = 0; i < business; i++) {
             const seat = { seat_number: `B${i}`, reserved: false };
-            seats.push(seat);
+            businessSeats.push(seat);
         }
         for (let i = 0; i < first; i++) {
             const seat = { seat_number: `F${i}`, reserved: false };
-            seats.push(seat);
+            firstSeats.push(seat);
         }
-        console.log(seats);
+        const seats = {
+            economy: economySeats,
+            business: businessSeats,
+            first: firstSeats,
+        };
 
         const newFlight = new Flight({
             flight_number: flight_number,

@@ -14,72 +14,76 @@ const Schema = mongoose.Schema;
  * /* */
 //flights
 const flightsSchema = new Schema({
-    flight_number: {
-        type: String,
-        required: true,
-        unique: true,
+  flight_number: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  trip_time: {
+    departure_time: {
+      type: String,
+      required: true,
     },
-    trip_time: {
-        departure_time: {
-            type: String,
-            required: true,
-        },
-        arrival_time: {
-            type: String,
-            required: true,
-        },
+    arrival_time: {
+      type: String,
+      required: true,
     },
-    trip_date: {
-        type: String,
-        required: true,
+  },
+  trip_date: {
+    type: String,
+    required: true,
+  },
+  cabin_classes: {
+    economy: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    cabin_classes: {
-        economy: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        business: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        first: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
+    business: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    airport: {
-        from: { type: String, required: true },
-        to: { type: String, required: true },
+    first: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    price: {
-        type: Number,
-        required: true,
+  },
+  airport: {
+    from: { type: String, required: true },
+    to: { type: String, required: true },
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  baggage_allowance: {
+    type: Number,
+    required: true,
+  },
+  remaining_seats: {
+    economy: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    baggage_allowance: {
-        type: Number,
-        required: true,
+    business: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    remaining_seats: {
-        economy: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        business: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        first: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
+    first: {
+      type: Number,
+      required: true,
+      default: 0,
     },
-    seats: [{ seat_number: String, reserved: Boolean }],
+  },
+  seats: {
+    economy: [{ seat_number: String, reserved: Boolean }],
+    business: [{ seat_number: String, reserved: Boolean }],
+    first: [{ seat_number: String, reserved: Boolean }],
+  },
 });
 
 //Creating flights
