@@ -9,7 +9,7 @@ import AboutUs from "./pages/aboutUs/AboutUs";
 import CreateFlight from "./pages/createFlight/CreateFlight";
 import UpdateFlight from "./pages/updateFlight/UpdateFlight";
 import Booking from "./pages/booking/Booking";
-import ReservationDetails from "./pages/reservationDetails/reservationDetails";
+import ReservationDetails from "./pages/reservationDetails/ReservationDetails";
 
 function App() {
     return (
