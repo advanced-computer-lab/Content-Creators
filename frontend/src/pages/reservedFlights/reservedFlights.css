@@ -1,9 +1,8 @@
 .flightReservationsCard{
-    display: grid;
-    grid-gap: 7px;
     border: 0.1rem #c0c0c0 solid;
     background-color: #f8f8f8;
     border-radius: 0.5rem;
+    grid-template-columns: repeat(2, auto);
     margin: 1rem;  
     font-family: 'Courier New', Courier, monospace;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
