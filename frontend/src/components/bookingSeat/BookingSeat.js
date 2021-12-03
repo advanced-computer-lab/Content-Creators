@@ -5,7 +5,7 @@ import "./BookingSeat.css";
 import createRows from "./createRows";
 import { useHistory } from "react-router-dom";
 
-export default function BookingSeat({ rows }) {
+export default function BookingSeat({ rows, flightNumber }) {
     const addSeatCallback = ({ row, number, id }, addCb) => {
         console.log("row", row);
         console.log("number", number);
@@ -21,6 +21,7 @@ export default function BookingSeat({ rows }) {
     return (
         <div>
             <h1>Seat Picker</h1>
+            <h1>{flightNumber}</h1>
             <div style={{ marginTop: "10px" }}>
                 <SeatPicker
                     key={rows}

@@ -58,6 +58,12 @@ export default function BookingFlight({
     };
 
     const pickSeatsHandler = () => {
+        const seatData = {
+            flightNumber: "LAR-320",
+            cabinClass: "economy",
+            requestedSeats: 7,
+        };
+        history.seat_data = seatData;
         history.push("/seat-picker");
     };
 
