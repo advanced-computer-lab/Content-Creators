@@ -9,12 +9,7 @@ export default function BookingSeat({ cabinClass, requestedSeats }) {
         { seat_number: "Z99", reserved: true },
     ]);
     const [remainingSeats, setRemainingSeats] = useState(-1);
-    const [rows, setRows] = useState([
-        [
-            { id: "E0", number: "E0", isReserved: false },
-            { id: "E1", number: "E1", isReserved: false },
-        ],
-    ]);
+    const [rows, setRows] = useState([[]]);
 
     //this should be passed from booking in previous page
     //first off we have to check whether requestedSeatsNumber<= remainingSeats to continue picking seats
@@ -189,6 +184,7 @@ export default function BookingSeat({ cabinClass, requestedSeats }) {
             <h1>Seat Picker</h1>
             <div style={{ marginTop: "10px" }}>
                 <SeatPicker
+                    key={rows}
                     addSeatCallback={addSeatCallback}
                     removeSeatCallback={removeSeatCallback}
                     rows={rows}
