@@ -64,7 +64,9 @@ export default function FlightDetails(){
         history.push(path);
     };
     return (
-        <div styles = {{alignContent: 'center'}}>
+        <div>
+        {/* <div styles = {{alignContent: 'center', objectFit: 'contain'}}> */}
+        <div className="detailsContainer">
             <div key={data.flight_number} className="flightDetailsCard6">
             <p />
             <p />
@@ -123,7 +125,7 @@ export default function FlightDetails(){
                 <br />
                 <br />
                 <button className="flightdetailsbutton" value="submit" type="button" onClick={submitHandler}> Book this Flight </button>
-
+                </div>
         </div>
     );
 }
