@@ -10,8 +10,10 @@ export default function BookingFilter({ data, setData }) {
     const [airportTo, setAirportTo] = useState(data.airportTo);
     const [departureDate, setDepartureDate] = useState(data.departureDate);
     const [returnDate, setReturnDate] = useState(data.returnDate);
-    const [childrenNumber, setChildrenNumber] = useState(data.childrenNumber);
-    const [adultsNumber, setAdultsNumber] = useState(data.adultsNumber);
+    const [childrenNumber, setChildrenNumber] = useState(
+        parseInt(data.childrenNumber)
+    );
+    const [adultsNumber, setAdultsNumber] = useState(parseInt(data.adultsNumber));
     const [cabinClass, setCabinClass] = useState(data.cabinClass);
 
     const handleFilterSubmit = (e) => {
@@ -128,7 +130,7 @@ export default function BookingFilter({ data, setData }) {
                             <input
                                 type="number"
                                 value={adultsNumber}
-                                onChange={(e) => setAdultsNumber(e.target.value)}
+                                onChange={(e) => setAdultsNumber(parseInt(e.target.value))}
                                 name="adults_number"
                                 min="09:00"
                                 max="18:00"
@@ -140,7 +142,7 @@ export default function BookingFilter({ data, setData }) {
                             <input
                                 type="number"
                                 value={childrenNumber}
-                                onChange={(e) => setChildrenNumber(e.target.value)}
+                                onChange={(e) => setChildrenNumber(parseInt(e.target.value))}
                                 name="children_number"
                                 min="09:00"
                                 max="18:00"

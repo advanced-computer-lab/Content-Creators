@@ -49,23 +49,11 @@ export default function BookingSeat({ tripInfo, setSelected }) {
     // };
 
     const addSeatCallback = ({ row, number, id }, addCb) => {
-        console.log("row", row);
-        console.log("number", number);
-        console.log("id", id);
-        // setSelected(`Added seat ${number}, row ${row}, id ${id}`);
-
         setSelected((prevState) => {
             const newState = Array.from(prevState);
             newState.push(id);
             return newState;
         });
-
-        // setSelected((prevState) => {
-        //     console.log("prevState is: ", prevState);
-        //     return prevState.push(id);
-        // });
-
-        // const newTooltip = `tooltip for id-${id} added by callback`;
         addCb(row, number, id);
     };
 
@@ -75,7 +63,6 @@ export default function BookingSeat({ tripInfo, setSelected }) {
             newState = newState.filter((x) => x != id);
             return newState;
         });
-
         removeCb(row, number, id);
     };
 
