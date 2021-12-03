@@ -1,16 +1,27 @@
 const express = require("express");
 const router = express.Router();
 var nodemailer = require("nodemailer");
-const users = require("../routers/users");
+// const users = require("../routers/users");
+// const flights = require("../routers/flights");
+
 const Reservation = require("../models/reservationSchema");
+const Flight = require("../models/flightSchema");
 
-router.use("/users", users);
-
+// router.use("/users", users);
+// router.use("/flights", flights);
 //list all reservations
 router.get("/all-reservations/:username", async (req, res) => {
     const {username} = req.params;
     const allReservations = await Reservation.find({username: username});
     await res.status(200).send(allReservations).sendStatus;
+});
+router.get("/allreservations/:username", async (req, res) => {
+    const {username} = req.params;
+    const allReservations = await Reservation.find({username: username});
+    const reservationFlights = await Flight.find({flight_number: allReservations.flight_number})
+    await res.status(200).send(allReservations,reservationFlights).sendStatus;
+    // await res.status(200).send(allReservations).sendStatus;
+
 });
 
 //1- Removes reservation from user

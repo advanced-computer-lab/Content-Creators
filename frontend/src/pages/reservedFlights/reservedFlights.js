@@ -15,7 +15,9 @@ export default function ReservedFlight() {
     const locationPath = location.pathname.split("/");
     const username = locationPath[locationPath.length -1];
     
+    // const [data, setData] = useState([[]]);
     const [data, setData] = useState([]);
+
 
     const getReservationAxios = async () => {
         try {
@@ -57,6 +59,14 @@ export default function ReservedFlight() {
                      <h2><Icon icon="icon-park-outline:round-trip" color="#111" width="24" height="24"/> 
                      {data.flight_number}
                      </h2>
+                     <h2> <Icon icon="el:adult" />
+                     {data.no_of_adults}
+
+                     </h2>
+                     <h2><Icon icon="mdi:human-male-child" />
+                     {data.no_of_children}
+                     </h2>
+
                      <br />
                      <br />
                      <br />
