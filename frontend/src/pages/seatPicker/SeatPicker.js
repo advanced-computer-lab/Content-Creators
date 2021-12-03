@@ -11,49 +11,62 @@ export default function SeatPicker() {
         history.chosenSeats = ["E0", "E1", "E7"];
         history.goBack();
     };
-    //this should be passed from booking in previous page
-    //first off we have to check whether requestedSeatsNumber<= remainingSeats to continue picking seats
-    let flightNumber = "TKL-234";
-    let flightType = "Departure";
-    let cabinClass = "first";
-    let requestedSeats = 4;
+    const [choosingDep, setChosingDep] = useState(true);
+    const [departureSeats, setDepartureSeats] = useState([]);
+    const [returnSeats, setReturnSeats] = useState([]);
 
-    const seatData = history.seat_data;
-    if (seatData) {
-        flightType = seatData.flightType;
-        flightNumber = seatData.flightNumber;
-        requestedSeats = seatData.requestedSeats;
-        cabinClass = seatData.cabinClass;
+    console.log("history.trip_info", history.trip_info);
+    let departureTripInfo,
+        returnTripInfo = {
+            departureFlightNumber: "opop",
+            returnFlightNumber: "wassup",
+            cabinClass: "economy",
+            requestedSeats: 4,
+        };
+
+    console.log("info undefined?", history.trip_info == undefined);
+    if (history.trip_info) {
+        // tripInfo = history.trip_info;
+        const {
+            departureFlightNumber,
+            returnFlightNumber,
+            cabinClass,
+            requestedSeats,
+        } = history.trip_info;
+        const allInfo = { cabinClass, requestedSeats };
+
+        departureTripInfo = { ...allInfo, flightNumber: departureFlightNumber };
+        returnTripInfo = { ...allInfo, flightNumber: returnFlightNumber };
     }
-    console.log("seatData IS", seatData);
-    const [remainingSeats, setRemainingSeats] = useState(-1);
-    const [rows, setRows] = useState([[]]);
-    useEffect(() => {
-        getSeats(flightNumber);
-    }, []);
 
-    const getSeats = async (flightNumber) => {
-        try {
-            const url = `http://localhost:8000/flights/search?flight_number=${flightNumber}`;
-            const response = await axios.get(url);
-            const seatFullData = response.data[0].seats[cabinClass];
-            setRemainingSeats(response.data[0].remaining_seats[cabinClass]);
-            setRows(createRows(seatFullData));
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    // if (seatData) {
+    //     flightType = seatData.flightType;
+    //     flightNumber = seatData.flightNumber;
+    //     requestedSeats = seatData.requestedSeats;
+    //     cabinClass = seatData.cabinClass;
+    // }
+    // console.log("seatData IS", seatData);
+    // const [remainingSeats, setRemainingSeats] = useState(-1);
     return (
         <>
-            <BookingSeat
-                rows={rows}
-                flightNumber={flightNumber}
-                flightType={flightType}
-            />
+            {choosingDep && (
+                <BookingSeat
+                    tripInfo={departureTripInfo}
+                    title="Departure"
+                    setSeats={setDepartureSeats}
+                />
+            )}
+            {!choosingDep && (
+                <BookingSeat
+                    tripInfo={returnTripInfo}
+                    title="Return"
+                    setSeats={setReturnSeats}
+                />
+            )}
 
             <div style={{ textAlign: "center" }}>
                 <button type="button" class="btn-confirm" onClick={pickSeatsHandler}>
-                    PICK SEATS
+                    Continue
                 </button>
             </div>
         </>

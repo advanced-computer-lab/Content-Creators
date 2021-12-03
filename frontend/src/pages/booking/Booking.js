@@ -32,11 +32,24 @@ export default function Booking() {
 
     const confirmHandler = () => {
         const tripInfo = {
-            departure_flight_number: departureFlightNumber,
-            return_flight_number: returnFlightNumber,
+            departureFlightNumber: departureFlightNumber,
+            returnFlightNumber: returnFlightNumber,
+            cabinClass: data.cabinClass,
+            requestedSeats: data.adultsNumber + data.childrenNumber,
         };
         history.trip_info = tripInfo;
-        history.push("/reservation-details");
+        history.push("/seat-picker");
+    };
+
+    const pickSeatsHandler = () => {
+        const seatData = {
+            departure_flight_number: departureFlightNumber,
+            returnFlightNumber: returnFlightNumber,
+            cabinClass: data.cabinClass,
+            requestedSeats: data.adultsNumber + data.childrenNumber,
+        };
+        history.seat_data = seatData;
+        history.push("/seat-picker");
     };
 
     return (
