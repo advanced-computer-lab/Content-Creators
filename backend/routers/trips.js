@@ -5,9 +5,18 @@ const users = require("../routers/users");
 const Trip = require("../models/tripSchema");
 
 //list all trips
-router.get("/all-trips", async (req, res) => {
+router.get("/all-trips/:trip_id", async (req, res) => { //must be wriiten /all-trips/{space} to get all
     const allTrips = await Trip.find();
+
+    if(req.params != null){
+        const {trip_id} = req.params;
+        const filter = {trip_id: trip_id}
+         allTrips : await Trip.find(filter);
+
+    }
     await res.status(200).send(allTrips).sendStatus;
+
+
 });
 
 //1- Removes trip from user
@@ -44,26 +53,25 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
         console.log(err);
         res.status(500).send({
             success: false,
-            message: `deleting ${flight_number} is unsuccessful`,
+            message: `deleting ${trip_id} is unsuccessful`,
             error: err,
         });
     }
 });
 
 //adds trips
-router.post("/add-trip", async (req, res) => {
+router.post("/add-trip/:username", async (req, res) => {
     try {
+        const username = req.params.username;
         const {
-            // booking_id,
-            username,
-            arrival_flight_number,
-            departure_flight_number,
+            departure_booking_id,
+            return_booking_id,
         } = req.body.trip;
 
         const newTrip = new Trip({
             username: username,
-            arrival_flight_number: arrival_flight_number,
-            departure_flight_number: departure_flight_number,
+            return_booking_id: return_booking_id,
+            departure_booking_id: departure_booking_id,
         });
 
         await newTrip.save();
@@ -101,5 +109,6 @@ router.post("/add-trip", async (req, res) => {
         });
     }
 });
+
 
 module.exports = router;
