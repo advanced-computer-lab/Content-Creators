@@ -59,26 +59,6 @@ export default function BookingFlight({
         }
     };
 
-    const pickSeatsHandler = () => {
-        let flightNumber;
-        let flightType;
-        if (title.includes("Departure")) {
-            flightNumber = departureFlightNumber;
-            flightType = "Departure";
-        } else {
-            flightNumber = returnFlightNumber;
-            flightType = "Return";
-        }
-        const seatData = {
-            flightNumber: flightNumber,
-            flightType: flightType,
-            cabinClass: cabinClass,
-            requestedSeats: adultsNumber + childrenNumber,
-        };
-        history.seat_data = seatData;
-        history.push("/seat-picker");
-    };
-
     return (
         <>
             <>
@@ -112,16 +92,6 @@ export default function BookingFlight({
                             }
                         }}
                     >
-                        {chosen && (
-                            <button
-                                id="Button"
-                                class="pickSeatButton"
-                                onClick={pickSeatsHandler}
-                            >
-                                Pick Seats
-                            </button>
-                        )}
-
                         {chosen && (
                             <button
                                 id="cancelButton"

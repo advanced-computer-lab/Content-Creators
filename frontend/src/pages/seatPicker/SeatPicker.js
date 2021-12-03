@@ -52,20 +52,22 @@ export default function SeatPicker() {
             history.push("/reservation-details");
         }
     };
+    console.log("returnSeats", returnSeats);
+    console.log("departureSeats", departureSeats);
     return (
         <>
             {choosingDep && (
                 <BookingSeat
                     tripInfo={departureTripInfo}
                     title="Departure"
-                    setSeats={setDepartureSeats}
+                    setSelected={setDepartureSeats}
                 />
             )}
             {!choosingDep && (
                 <BookingSeat
                     tripInfo={returnTripInfo}
                     title="Return"
-                    setSeats={setReturnSeats}
+                    setSelected={setReturnSeats}
                 />
             )}
 
