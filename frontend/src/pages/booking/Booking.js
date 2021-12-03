@@ -49,6 +49,8 @@ export default function Booking() {
                 setReturnChosen={setReturnChosen}
                 setReturnFlightNumber={setReturnFlightNumber}
                 setDepartureFlightNumber={setDepartureFlightNumber}
+                departureFlightNumber={departureFlightNumber}
+                returnFlightNumber={returnFlightNumber}
                 title={"Departure Flight:"}
             />
 
@@ -58,6 +60,7 @@ export default function Booking() {
                         data={data}
                         setReturnChosen={setReturnChosen}
                         setReturnFlightNumber={setReturnFlightNumber}
+                        returnFlightNumber={returnFlightNumber}
                         title={"Return Flight:"}
                     />
                 </>

@@ -10,6 +10,8 @@ export default function BookingFlight({
     setReturnChosen,
     setDepartureFlightNumber,
     setReturnFlightNumber,
+    departureFlightNumber,
+    returnFlightNumber,
 }) {
     const history = useHistory();
 
@@ -58,10 +60,14 @@ export default function BookingFlight({
     };
 
     const pickSeatsHandler = () => {
+        let flightNumber;
+        title.includes("Departure")
+            ? (flightNumber = departureFlightNumber)
+            : (flightNumber = returnFlightNumber);
         const seatData = {
-            flightNumber: "LAR-320",
-            cabinClass: "economy",
-            requestedSeats: 7,
+            flightNumber: flightNumber,
+            cabinClass: cabinClass,
+            requestedSeats: adultsNumber + childrenNumber,
         };
         history.seat_data = seatData;
         history.push("/seat-picker");
