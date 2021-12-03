@@ -14,11 +14,13 @@ export default function SeatPicker() {
     //this should be passed from booking in previous page
     //first off we have to check whether requestedSeatsNumber<= remainingSeats to continue picking seats
     let flightNumber = "TKL-234";
+    let flightType = "Departure";
     let cabinClass = "first";
     let requestedSeats = 4;
 
     const seatData = history.seat_data;
     if (seatData) {
+        flightType = seatData.flightType;
         flightNumber = seatData.flightNumber;
         requestedSeats = seatData.requestedSeats;
         cabinClass = seatData.cabinClass;
@@ -43,7 +45,11 @@ export default function SeatPicker() {
     };
     return (
         <>
-            <BookingSeat rows={rows} flightNumber={flightNumber} />
+            <BookingSeat
+                rows={rows}
+                flightNumber={flightNumber}
+                flightType={flightType}
+            />
 
             <div style={{ textAlign: "center" }}>
                 <button type="button" class="btn-confirm" onClick={pickSeatsHandler}>

@@ -61,11 +61,17 @@ export default function BookingFlight({
 
     const pickSeatsHandler = () => {
         let flightNumber;
-        title.includes("Departure")
-            ? (flightNumber = departureFlightNumber)
-            : (flightNumber = returnFlightNumber);
+        let flightType;
+        if (title.includes("Departure")) {
+            flightNumber = departureFlightNumber;
+            flightType = "Departure";
+        } else {
+            flightNumber = returnFlightNumber;
+            flightType = "Return";
+        }
         const seatData = {
             flightNumber: flightNumber,
+            flightType: flightType,
             cabinClass: cabinClass,
             requestedSeats: adultsNumber + childrenNumber,
         };
