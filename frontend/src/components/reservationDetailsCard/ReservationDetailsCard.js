@@ -4,8 +4,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import "./ReservationDetailsCard.css";
 
 function ReservationDetailsCard({ tripInfo }) {
-    const departureFlightNumber = tripInfo.departure_flight_number;
-    const returnFlightNumber = tripInfo.return_flight_number;
+    const departureFlightNumber = tripInfo.departureFlightNumber;
+    const returnFlightNumber = tripInfo.returnFlightNumber;
     const [departureFlightData, setDepartureFlightData] = useState({});
     const [returnFlightData, setReturnFlightData] = useState({});
 

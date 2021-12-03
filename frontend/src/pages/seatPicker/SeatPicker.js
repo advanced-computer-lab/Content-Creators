@@ -7,15 +7,13 @@ import BookingSeat from "../../components/bookingSeat/BookingSeat";
 import createRows from "../../components/bookingSeat/createRows";
 export default function SeatPicker() {
     const history = useHistory();
-    const pickSeatsHandler = () => {
-        history.chosenSeats = ["E0", "E1", "E7"];
-        history.goBack();
-    };
     const [choosingDep, setChosingDep] = useState(true);
     const [departureSeats, setDepartureSeats] = useState([]);
     const [returnSeats, setReturnSeats] = useState([]);
+    const [buttonText, setButtonText] = useState(
+        "Continue to Return Flight Seating"
+    );
 
-    console.log("history.trip_info", history.trip_info);
     let departureTripInfo,
         returnTripInfo = {
             departureFlightNumber: "opop",
@@ -24,9 +22,7 @@ export default function SeatPicker() {
             requestedSeats: 4,
         };
 
-    console.log("info undefined?", history.trip_info == undefined);
     if (history.trip_info) {
-        // tripInfo = history.trip_info;
         const {
             departureFlightNumber,
             returnFlightNumber,
@@ -39,14 +35,23 @@ export default function SeatPicker() {
         returnTripInfo = { ...allInfo, flightNumber: returnFlightNumber };
     }
 
-    // if (seatData) {
-    //     flightType = seatData.flightType;
-    //     flightNumber = seatData.flightNumber;
-    //     requestedSeats = seatData.requestedSeats;
-    //     cabinClass = seatData.cabinClass;
-    // }
-    // console.log("seatData IS", seatData);
-    // const [remainingSeats, setRemainingSeats] = useState(-1);
+    const pickSeatsHandler = () => {
+        //more conditioons have to be added checking whether a correct amount of seats have
+        //been chosen using departureSeats and returnSeats state variables that will be set in the child compoonent BookingSeat
+        //probably then length of the array will be checked
+        if (choosingDep) {
+            setButtonText("Continue Booking");
+            setChosingDep((prevState) => !prevState);
+        } else {
+            const tripInfo = {
+                ...history.trip_info,
+                departureSeats: departureSeats,
+                returnSeats: returnSeats,
+            };
+            history.trip_info = tripInfo;
+            history.push("/reservation-details");
+        }
+    };
     return (
         <>
             {choosingDep && (
@@ -66,7 +71,7 @@ export default function SeatPicker() {
 
             <div style={{ textAlign: "center" }}>
                 <button type="button" class="btn-confirm" onClick={pickSeatsHandler}>
-                    Continue
+                    {buttonText}
                 </button>
             </div>
         </>
