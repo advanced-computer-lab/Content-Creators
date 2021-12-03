@@ -18,13 +18,13 @@ const tripSchema = new Schema(
             trim: true,
             required: true,
         },
-        arrival_flight_number: {
-            type: String,
+        departure_booking_id: {
+            type: Number,
             trim: true,
             required: true,
         },
-        departure_flight_number: {
-            type: String,
+        return_booking_id: {
+            type: Number,
             trim: true,
             required: true,
         },
@@ -32,7 +32,7 @@ const tripSchema = new Schema(
     { collection: "trips" }
 );
 tripSchema.index(
-    { username: 1, arrival_flight_number: 1, departure_flight_number: 1 },
+    { username: 1, departure_booking_id: 1, return_booking_id: 1 },
     { unique: true }
 );
 const trips = mongoose.model("trips", tripSchema);
