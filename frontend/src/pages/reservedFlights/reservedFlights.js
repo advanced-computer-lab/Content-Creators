@@ -1,11 +1,12 @@
 import React from "react";
-import "../../components/flightCard/FlightCard.css"
+import "./reservedFlights.css";
 import "../../App.css";
 import { Component, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Button } from "../../components/button/Button";
+import { Icon } from '@iconify/react';
 
 export default function ReservedFlight() {
 
@@ -47,14 +48,19 @@ export default function ReservedFlight() {
         <div>
          {data.map((data) => {
              return (
+                <div styles = {{alignContent: 'center'}}>
                  <div key={data.flight_number} className = "flightReservationsCard" onClick = {() => submitHandler(data.flight_number)}>
-                     <h3>Booking Id:
+                     <h2>
+                    <Icon icon="tabler:brand-booking" /> 
                      {data.booking_id}
-                     </h3>
-                     <h3>Flight Number:
+                     </h2>
+                     <h2><Icon icon="icon-park-outline:round-trip" color="#111" width="24" height="24"/> 
                      {data.flight_number}
-                     </h3>
+                     </h2>
                      <br />
+                     <br />
+                     <br />
+                 </div>
                  </div>
              );
          })}
