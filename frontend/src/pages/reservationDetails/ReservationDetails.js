@@ -10,8 +10,10 @@ function ReservationDetails() {
     console.log("history.trip_info", history.trip_info);
 
     let tripInfo = {
-        departure_flight_number: "opop",
-        return_flight_number: "wassup",
+        departure_flight_number: "random-flightNumber",
+        return_flight_number: "random-flightNumber2",
+        departureSeats: ["E12", "E23", "E16", "E6", "E1"],
+        returnSeats: ["E39", "E34", "E32", "E20", "E21"],
     };
 
     if (history.trip_info) {

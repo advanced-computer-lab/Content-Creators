@@ -22,7 +22,9 @@ export default function SeatPicker() {
             requestedSeats: 4,
         };
 
+    let requestedSeatsLocal = 4;
     if (history.trip_info) {
+        requestedSeatsLocal = history.trip_info.requestedSeats;
         const {
             departureFlightNumber,
             returnFlightNumber,
@@ -40,9 +42,11 @@ export default function SeatPicker() {
         //been chosen using departureSeats and returnSeats state variables that will be set in the child compoonent BookingSeat
         //probably then length of the array will be checked
         if (choosingDep) {
-            setButtonText("Continue Booking");
-            setChosingDep((prevState) => !prevState);
-        } else {
+            if (departureSeats.length >= requestedSeatsLocal) {
+                setButtonText("Continue Booking");
+                setChosingDep((prevState) => !prevState);
+            }
+        } else if (returnSeats.length >= requestedSeatsLocal) {
             const tripInfo = {
                 ...history.trip_info,
                 departureSeats: departureSeats,
@@ -52,20 +56,22 @@ export default function SeatPicker() {
             history.push("/reservation-details");
         }
     };
+    console.log("returnSeats", returnSeats);
+    console.log("departureSeats", departureSeats);
     return (
         <>
             {choosingDep && (
                 <BookingSeat
                     tripInfo={departureTripInfo}
                     title="Departure"
-                    setSeats={setDepartureSeats}
+                    setSelected={setDepartureSeats}
                 />
             )}
             {!choosingDep && (
                 <BookingSeat
                     tripInfo={returnTripInfo}
                     title="Return"
-                    setSeats={setReturnSeats}
+                    setSelected={setReturnSeats}
                 />
             )}
 

@@ -15,6 +15,7 @@ export default function Booking() {
 
     const [departureFlightNumber, setDepartureFlightNumber] = useState("");
     const [returnFlightNumber, setReturnFlightNumber] = useState("");
+    console.log("booking_details", history.booking_details);
 
     if (!data) {
         //generally we will get it from history this is just mock data in case url entered directly
@@ -23,8 +24,8 @@ export default function Booking() {
             airportTo: "CAI",
             departureDate: "2021-12-14",
             returnDate: "2021-12-30",
-            childrenNumber: "3",
-            adultsNumber: "2",
+            childrenNumber: 3,
+            adultsNumber: 2,
             cabinClass: "economy",
         };
         setData(allInfoTemp);
