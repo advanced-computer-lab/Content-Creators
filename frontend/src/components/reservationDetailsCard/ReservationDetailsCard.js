@@ -4,8 +4,12 @@ import { useHistory, useLocation } from "react-router-dom";
 import "./ReservationDetailsCard.css";
 
 function ReservationDetailsCard({ tripInfo }) {
-    const departureFlightNumber = tripInfo.departureFlightNumber;
-    const returnFlightNumber = tripInfo.returnFlightNumber;
+    const {
+        departureFlightNumber,
+        returnFlightNumber,
+        departureSeats,
+        returnSeats,
+    } = tripInfo;
     const [departureFlightData, setDepartureFlightData] = useState({});
     const [returnFlightData, setReturnFlightData] = useState({});
 
@@ -33,12 +37,20 @@ function ReservationDetailsCard({ tripInfo }) {
             <h2>Date: {departureFlightData.trip_date}</h2>
             <h2>Price: {departureFlightData.price}</h2>
             <h2>Baggage: {departureFlightData.baggage_allowance}</h2>
+            <h2>Departure Seats:</h2>
+            {departureSeats.map((seat) => {
+                return <h2 key={seat}>{seat}</h2>;
+            })}
 
             <h1>Return Flight</h1>
             <h2>Flight Number: {returnFlightData.flight_number}</h2>
             <h2>Date: {returnFlightData.trip_date}</h2>
             <h2>Price: {returnFlightData.price}</h2>
             <h2>Baggage: {returnFlightData.baggage_allowance}</h2>
+            <h2>Return Seats:</h2>
+            {returnSeats.map((seat) => {
+                return <h2 key={seat}>{seat}</h2>;
+            })}
 
             <h1> Departure Flight Number: {tripInfo.departure_flight_number}</h1>
             <h1> Return Flight Number: {tripInfo.return_flight_number}</h1>
