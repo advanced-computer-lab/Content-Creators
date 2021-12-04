@@ -15,8 +15,8 @@ export default function BookingCard() {
     const [departureDate, setDepartureDate] = useState("");
     const [returnDate, setReturnDate] = useState("");
     const [childrenNumber, setChildrenNumber] = useState("");
-    const [adultsNumber, setAdultsNumber] = useState("");
-    const [cabinClass, setCabinClass] = useState("");
+    const [adultsNumber, setAdultsNumber] = useState(0);
+    const [cabinClass, setCabinClass] = useState(0);
 
     const currentDate = new Date();
     const [minDate, setMinDate] = useState(currentDate);
@@ -125,7 +125,7 @@ export default function BookingCard() {
                         id="no_of_adults"
                         name="adults"
                         value={adultsNumber}
-                        onChange={(e) => setAdultsNumber(e.target.value)}
+                        onChange={(e) => setAdultsNumber(parseInt(e.target.value))}
                     />
                 </div>
                 <div className="form-control">
@@ -135,7 +135,7 @@ export default function BookingCard() {
                         id="no_of_children"
                         name="children"
                         value={childrenNumber}
-                        onChange={(e) => setChildrenNumber(e.target.value)}
+                        onChange={(e) => setChildrenNumber(parseInt(e.target.value))}
                     />
                 </div>
                 <select
