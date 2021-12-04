@@ -4,11 +4,16 @@ import { useHistory, useLocation } from "react-router-dom";
 import "./ReservationDetailsCard.css";
 
 function ReservationDetailsCard({ tripInfo }) {
+    const history = useHistory();
+    console.log("history", history);
+    console.log("history.booking_details", history.booking_details);
     const {
         departureFlightNumber,
         returnFlightNumber,
         departureSeats,
         returnSeats,
+        cabinClass,
+        requestedSeats,
     } = tripInfo;
     const [departureFlightData, setDepartureFlightData] = useState({});
     const [returnFlightData, setReturnFlightData] = useState({});
@@ -32,6 +37,9 @@ function ReservationDetailsCard({ tripInfo }) {
 
     return (
         <div>
+            <h1>Cabin Class: {cabinClass}</h1>
+            <h1>Requested Seats: {requestedSeats}</h1>
+
             <h1>Departure Flight</h1>
             <h2>Flight Number: {departureFlightData.flight_number}</h2>
             <h2>Date: {departureFlightData.trip_date}</h2>

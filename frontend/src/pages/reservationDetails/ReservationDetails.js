@@ -3,6 +3,7 @@ import "./ReservationDetails.css";
 import ReservationDetailsCard from "../../components/reservationDetailsCard/ReservationDetailsCard";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { request } from "http";
 
 function ReservationDetails() {
     const history = useHistory();
@@ -14,6 +15,8 @@ function ReservationDetails() {
         return_flight_number: "random-flightNumber2",
         departureSeats: ["E12", "E23", "E16", "E6", "E1"],
         returnSeats: ["E39", "E34", "E32", "E20", "E21"],
+        cabinClass: "economy",
+        requestedSeats: 5,
     };
 
     if (history.trip_info) {
