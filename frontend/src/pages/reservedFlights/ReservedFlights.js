@@ -4,15 +4,10 @@ import "../../App.css";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import ReservedFlightCard from "../../components/reservedFlights/reservedFlightsCard";
 
 export default function ReservedFlight() {
-    let location = useLocation();
-
-    const locationPath = location.pathname.split("/");
-    // const username = locationPath[locationPath.length - 1];
     const [username, setUsername] = useState("husseljo");
 
     // const [data, setData] = useState([[]]);
@@ -116,13 +111,15 @@ export default function ReservedFlight() {
                             Departure Flight:{" "}
                             {data.departure_reservation_id.flight_id.flight_number}
                         </h1>
-                        <ReservedFlightCard data={data.departure_reservation_id} />
+                        <ReservedFlightCard
+                            data={data.departure_reservation_id.flight_id}
+                        />
                         <h1>
                             {" "}
                             Return Flight:{" "}
                             {data.return_reservation_id.flight_id.flight_number}
                         </h1>
-                        <ReservedFlightCard data={data.return_reservation_id} />
+                        <ReservedFlightCard data={data.return_reservation_id.flight_id} />
                     </div>
                 );
             })}
