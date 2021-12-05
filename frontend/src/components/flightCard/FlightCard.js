@@ -33,6 +33,10 @@ export default function FlightCard({ data, setDataParent }) {
         }
     };
 
+    const flightDetailsHandler = (flightNumber) => {
+        routeChange(`../flight-details/${flightNumber}`);
+      };
+        
     const editHandler = (flightData) => {
         history.flight_data = flightData;
         routeChange(`../update-flight/${flightData.flight_number}`);
@@ -42,7 +46,7 @@ export default function FlightCard({ data, setDataParent }) {
         <div>
             {data.map((data) => {
                 return (
-                    <div key={data.flight_number} className="flightCard">
+                    <div key={data.flight_number} className="flightCard" onClick = {() => flightDetailsHandler(data.flight_number)}>
                         <link
                             href="https://fonts.googleapis.com/icon?family=Material+Icons"
                             rel="stylesheet"
