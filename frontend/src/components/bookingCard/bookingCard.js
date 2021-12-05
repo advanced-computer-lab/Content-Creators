@@ -60,8 +60,8 @@ export default function BookingCard() {
     };
 
     return (
-        <div>
-            <div className="booking-container">
+        <div className="booking-container">
+            <div>
                 <h1 className="booking-title">Book Your Flight Now!</h1>
                 <br />
                 <div className="form-control">
