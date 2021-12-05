@@ -18,11 +18,11 @@ const tripSchema = new Schema(
             trim: true,
             required: true,
         },
-        departure_reservation: {
+        departure_reservation_id: {
             type: mongoose.Schema.ObjectId,
             ref: "reservations",
         },
-        return_reservation: {
+        return_reservation_id: {
             type: mongoose.Schema.ObjectId,
             ref: "reservations",
         },
