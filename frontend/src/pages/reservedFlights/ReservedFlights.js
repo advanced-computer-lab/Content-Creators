@@ -66,24 +66,6 @@ export default function ReservedFlight() {
         history.push(path);
     };
 
-    const submitHandler = (flightNumber) => {
-        routeChange(`../reservation-details`);
-    };
-
-    // return (
-    //     <div>
-    //         <div> User of this trip: {username}</div>
-    //         {data.map((data) => {
-    //             return (
-    //                 <div styles={{ alignContent: "center" }}>
-    // <ReservedFlightCard data={data.departure_reservation_id} />
-    // <ReservedFlightCard data={data.return_reservation_id} />
-    //                 </div>
-    //             );
-    //         })}
-    //     </div>
-    // );
-    // }
     return (
         <div>
             {data.map((data, index) => {

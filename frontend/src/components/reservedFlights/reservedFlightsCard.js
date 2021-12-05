@@ -2,21 +2,15 @@ import React from "react";
 import "./reservedFlightsCard.css";
 import "../../App.css";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 export default function ReservedFlightCard({ data }) {
-    let location = useLocation();
     console.log("PASSED PROPS", data);
     console.log("data.airport", data.airport);
 
     // { airport, trip_date, trip_time }
     // let { airport, trip_date, trip_time } = data;
-
-    const locationPath = location.pathname.split("/");
-    const username = locationPath[locationPath.length - 1];
 
     if (data.airport) {
         return (
@@ -38,7 +32,7 @@ export default function ReservedFlightCard({ data }) {
 
                         <h2>
                             <Icon
-                                icon="icon-park-outline:round-trip"
+                                icon="icon-park-outline:calender-thirty"
                                 color="#111"
                                 width="24"
                                 height="24"
@@ -50,7 +44,7 @@ export default function ReservedFlightCard({ data }) {
                         <h2></h2>
                         <h2>
                             <Icon
-                                icon="icon-park-outline:round-trip"
+                                icon="icon-park-outline:calender-thirty"
                                 color="#111"
                                 width="24"
                                 height="24"
@@ -62,7 +56,7 @@ export default function ReservedFlightCard({ data }) {
                         <h2></h2>
                         <h2>
                             <Icon
-                                icon="icon-park-outline:round-trip"
+                                icon="icon-park-outline:calender-thirty"
                                 color="#111"
                                 width="24"
                                 height="24"
