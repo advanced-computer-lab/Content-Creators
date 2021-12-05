@@ -41,6 +41,7 @@ function ReservationDetailsCard({ tripInfo }) {
             <h1>Requested Seats: {requestedSeats}</h1>
 
             <h1>Departure Flight</h1>
+            <h1>Departure Flight ID: {departureFlightData._id}</h1>
             <h2>Flight Number: {departureFlightData.flight_number}</h2>
             <h2>Date: {departureFlightData.trip_date}</h2>
             <h2>Price: {departureFlightData.price}</h2>
@@ -51,6 +52,7 @@ function ReservationDetailsCard({ tripInfo }) {
             })}
 
             <h1>Return Flight</h1>
+            <h1>Return Flight ID: {returnFlightData._id}</h1>
             <h2>Flight Number: {returnFlightData.flight_number}</h2>
             <h2>Date: {returnFlightData.trip_date}</h2>
             <h2>Price: {returnFlightData.price}</h2>
