@@ -10,9 +10,18 @@ const { addReservation } = require("../controllers/reservationController");
 router.use("/users", users);
 
 //list all reservations
-router.get("/all-reservations", async (req, res) => {
-    const allReservations = await Reservation.find();
+router.get("/all-reservations/:username", async (req, res) => {
+    const {username} = req.params;
+    const allReservations = await Reservation.find({username: username});
     await res.status(200).send(allReservations).sendStatus;
+});
+router.get("/allreservations/:username", async (req, res) => {
+    const {username} = req.params;
+    const allReservations = await Reservation.find({username: username});
+    const reservationFlights = await Flight.find({flight_number: allReservations.flight_number})
+    await res.status(200).send(allReservations,reservationFlights).sendStatus;
+    // await res.status(200).send(allReservations).sendStatus;
+
 });
 
 router.post("/reservationYasta", addReservation);
