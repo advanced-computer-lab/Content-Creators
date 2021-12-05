@@ -104,8 +104,6 @@ function ReservationDetailsCard({ tripInfo }) {
                     </div>
                     <div className="reservationDetailsCard-payment">
                         <br />
-                        <p> Departure Flight Number: {tripInfo.departure_flight_number} <br/>
-             Return Flight Number: {tripInfo.return_flight_number}</p>
                         <button
                             className="createbutton"
                             type="submit"
