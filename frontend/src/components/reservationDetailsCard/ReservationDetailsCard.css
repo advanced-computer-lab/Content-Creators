@@ -1,36 +1,51 @@
-.reservationDetailsCard{
-    border: 1rem #c0c0c0 solid;
-    background-color: #E8BE99; 
-    border-radius: 1rem;
-    margin: 1rem;  
-    font-family: 'Courier New', Courier, monospace;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    height: 600px;
-    width: 600px;
-    position: relative;
-    left: 550px;
-    top: 100px;
+.reservationDetailsCard {
+  border: 1rem #c0c0c0 solid;
+  background-color: #e8be99;
+  border-radius: 1rem;
+  margin: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 600px;
+  width: 600px;
+  position: relative;
+  left: 550px;
+  top: 100px;
 }
 
-.reservationDetailsCard-body{
-    padding: 1rem;
-    position: relative;
-    left: 0px;
-    top: 40px;   
-    font-size: 20px;
+.reservationDetailsCard-body {
+  padding: 1rem;
+  position: relative;
+  left: 0px;
+  top: 40px;
+  font-size: 20px;
 }
 
-.reservationDetailsCard-header{
-    width: 600px;
-    font-size: 30px;
+.reservationDetailsCard-header {
+  width: 600px;
+  font-size: 30px;
 }
 
-.reservationDetailsCard-details{
-    width: 600px;
+.reservationDetailsCard-details {
+  width: 600px;
 }
 
-.createbutton{
-    position: relative;
-    top: 20px;
-}  
+.createbutton {
+  position: relative;
+  top: 20px;
+}
 
+.btn-confirm {
+  height: 70px;
+  width: 40%;
+  background-color: #453a2e;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.5px;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.2s ease-out, color 0.2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}

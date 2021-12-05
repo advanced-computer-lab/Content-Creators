@@ -29,6 +29,8 @@ export default function SeatPicker() {
             departureFlightNumber,
             returnFlightNumber,
             cabinClass,
+            adultsNumber,
+            childrenNumber,
             requestedSeats,
         } = history.trip_info;
         const allInfo = { cabinClass, requestedSeats };

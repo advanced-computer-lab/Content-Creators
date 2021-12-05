@@ -14,6 +14,8 @@ function ReservationDetailsCard({ tripInfo }) {
         returnSeats,
         cabinClass,
         requestedSeats,
+        adultsNumber,
+        childrenNumber,
     } = tripInfo;
     const [departureFlightData, setDepartureFlightData] = useState({});
     const [returnFlightData, setReturnFlightData] = useState({});
@@ -35,10 +37,40 @@ function ReservationDetailsCard({ tripInfo }) {
         getFlight(returnFlightNumber, false);
     }, []);
 
+    const getFlightX = async () => {
+        try {
+            // const url = `http://localhost:8000/flights/search?flight_number=${flightNumber}`;
+            // const response = await axios.get(url);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const confirmHandler = () => {
+        const x = {
+            username: "husseljo",
+            cabin_class: cabinClass,
+            no_of_adults: adultsNumber,
+            no_of_children: childrenNumber,
+            departure_flight_id: departureFlightData._id,
+            departure_seat_numbers: departureSeats,
+            return_flight_id: returnFlightData._id,
+            return_seat_numbers: departureSeats,
+        };
+        // const history =
+        console.log("history.booking_details", history.booking_details);
+
+        console.log("CONFIRM CLICKED");
+        console.log("CONFIRM DATA", x);
+    };
+
     return (
         <div>
             <h1>Cabin Class: {cabinClass}</h1>
             <h1>Requested Seats: {requestedSeats}</h1>
+
+            <h1>Adults Number: {adultsNumber}</h1>
+            <h1>Children Number: {childrenNumber}</h1>
 
             <h1>Departure Flight</h1>
             <h1>Departure Flight ID: {departureFlightData._id}</h1>
@@ -61,9 +93,11 @@ function ReservationDetailsCard({ tripInfo }) {
             {returnSeats.map((seat) => {
                 return <h2 key={seat}>{seat}</h2>;
             })}
-
-            <h1> Departure Flight Number: {tripInfo.departure_flight_number}</h1>
-            <h1> Return Flight Number: {tripInfo.return_flight_number}</h1>
+            <div style={{ textAlign: "center" }}>
+                <button type="button" class="btn-confirm" onClick={confirmHandler}>
+                    Confirm Trip Reservation
+                </button>
+            </div>
 
             <div className="reservationDetailsCard">
                 <div className="reservationDetailsCard-body">

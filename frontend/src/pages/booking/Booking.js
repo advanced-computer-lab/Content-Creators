@@ -36,6 +36,8 @@ export default function Booking() {
             departureFlightNumber: departureFlightNumber,
             returnFlightNumber: returnFlightNumber,
             cabinClass: data.cabinClass,
+            adultsNumber: data.adultsNumber,
+            childrenNumber: data.childrenNumber,
             requestedSeats: data.adultsNumber + data.childrenNumber,
         };
         history.trip_info = tripInfo;
