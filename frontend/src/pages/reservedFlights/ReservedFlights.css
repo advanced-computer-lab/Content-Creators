@@ -1,22 +1,24 @@
-.flightReservationsCard {
+.flightReservationsCard{
   border: 0.1rem #c0c0c0 solid;
   background-color: #f8f8f8;
   border-radius: 0.5rem;
   display: grid;
   grid-template-columns: repeat(4, auto);
-  margin: 0rem 50rem 1rem;
-  font-family: "Courier New", Courier, monospace;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 0rem 50rem 1rem;  
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   cursor: pointer;
+
 }
-.flightReservationsCard:hover {
+.flightReservationsCard:hover{
   border: 0.1rem #c0c0c0 solid;
   background-color: #80683d;
   border-radius: 0.5rem;
   display: grid;
   grid-template-columns: repeat(4, auto);
-  margin: 0rem 50rem 1rem;
-  font-family: "Courier New", Courier, monospace;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 0rem 50rem 1rem;  
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   cursor: pointer;
+
 }
