@@ -30,12 +30,13 @@ router.post("/add-trip/", async (req, res) => {
             departure_seat_numbers,
             return_flight_id,
             return_seat_numbers,
-            total_price,
+            departure_total_price,
+            return_total_price,
         } = req.body.trip;
 
-        const departure_total_price =
+        const departure_reservation_price =
             departure_seat_numbers.length *
-            total_price *
+            departure_total_price *
             (no_of_children + no_of_adults);
         const departureReservation = {
             username: username,
@@ -44,12 +45,12 @@ router.post("/add-trip/", async (req, res) => {
             no_of_adults: no_of_adults,
             no_of_children: no_of_children,
             seat_numbers: departure_seat_numbers,
-            total_price: departure_total_price,
+            total_price: departure_reservation_price,
         };
 
-        const return_total_price =
+        const return_reservation_price =
             return_seat_numbers.length *
-            total_price *
+            return_total_price *
             (no_of_children + no_of_adults);
         const returnReservation = {
             username: username,
@@ -58,7 +59,7 @@ router.post("/add-trip/", async (req, res) => {
             no_of_adults: no_of_adults,
             no_of_children: no_of_children,
             seat_numbers: return_seat_numbers,
-            total_price: return_total_price,
+            total_price: return_reservation_price,
         };
 
         const reqFirstReservation = {

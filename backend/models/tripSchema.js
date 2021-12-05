@@ -21,10 +21,10 @@ const tripSchema = new Schema(
     },
     { collection: "trips" }
 );
-tripSchema.index(
-    { username: 1, departure_reservation: 1, return_reservation: 1 },
-    { unique: true }
-);
+// tripSchema.index(
+//     { username: 1, departure_reservation: 1, return_reservation: 1 },
+//     { unique: true }
+// );
 const trips = mongoose.model("trips", tripSchema);
 
 module.exports = trips;

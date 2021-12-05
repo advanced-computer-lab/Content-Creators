@@ -19,6 +19,7 @@ function ReservationDetailsCard({ tripInfo }) {
     } = tripInfo;
     const [departureFlightData, setDepartureFlightData] = useState({});
     const [returnFlightData, setReturnFlightData] = useState({});
+    const [username, setUsername] = useState("husseljo");
 
     const getFlight = async (flightNumber, bool) => {
         try {
@@ -57,7 +58,7 @@ function ReservationDetailsCard({ tripInfo }) {
     const confirmHandler = () => {
         const readyTrip = {
             trip: {
-                username: "husseljo",
+                username: username,
                 cabin_class: cabinClass,
                 no_of_adults: adultsNumber,
                 no_of_children: childrenNumber,
@@ -65,7 +66,8 @@ function ReservationDetailsCard({ tripInfo }) {
                 departure_seat_numbers: departureSeats,
                 return_flight_id: returnFlightData._id,
                 return_seat_numbers: departureSeats,
-                total_price: departureFlightData.price,
+                departure_total_price: departureFlightData.price,
+                return_total_price: returnFlightData.price,
             },
         };
         createTripAxios(readyTrip);
@@ -75,6 +77,18 @@ function ReservationDetailsCard({ tripInfo }) {
 
     return (
         <div>
+            <div>
+                <p>Enter different username for developement purposes:</p>
+                <input
+                    type="text"
+                    id="airport_to"
+                    name="to"
+                    value={username}
+                    onChange={(e) => {
+                        setUsername(e.target.value);
+                    }}
+                />
+            </div>
             <h1>Cabin Class: {cabinClass}</h1>
             <h1>Requested Seats: {requestedSeats}</h1>
 
