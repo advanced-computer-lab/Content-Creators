@@ -2,19 +2,25 @@ const express = require("express");
 const router = express.Router();
 var nodemailer = require("nodemailer");
 const users = require("../routers/users");
+const Reservation = require("../models/reservationSchema");
 const Trip = require("../models/tripSchema");
+const flights = require("../models/flightSchema");
 const { addReservation } = require("../controllers/reservationController");
 
 //list all trips
-router.get("/all-trips/:trip_id", async (req, res) => {
+router.get("/all-trips/", async (req, res) => {
     //must be wriiten /all-trips/{space} to get all
-    const allTrips = await Trip.find();
+    const allTrips = await Trip.find()
+        .populate({
+            path: "departure_reservation_id",
+            populate: "flight_id",
+        })
+        .populate({
+            path: "return_reservation_id",
+            populate: "flight_id",
+        });
+    console.log("allTrips", allTrips);
 
-    if (req.params != null) {
-        const { trip_id } = req.params;
-        const filter = { trip_id: trip_id };
-        allTrips: await Trip.find(filter);
-    }
     await res.status(200).send(allTrips).sendStatus;
 });
 

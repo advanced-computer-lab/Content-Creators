@@ -87,7 +87,7 @@ const flightsSchema = new Schema({
 });
 
 //Creating flights
-const Flights = mongoose.model("Flight", flightsSchema);
+const Flights = mongoose.model("flights", flightsSchema);
 
 // Exporting the Flights
 
