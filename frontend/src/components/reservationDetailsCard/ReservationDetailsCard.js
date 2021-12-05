@@ -37,31 +37,39 @@ function ReservationDetailsCard({ tripInfo }) {
         getFlight(returnFlightNumber, false);
     }, []);
 
-    const getFlightX = async () => {
+    const createTripAxios = async (readyTrip) => {
         try {
-            // const url = `http://localhost:8000/flights/search?flight_number=${flightNumber}`;
-            // const response = await axios.get(url);
+            const response = await axios.post(
+                "http://localhost:8000/trips/add-trip",
+                readyTrip
+            );
+            if (response.data.success) {
+                console.log("successfully created trip");
+            } else {
+                console.log("not able to create trip!");
+            }
         } catch (err) {
+            console.log("error occured while posting the trip using axios!");
             console.log(err);
         }
     };
 
     const confirmHandler = () => {
-        const x = {
-            username: "husseljo",
-            cabin_class: cabinClass,
-            no_of_adults: adultsNumber,
-            no_of_children: childrenNumber,
-            departure_flight_id: departureFlightData._id,
-            departure_seat_numbers: departureSeats,
-            return_flight_id: returnFlightData._id,
-            return_seat_numbers: departureSeats,
+        const readyTrip = {
+            trip: {
+                username: "husseljo",
+                cabin_class: cabinClass,
+                no_of_adults: adultsNumber,
+                no_of_children: childrenNumber,
+                departure_flight_id: departureFlightData._id,
+                departure_seat_numbers: departureSeats,
+                return_flight_id: returnFlightData._id,
+                return_seat_numbers: departureSeats,
+            },
         };
-        // const history =
-        console.log("history.booking_details", history.booking_details);
-
-        console.log("CONFIRM CLICKED");
-        console.log("CONFIRM DATA", x);
+        createTripAxios(readyTrip);
+        console.log("trip successfully created!");
+        history.push("/");
     };
 
     return (
