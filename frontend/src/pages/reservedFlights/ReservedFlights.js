@@ -86,8 +86,10 @@ export default function ReservedFlight() {
     // }
     return (
         <div>
-            <div> User of this trip: {username}</div>
             {data.map((data, index) => {
+                {
+                    /* <div> User of this trip: {data.username}</div>; */
+                }
                 console.log(`data ${index}`, data);
                 return (
                     <div styles={{ alignContent: "center" }}>
