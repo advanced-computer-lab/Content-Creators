@@ -16,14 +16,8 @@ export default function ReservedFlight() {
     const username = locationPath[locationPath.length -1];
     const flightNumber = locationPath[locationPath.length -1];
     
-    const airport_state ={
-        from : "",
-        to : ""
-    }
-    
     // const [data, setData] = useState([[]]);
     const [data, setData] = useState([]);
-    const [airport ,setAirport]= useState(airport_state);
 
 
     const getReservationAxios = async () => {
@@ -37,21 +31,8 @@ export default function ReservedFlight() {
         }
     };
 
-    const getFlightReservationAxios = async () => {
-        try {
-            const response = await axios.get(
-                `http://localhost:8000/flights/all-reservations/${flightNumber}`,
-            );
-            setData(response.data)
-            setAirport(response.data.airport)
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
     useEffect(() => {
         getReservationAxios();
-        getFlightReservationAxios();
     }, []);
 
 
