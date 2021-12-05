@@ -60,11 +60,27 @@ export default function ReservedFlight() {
         getReservationAxios();
     }, []);
 
-    const history = useHistory();
-
-    const routeChange = (path) => {
-        history.push(path);
-    };
+    // const deleteHandler = async () => {
+    //     let isExecuted = window.confirm("Are you sure to delete this flight?");
+    //     if (isExecuted) {
+    //         try {
+    //             console.log(`Attempting to delete flightNumber: ${flightNumber}`);
+    //             const response = await axios.delete(
+    //                 `http://localhost:8000/flights/delete-flight/${flightNumber}`
+    //             );
+    //             setDataParent((prevState) => {
+    //                 return prevState.filter((elem) => elem.flight_number != flightNumber);
+    //             });
+    //             console.log(`successfully deleted ${flightNumber}`);
+    //         } catch (err) {
+    //             console.log(`not able to delete ${flightNumber}`);
+    //             console.log(err);
+    //         }
+    //     } else {
+    //         routeChange(`all-flights`);
+    //     }
+    // };
+    const cancelHandler = () => { };
 
     return (
         <div>
@@ -78,6 +94,19 @@ export default function ReservedFlight() {
                         <br />
                         <br />
                         <h1>Trip {index + 1}</h1>
+                        <button
+                            className="FlightBtns"
+                            id={data._id}
+                            type="button"
+                            onClick={cancelHandler}
+                        >
+                            Cancel Trip
+                        </button>
+
+                        <h2>
+                            <Icon icon="tabler:brand-booking" />
+                            Trip ID: {data._id}
+                        </h2>
                         <h2>
                             <Icon icon="tabler:brand-booking" />
                             Cabin Class: {data.departure_reservation_id.cabin_class}

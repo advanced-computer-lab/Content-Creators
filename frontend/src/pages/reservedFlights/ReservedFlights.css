@@ -20,3 +20,28 @@
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
 }
+
+.btn-cancel {
+  /* height: 70px; */
+  /* width: 100%; */
+  background-color: red;
+  /* white-space: nowrap; */
+  /* border-radius: 0.5px; */
+  /* font-size: 20px; */
+  /* color: #fff; */
+  /* transition: all 0.2s ease-out, color 0.2s ease-out; */
+  /* border: 0; */
+  /* cursor: pointer; */
+  /* font-weight: 400; */
+  /* font-family: "Poppins", sans-serif; */
+  /* position: absolute; */
+  /* top: 0; */
+  /* right: 0; */
+}
+.Flightbtns {
+  position: relative;
+  background-color: red;
+  color: red;
+  left: 1400px;
+  right: 100px;
+}
