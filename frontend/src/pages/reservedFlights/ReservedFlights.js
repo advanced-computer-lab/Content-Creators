@@ -19,24 +19,34 @@ export default function ReservedFlight() {
     const [data, setData] = useState([
         {
             flight_number: "ABC-123",
-            departure_reservation_id: { no_of_adults: 9, no_of_children: 7 },
-            booking_id: 12,
-            no_of_adults: 2,
-            no_of_children: 3,
-        },
-        {
-            flight_number: "ABC-123",
-            departure_reservation_id: { no_of_adults: 9, no_of_children: 7 },
-            booking_id: 7,
-            no_of_adults: 1,
-            no_of_children: 1,
-        },
-        {
-            flight_number: "ABC-123",
-            departure_reservation_id: { no_of_adults: 9, no_of_children: 7 },
-            booking_id: 2,
-            no_of_adults: 4,
-            no_of_children: 2,
+            return_reservation_id: {
+                no_of_adults: 9,
+                no_of_children: 7,
+                no_of_adults: 2,
+                no_of_children: 3,
+                flight_id: {
+                    flightNumber: 1,
+                    price: 1,
+                    baggage_allowance: 1,
+                    trip_date: "11-11-2011",
+                    trip_time: { arrival_time: "1:00", departure_time: "2:00" },
+                    airport: { from: "", to: "" },
+                },
+            },
+            departure_reservation_id: {
+                no_of_adults: 9,
+                no_of_children: 7,
+                no_of_adults: 2,
+                no_of_children: 3,
+                flight_id: {
+                    flightNumber: 1,
+                    price: 1,
+                    baggage_allowance: 1,
+                    trip_date: "11-11-2011",
+                    trip_time: { arrival_time: "1:00", departure_time: "2:00" },
+                    airport: { from: "", to: "" },
+                },
+            },
         },
     ]);
 
@@ -83,6 +93,7 @@ export default function ReservedFlight() {
         <div>
             <div> User of this trip: {username}</div>
             {data.map((data, index) => {
+                console.log(`data ${index}`, data);
                 return (
                     <div styles={{ alignContent: "center" }}>
                         <br />
@@ -103,13 +114,13 @@ export default function ReservedFlight() {
                         <h1>
                             {" "}
                             Departure Flight:{" "}
-                            {/* {data.departure_reservation_id.flight_id.flight_number} */}
+                            {data.departure_reservation_id.flight_id.flight_number}
                         </h1>
                         <ReservedFlightCard data={data.departure_reservation_id} />
                         <h1>
                             {" "}
                             Return Flight:{" "}
-                            {/* {data.return_reservation_id.flight_id.flight_number} */}
+                            {data.return_reservation_id.flight_id.flight_number}
                         </h1>
                         <ReservedFlightCard data={data.return_reservation_id} />
                     </div>
