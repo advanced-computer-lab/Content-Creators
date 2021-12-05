@@ -65,6 +65,7 @@ function ReservationDetailsCard({ tripInfo }) {
                 departure_seat_numbers: departureSeats,
                 return_flight_id: returnFlightData._id,
                 return_seat_numbers: departureSeats,
+                total_price: departureFlightData.price,
             },
         };
         createTripAxios(readyTrip);
