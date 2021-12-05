@@ -3,6 +3,7 @@ const router = express.Router();
 var nodemailer = require("nodemailer");
 const users = require("../routers/users");
 const Reservation = require("../models/reservationSchema");
+const Flight = require("../models/flightSchema");
 
 router.use("/users", users);
 
@@ -38,13 +39,13 @@ router.delete("/delete-reservation/:booking_id", async (req, res) => {
             text: "Your reservation has been canceled. You have been refunded and it will take 10 days to process.",
         };
 
-        transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log("Email sent: " + info.response);
-            }
-        });
+        // transporter.sendMail(mailOptions, function(error, info) {
+        //     if (error) {
+        //         console.log(error);
+        //     } else {
+        //         console.log("Email sent: " + info.response);
+        //     }
+        // });
     } catch (err) {
         console.log(err);
         res.status(500).send({
@@ -58,7 +59,6 @@ router.delete("/delete-reservation/:booking_id", async (req, res) => {
 router.post("/add-reservation", async (req, res) => {
     try {
         const {
-            // booking_id,
             username,
             flight_number,
             cabin_class,
@@ -68,10 +68,20 @@ router.post("/add-reservation", async (req, res) => {
             total_price,
         } = req.body.reservation;
 
+        //get flight_id of flight_number
+        const flight_id_arr = await Flight.find(
+            {
+                flight_number: { $eq: flight_number },
+            },
+            { _id: 1 }
+        );
+        const flight_id = flight_id_arr[0]._id;
+
+        console.log("flight id object is: ", flight_id);
+
         const newReservation = new Reservation({
-            // booking_id: booking_id,
             username: username,
-            flight_number: flight_number,
+            flight_id: flight_id,
             cabin_class: cabin_class,
             no_of_adults: no_of_adults,
             no_of_children: no_of_children,
@@ -98,13 +108,13 @@ router.post("/add-reservation", async (req, res) => {
             text: "Your reservation has been made!",
         };
 
-        transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log("Email sent: " + info.response);
-            }
-        });
+        // transporter.sendMail(mailOptions, function(error, info) {
+        //     if (error) {
+        //         console.log(error);
+        //     } else {
+        //         console.log("Email sent: " + info.response);
+        //     }
+        // });
     } catch (err) {
         console.log(err);
         res.status(500).send({
@@ -119,6 +129,20 @@ router.get("/get_Registration", async (req, res) => {
     const filter = req.query;
     const allReservation = await Reservation.find(filter);
     res.status(200).send(allReservation);
+});
+
+router.get("/get-reservationX", async (req, res) => {
+    const filter = req.query;
+    console.log("req.query YOOOO", req.query);
+    const reservationData = await Reservation.find(filter);
+
+    console.log("reservationData is", reservationData);
+    console.log("reservationData.flight is", reservationData[0].flight_id);
+    const flight_id = reservationData[0].flight_id;
+    const filter2 = { _id: flight_id };
+    const flightData = await Flight.find(filter2);
+
+    res.status(200).send(flightData);
 });
 
 module.exports = router;

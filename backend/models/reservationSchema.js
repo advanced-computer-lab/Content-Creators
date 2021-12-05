@@ -3,25 +3,16 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-let counter = 0;
-
 const reservationSchema = new Schema(
     {
-        booking_id: {
-            type: Number,
-            trim: true,
-            unique: true,
-            default: () => counter++,
-        },
         username: {
             type: String,
             trim: true,
             required: true,
         },
-        flight_number: {
-            type: String,
-            trim: true,
-            required: true,
+        flight_id: {
+            type: mongoose.Schema.ObjectId,
+            ref: "flights",
         },
         cabin_class: {
             type: String,
