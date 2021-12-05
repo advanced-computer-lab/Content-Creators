@@ -3,16 +3,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-// let counter = 0;
-
 const tripSchema = new Schema(
     {
-        // trip_id: {
-        //     type: Number,
-        //     trim: true,
-        //     unique: true,
-        //     default: () => counter++,
-        // },
         username: {
             type: String,
             trim: true,

@@ -3,7 +3,7 @@ const router = express.Router();
 var nodemailer = require("nodemailer");
 const users = require("../routers/users");
 const Trip = require("../models/tripSchema");
-const reservationRouter = require("./reservations");
+const { addReservation } = require("../controllers/reservationController");
 
 //list all trips
 router.get("/all-trips/:trip_id", async (req, res) => {
@@ -34,7 +34,9 @@ router.post("/add-trip/", async (req, res) => {
         } = req.body.trip;
 
         const departure_total_price =
-            departure_seat_numbers.length * (no_of_children + no_of_adults);
+            departure_seat_numbers.length *
+            total_price *
+            (no_of_children + no_of_adults);
         const departureReservation = {
             username: username,
             flight_id: departure_flight_id,
@@ -46,7 +48,9 @@ router.post("/add-trip/", async (req, res) => {
         };
 
         const return_total_price =
-            return_seat_numbers.length * (no_of_children + no_of_adults);
+            return_seat_numbers.length *
+            total_price *
+            (no_of_children + no_of_adults);
         const returnReservation = {
             username: username,
             flight_id: return_flight_id,
@@ -57,14 +61,33 @@ router.post("/add-trip/", async (req, res) => {
             total_price: return_total_price,
         };
 
+        const reqFirstReservation = {
+            body: { reservation: { ...departureReservation } },
+        };
+        const reqSecondReservation = {
+            body: { reservation: { ...returnReservation } },
+        };
+
+        const departure_reservation_id = await addReservation(
+            reqFirstReservation,
+            res
+        );
+        const return_reservation_id = await addReservation(
+            reqSecondReservation,
+            res
+        );
+
+        console.log("departure_flight_id", departure_flight_id);
+        console.log("return_reservation_id", return_reservation_id);
+
         const newTrip = new Trip({
             username: username,
-            return_booking_id: return_booking_id,
-            departure_booking_id: departure_booking_id,
+            departure_reservation_id: departure_reservation_id,
+            return_reservation_id: return_reservation_id,
         });
 
-        await newTrip.save();
-        console.log("creating new trip is successful");
+        const finalTrip = await newTrip.save();
+        console.log("creating new trip is successful", finalTrip);
         res.status(201).send({ success: true });
 
         var transporter = nodemailer.createTransport({
