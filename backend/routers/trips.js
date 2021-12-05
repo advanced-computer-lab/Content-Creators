@@ -6,6 +6,7 @@ const Reservation = require("../models/reservationSchema");
 const Trip = require("../models/tripSchema");
 const flights = require("../models/flightSchema");
 const { addReservation } = require("../controllers/reservationController");
+const { deleteReservation } = require("../controllers/reservationDelete");
 
 //list all trips
 router.get("/all-trips/", async (req, res) => {
@@ -133,37 +134,63 @@ router.post("/add-trip/", async (req, res) => {
 router.delete("/delete-trip/:trip_id", async (req, res) => {
     try {
         const { trip_id } = req.params;
-        await Trip.deleteOne({ trip_id: trip_id });
-        console.log(`deleting ${trip_id} is successful`);
-        res.status(201).send({ success: true });
+        const filter = { _id: trip_id };
+        console.log("filter is: ", filter);
+        const tripData = await Trip.find({ _id: trip_id });
+        console.log("TRIP DATA IS: ", tripData[0]);
+        // const departure_reservation_id, return_reservation_id = undefined
+        const { departure_reservation_id, return_reservation_id } = tripData[0];
 
-        var transporter = nodemailer.createTransport({
-            service: "outlook",
-            auth: {
-                user: "ibnfirnas_acl@outlook.com",
-                pass: "firnas123",
-            },
-        });
+        const departureReservation = { reservation_id: departure_reservation_id };
+        console.log("departureReservation", departureReservation);
+        const returnReservation = { reservation_id: return_reservation_id };
+        console.log("returnReservation", returnReservation);
 
-        var mailOptions = {
-            from: "ibnfirnas_acl@outlook.com",
-            to: "alirmazhar1@gmail.com",
-            subject: "Reservation Cancel Notice ",
-            text: "Your reservation has been canceled. You have been refunded and it will take 10 days to process.",
-        };
+        const firstDeleted = await deleteReservation(departureReservation, res);
+        if (firstDeleted) {
+            console.log("deleted first reservation in trip deletion:", firstDeleted);
+            const secondDeleted = await deleteReservation(returnReservation, res);
+            if (secondDeleted) {
+                console.log(
+                    "deleted second reservation in trip deletion:",
+                    secondDeleted
+                );
+                await Trip.deleteOne({ _id: trip_id });
+                console.log(`deleting ${trip_id} is successful`);
+                res.status(201).send({ success: true });
 
-        transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log("Email sent: " + info.response);
+                var transporter = nodemailer.createTransport({
+                    service: "outlook",
+                    auth: {
+                        user: "ibnfirnas_acl@outlook.com",
+                        pass: "firnas123",
+                    },
+                });
+
+                var mailOptions = {
+                    from: "ibnfirnas_acl@outlook.com",
+                    to: "alirmazhar1@gmail.com",
+                    subject: "Reservation Cancel Notice ",
+                    text: "Your reservation has been canceled. You have been refunded and it will take 10 days to process.",
+                };
+
+                transporter.sendMail(mailOptions, function(error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Email sent: " + info.response);
+                    }
+                });
             }
-        });
+        }
+
+        res.status(201).send({ success: true });
     } catch (err) {
         console.log(err);
         res.status(500).send({
             success: false,
-            message: `deleting ${trip_id} is unsuccessful`,
+            // message: `deleting ${trip_id} is unsuccessful`,
+            message: `deleting trip is unsuccessful`,
             error: err,
         });
     }
