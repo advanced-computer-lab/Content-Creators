@@ -37,7 +37,7 @@ function ReservationDetailsCard({ tripInfo }) {
 
     return (
         <div>
-            <h1>Cabin Class: {cabinClass}</h1>
+            {/* <h1>Cabin Class: {cabinClass}</h1>
             <h1>Requested Seats: {requestedSeats}</h1>
 
             <h1>Departure Flight</h1>
@@ -61,32 +61,51 @@ function ReservationDetailsCard({ tripInfo }) {
             })}
 
             <h1> Departure Flight Number: {tripInfo.departure_flight_number}</h1>
-            <h1> Return Flight Number: {tripInfo.return_flight_number}</h1>
+            <h1> Return Flight Number: {tripInfo.return_flight_number}</h1> */}
 
             <div className="reservationDetailsCard">
                 <div className="reservationDetailsCard-body">
                     <div className="reservationDetailsCard-header">
-                        <h3> Hi Ahmed Mohamed,</h3>
-                        <br />
                         <p>
-                            Your reservation request for flight CAI-LAX roundtrip is almost
-                            done!
+                            Your reservation request for is almost done!
                             <br /> Please review the details of your booking.
                         </p>
                     </div>
                     <br />
                     <div className="reservationDetailsCard-details">
-                        <p>Cabin class: FirstClass</p>
+                        <p>Cabin Class: {cabinClass}</p>
                         <br />
-                        <p>Number of Adults: 3</p>
+                        <p>Requested Seats: {requestedSeats}</p>
                         <br />
-                        <p>Number of Children: 0</p>
-                        <br />
-                        <p>Seat Numbers: 2A,3B,3C</p>
+                        <p>Departure Flight</p>
+                        <p>Flight Number: {departureFlightData.flight_number}</p>
+                        <p>Date: {departureFlightData.trip_date}</p>
+                        <p>Price: {departureFlightData.price}</p>
+                        <p>Baggage: {departureFlightData.baggage_allowance}</p>
+                        <p>Departure Seats:</p>
+                        <p>
+                            {departureSeats.map((seat) => {
+                            return <p key={seat}>{seat}</p>;
+                            })}
+                        </p>
+                        <br/>
+                        <br/>
+                        <p>Return Flight</p>
+                        <p>Flight Number: {returnFlightData.flight_number}</p>
+                        <p>Date: {returnFlightData.trip_date}</p>
+                        <p>Price: {returnFlightData.price}</p>
+                        <p>Baggage: {returnFlightData.baggage_allowance}</p>
+                        <p>Return Seats:</p>
+                        <p>
+                            {returnSeats.map((seat) => {
+                            return<p key={seat}>{seat}</p>;
+                            })}
+                        </p>
                     </div>
                     <div className="reservationDetailsCard-payment">
                         <br />
-                        <p>Total Price: 4380</p>
+                        <p> Departure Flight Number: {tripInfo.departure_flight_number} <br/>
+             Return Flight Number: {tripInfo.return_flight_number}</p>
                         <button
                             className="createbutton"
                             type="submit"
