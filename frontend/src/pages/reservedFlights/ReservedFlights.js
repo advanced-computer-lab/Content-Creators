@@ -2,7 +2,6 @@ import React from "react";
 import "./ReservedFlights.css";
 import "../../App.css";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import ReservedFlightCard from "../../components/reservedFlights/reservedFlightsCard";
@@ -15,30 +14,30 @@ export default function ReservedFlight() {
         {
             flight_number: "ABC-123",
             return_reservation_id: {
-                no_of_adults: 9,
-                no_of_children: 7,
-                no_of_adults: 2,
-                no_of_children: 3,
+                no_of_adults: 0,
+                no_of_children: 0,
+                no_of_adults: 0,
+                no_of_children: 0,
                 flight_id: {
-                    flightNumber: 1,
-                    price: 1,
-                    baggage_allowance: 1,
-                    trip_date: "11-11-2011",
-                    trip_time: { arrival_time: "1:00", departure_time: "2:00" },
+                    flightNumber: 0,
+                    price: 0,
+                    baggage_allowance: 0,
+                    trip_date: "",
+                    trip_time: { arrival_time: "", departure_time: "" },
                     airport: { from: "", to: "" },
                 },
             },
             departure_reservation_id: {
-                no_of_adults: 9,
-                no_of_children: 7,
-                no_of_adults: 2,
-                no_of_children: 3,
+                no_of_adults: 0,
+                no_of_children: 0,
+                no_of_adults: 0,
+                no_of_children: 0,
                 flight_id: {
-                    flightNumber: 1,
-                    price: 1,
-                    baggage_allowance: 1,
-                    trip_date: "11-11-2011",
-                    trip_time: { arrival_time: "1:00", departure_time: "2:00" },
+                    flightNumber: 0,
+                    price: 0,
+                    baggage_allowance: 0,
+                    trip_date: "",
+                    trip_time: { arrival_time: "", departure_time: "" },
                     airport: { from: "", to: "" },
                 },
             },
@@ -60,27 +59,6 @@ export default function ReservedFlight() {
         getReservationAxios();
     }, []);
 
-    // const deleteHandler = async () => {
-    //     let isExecuted = window.confirm("Are you sure to delete this flight?");
-    //     if (isExecuted) {
-    //         try {
-    //             console.log(`Attempting to delete flightNumber: ${flightNumber}`);
-    //             const response = await axios.delete(
-    //                 `http://localhost:8000/flights/delete-flight/${flightNumber}`
-    //             );
-    //             setDataParent((prevState) => {
-    //                 return prevState.filter((elem) => elem.flight_number != flightNumber);
-    //             });
-    //             console.log(`successfully deleted ${flightNumber}`);
-    //         } catch (err) {
-    //             console.log(`not able to delete ${flightNumber}`);
-    //             console.log(err);
-    //         }
-    //     } else {
-    //         routeChange(`all-flights`);
-    //     }
-    // };
-
     const deleteHandler = async (tripId) => {
         let isExecuted = window.confirm("Are you sure to delete this trip?");
         if (isExecuted) {
@@ -89,6 +67,9 @@ export default function ReservedFlight() {
                 const response = await axios.delete(
                     `http://localhost:8000/trips/delete-trip/${tripId}`
                 );
+                setData((prevState) => {
+                    return prevState.filter((elem) => elem._id != tripId);
+                });
             } catch (err) {
                 console.log(`not able to delete trip ${tripId}`);
                 console.log(err);
