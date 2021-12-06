@@ -1,0 +1,105 @@
+.detailsContainer {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  position: fixed;
+}
+.flightdetailsbutton {
+  background-color: #000000;
+  color: rgb(255, 249, 249);
+  padding: 1rem;
+  margin: 0rem 95rem 0rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  border-radius: 1rem;
+  width: 10%;
+  object-fit: contain;
+}
+.flightdetailsbutton:hover {
+  background-color: #ffffff;
+  transition: all 0.2s ease-out;
+  color: #000000;
+}
+.flightDetailsCard {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 15px;
+  border: 0.1rem #c0c0c000 solid;
+  /* background-color: #f8f8f8; */
+  border-radius: 0.5rem;
+  margin: 0rem 50rem 0rem;
+  font-family: "Courier New", Courier, monospace;
+  object-fit: contain;
+
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+.flightDetailsCard2 {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 12px;
+  border: 0.1rem #c0c0c000 solid;
+  /* background-color: #f8f8f8; */
+  border-radius: 0.5rem;
+  margin: 0rem 50rem 0rem;
+  font-family: "Courier New", Courier, monospace;
+  object-fit: contain;
+
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+.flightDetailsCard1 {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-gap: 12px;
+  border: 0.1rem #c0c0c000 solid;
+  /* background-color: #f8f8f8; */
+  border-radius: 0.5rem;
+  margin: 0rem 45rem 0rem;
+  font-family: "Courier New", Courier, monospace;
+  object-fit: contain;
+
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+.flightDetailsCard3 {
+  display: grid;
+  grid-template-columns: repeat(15, auto);
+  grid-gap: 12px;
+  border: 0.1rem #c0c0c000 solid;
+  /* background-color: #f8f8f8; */
+  border-radius: 0.5rem;
+  margin: 0rem 50rem 0rem;
+  font-family: "Courier New", Courier, monospace;
+  object-fit: contain;
+
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+.flightDetailsCard5 {
+  display: grid;
+  grid-template-columns: repeat(15, auto);
+  grid-gap: 12px;
+  border: 0.1rem #c0c0c000 solid;
+  /* background-color: #f8f8f8; */
+  border-radius: 0.5rem;
+  margin: 0rem 47rem 0rem;
+  font-family: "Courier New", Courier, monospace;
+  padding-left: 40px;
+  object-fit: contain;
+
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+.flightDetailsCard6 {
+  display: grid;
+  grid-template-columns: repeat(15, auto);
+  grid-gap: 12px;
+  border: 0.1rem #c0c0c000 solid;
+  /* background-color: #f8f8f8; */
+  border-radius: 0.5rem;
+  margin: 0rem 47.5rem 0rem;
+  font-family: "Courier New", Courier, monospace;
+  padding-left: 40px;
+  object-fit: contain;
+
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}

@@ -28,8 +28,6 @@ export default function FlightCard({ data, setDataParent }) {
                 console.log(`not able to delete ${flightNumber}`);
                 console.log(err);
             }
-        } else {
-            routeChange(`all-flights`);
         }
     };
 
@@ -51,7 +49,15 @@ export default function FlightCard({ data, setDataParent }) {
                             src="https://kit.fontawesome.com/a076d05399.js"
                             crossorigin="anonymous"
                         ></script>
-                        <div className="flightCard-body">
+                        <div
+                            className="flightCard-body"
+                            id="mainCard"
+                            onClick={(e) => {
+                                if (e.target.id == "mainCard") {
+                                    routeChange(`../flight-details/${data.flight_number}`);
+                                }
+                            }}
+                        >
                             {" "}
                             <h3>Flight Number: {data.flight_number} </h3>
                             <button

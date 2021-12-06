@@ -12,6 +12,7 @@ import Booking from "./pages/booking/Booking";
 import SeatPicker from "./pages/seatPicker/SeatPicker";
 import ReservationDetails from "./pages/reservationDetails/ReservationDetails";
 import ReservedFlight from "./pages/reservedFlights/ReservedFlights";
+import FlightDetails from "./pages/flightDetails/FlightDetails";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/reservation-details" component={ReservationDetails} />
                     <Route path="/seat-picker" component={SeatPicker} />
                     <Route path="/reserved-flights" component={ReservedFlight} />
+                    <Route path="/flight-details" component={FlightDetails} />
                 </Switch>
             </Router>
         </>
