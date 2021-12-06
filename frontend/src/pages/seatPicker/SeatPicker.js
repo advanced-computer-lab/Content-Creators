@@ -16,10 +16,10 @@ export default function SeatPicker() {
 
     let departureTripInfo,
         returnTripInfo = {
-            departureFlightNumber: "opop",
-            returnFlightNumber: "wassup",
-            cabinClass: "economy",
-            requestedSeats: 4,
+            departureFlightNumber: "",
+            returnFlightNumber: "",
+            cabinClass: "",
+            requestedSeats: 0,
         };
 
     let requestedSeatsLocal = 4;
@@ -60,28 +60,49 @@ export default function SeatPicker() {
     };
     console.log("returnSeats", returnSeats);
     console.log("departureSeats", departureSeats);
-    return (
-        <>
-            {choosingDep && (
-                <BookingSeat
-                    tripInfo={departureTripInfo}
-                    title="Departure"
-                    setSelected={setDepartureSeats}
-                />
-            )}
-            {!choosingDep && (
-                <BookingSeat
-                    tripInfo={returnTripInfo}
-                    title="Return"
-                    setSelected={setReturnSeats}
-                />
-            )}
 
-            <div style={{ textAlign: "center" }}>
-                <button type="button" class="btn-confirm" onClick={pickSeatsHandler}>
-                    {buttonText}
-                </button>
+    if (history.trip_info) {
+        return (
+            <>
+                {choosingDep && (
+                    <BookingSeat
+                        tripInfo={departureTripInfo}
+                        title="Departure"
+                        setSelected={setDepartureSeats}
+                    />
+                )}
+                {!choosingDep && (
+                    <BookingSeat
+                        tripInfo={returnTripInfo}
+                        title="Return"
+                        setSelected={setReturnSeats}
+                    />
+                )}
+
+                <div style={{ textAlign: "center" }}>
+                    <button type="button" class="btn-confirm" onClick={pickSeatsHandler}>
+                        {buttonText}
+                    </button>
+                </div>
+            </>
+        );
+    } else {
+        return (
+            <div>
+                <h1>PLEASE GO THROUGH BOOKING PROCESS</h1>
+
+                <div style={{ textAlign: "center" }}>
+                    <button
+                        type="button"
+                        class="btn-confirm"
+                        onClick={() => {
+                            history.push("/booking");
+                        }}
+                    >
+                        GO TO BOOKING
+                    </button>
+                </div>
             </div>
-        </>
-    );
+        );
+    }
 }
