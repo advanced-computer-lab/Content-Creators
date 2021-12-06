@@ -11,12 +11,12 @@ function ReservationDetails() {
     console.log("history.trip_info", history.trip_info);
 
     let tripInfo = {
-        departure_flight_number: "random-flightNumber",
+        departure_flight_number: "",
         return_flight_number: "random-flightNumber2",
-        departureSeats: ["E12", "E23", "E16", "E6", "E1"],
-        returnSeats: ["E39", "E34", "E32", "E20", "E21"],
-        cabinClass: "economy",
-        requestedSeats: 5,
+        departureSeats: [],
+        returnSeats: [],
+        cabinClass: "",
+        requestedSeats: 0,
     };
 
     if (history.trip_info) {

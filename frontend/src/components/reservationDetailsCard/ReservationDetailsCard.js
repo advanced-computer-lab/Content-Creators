@@ -5,8 +5,6 @@ import "./ReservationDetailsCard.css";
 
 function ReservationDetailsCard({ tripInfo }) {
     const history = useHistory();
-    console.log("history", history);
-    console.log("history.booking_details", history.booking_details);
     const {
         departureFlightNumber,
         returnFlightNumber,
@@ -34,8 +32,10 @@ function ReservationDetailsCard({ tripInfo }) {
     };
 
     useEffect(() => {
-        getFlight(departureFlightNumber, true);
-        getFlight(returnFlightNumber, false);
+        if (departureFlightNumber) {
+            getFlight(departureFlightNumber, true);
+            getFlight(returnFlightNumber, false);
+        }
     }, []);
 
     const createTripAxios = async (readyTrip) => {
@@ -75,90 +75,82 @@ function ReservationDetailsCard({ tripInfo }) {
         history.push("/");
     };
 
-    return (
-        <div>
+    if (departureFlightData && cabinClass) {
+        return (
             <div>
-                <p>Enter different username for developement purposes:</p>
-                <input
-                    type="text"
-                    id="airport_to"
-                    name="to"
-                    value={username}
-                    onChange={(e) => {
-                        setUsername(e.target.value);
-                    }}
-                />
-            </div>
-            <h1>Cabin Class: {cabinClass}</h1>
-            <h1>Requested Seats: {requestedSeats}</h1>
-
-            <h1>Adults Number: {adultsNumber}</h1>
-            <h1>Children Number: {childrenNumber}</h1>
-
-            <h1>Departure Flight</h1>
-            <h1>Departure Flight ID: {departureFlightData._id}</h1>
-            <h2>Flight Number: {departureFlightData.flight_number}</h2>
-            <h2>Date: {departureFlightData.trip_date}</h2>
-            <h2>Price: {departureFlightData.price}</h2>
-            <h2>Baggage: {departureFlightData.baggage_allowance}</h2>
-            <h2>Departure Seats:</h2>
-            {departureSeats.map((seat) => {
-                return <h2 key={seat}>{seat}</h2>;
-            })}
-
-            <h1>Return Flight</h1>
-            <h1>Return Flight ID: {returnFlightData._id}</h1>
-            <h2>Flight Number: {returnFlightData.flight_number}</h2>
-            <h2>Date: {returnFlightData.trip_date}</h2>
-            <h2>Price: {returnFlightData.price}</h2>
-            <h2>Baggage: {returnFlightData.baggage_allowance}</h2>
-            <h2>Return Seats:</h2>
-            {returnSeats.map((seat) => {
-                return <h2 key={seat}>{seat}</h2>;
-            })}
-            <div style={{ textAlign: "center" }}>
-                <button type="button" class="btn-confirm" onClick={confirmHandler}>
-                    Confirm Trip Reservation
-                </button>
-            </div>
-
-            <div className="reservationDetailsCard">
-                <div className="reservationDetailsCard-body">
-                    <div className="reservationDetailsCard-header">
-                        <h3> Hi Ahmed Mohamed,</h3>
+                <div className="reservationDetailsCard">
+                    <div className="reservationDetailsCard-body">
+                        <div className="reservationDetailsCard-header">
+                            <p>
+                                Your reservation request for is almost done!
+                                <br /> Please review the details of your booking.
+                            </p>
+                        </div>
                         <br />
-                        <p>
-                            Your reservation request for flight CAI-LAX roundtrip is almost
-                            done!
-                            <br /> Please review the details of your booking.
-                        </p>
-                    </div>
-                    <br />
-                    <div className="reservationDetailsCard-details">
-                        <p>Cabin class: FirstClass</p>
-                        <br />
-                        <p>Number of Adults: 3</p>
-                        <br />
-                        <p>Number of Children: 0</p>
-                        <br />
-                        <p>Seat Numbers: 2A,3B,3C</p>
-                    </div>
-                    <div className="reservationDetailsCard-payment">
-                        <br />
-                        <p>Total Price: 4380</p>
-                        <button
-                            className="createbutton"
-                            type="submit"
-                            value="Create"
-                        //onClick={handleSubmit}
-                        >
-                            Confirm Reservation
-                        </button>
+                        <div className="reservationDetailsCard-details">
+                            <p>Cabin Class: {cabinClass}</p>
+                            <br />
+                            <p>Requested Seats: {requestedSeats}</p>
+                            <br />
+                            <p>Departure Flight</p>
+                            <p>Flight Number: {departureFlightData.flight_number}</p>
+                            <p>Date: {departureFlightData.trip_date}</p>
+                            <p>Price: {departureFlightData.price}</p>
+                            <p>Baggage: {departureFlightData.baggage_allowance}</p>
+                            <p>Departure Seats:</p>
+                            <p>
+                                {departureSeats.map((seat) => {
+                                    return <p key={seat}>{seat}</p>;
+                                })}
+                            </p>
+                            <br />
+                            <br />
+                            <p>Return Flight</p>
+                            <p>Flight Number: {returnFlightData.flight_number}</p>
+                            <p>Date: {returnFlightData.trip_date}</p>
+                            <p>Price: {returnFlightData.price}</p>
+                            <p>Baggage: {returnFlightData.baggage_allowance}</p>
+                            <p>Return Seats:</p>
+                            <p>
+                                {returnSeats.map((seat) => {
+                                    return <p key={seat}>{seat}</p>;
+                                })}
+                            </p>
+                        </div>
+                        <div className="reservationDetailsCard-payment">
+                            <br />
+                            <button
+                                className="createbutton"
+                                type="submit"
+                                value="Create"
+                                onClick={confirmHandler}
+                            >
+                                Confirm Reservation
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div>
+                <h1>PLEASE GO THROUGH BOOKING PROCESS</h1>
+
+                <div style={{ textAlign: "center" }}>
+                    <button
+                        type="button"
+                        class="btn-confirm"
+                        onClick={() => {
+                            history.push("/booking");
+                        }}
+                    >
+                        GO TO BOOKING
+                    </button>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default ReservationDetailsCard;
