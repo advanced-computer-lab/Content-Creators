@@ -156,8 +156,7 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
                     secondDeleted
                 );
                 await Trip.deleteOne({ _id: trip_id });
-                console.log(`deleting ${trip_id} is successful`);
-                res.status(201).send({ success: true });
+                console.log(`deleting trip:${trip_id} is successful`);
 
                 var transporter = nodemailer.createTransport({
                     service: "outlook",

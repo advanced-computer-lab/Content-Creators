@@ -80,7 +80,21 @@ export default function ReservedFlight() {
     //         routeChange(`all-flights`);
     //     }
     // };
-    const cancelHandler = () => { };
+
+    const deleteHandler = async (tripId) => {
+        let isExecuted = window.confirm("Are you sure to delete this trip?");
+        if (isExecuted) {
+            try {
+                console.log(`Attempting to delete trip: ${tripId}`);
+                const response = await axios.delete(
+                    `http://localhost:8000/trips/delete-trip/${tripId}`
+                );
+            } catch (err) {
+                console.log(`not able to delete trip ${tripId}`);
+                console.log(err);
+            }
+        }
+    };
 
     return (
         <div>
@@ -98,7 +112,7 @@ export default function ReservedFlight() {
                             className="FlightBtns"
                             id={data._id}
                             type="button"
-                            onClick={cancelHandler}
+                            onClick={() => deleteHandler(data._id)}
                         >
                             Cancel Trip
                         </button>
