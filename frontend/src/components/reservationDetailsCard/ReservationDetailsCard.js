@@ -78,6 +78,18 @@ function ReservationDetailsCard({ tripInfo }) {
     if (departureFlightData && cabinClass) {
         return (
             <div>
+                <div>
+                    <p>Enter different username for developement purposes:</p>
+                    <input
+                        type="text"
+                        id="airport_to"
+                        name="to"
+                        value={username}
+                        onChange={(e) => {
+                            setUsername(e.target.value);
+                        }}
+                    />
+                </div>
                 <div className="reservationDetailsCard">
                     <div className="reservationDetailsCard-body">
                         <div className="reservationDetailsCard-header">
@@ -111,11 +123,11 @@ function ReservationDetailsCard({ tripInfo }) {
                             <p>Price: {returnFlightData.price}</p>
                             <p>Baggage: {returnFlightData.baggage_allowance}</p>
                             <p>Return Seats:</p>
-                            <p>
+                            <div>
                                 {returnSeats.map((seat) => {
                                     return <p key={seat}>{seat}</p>;
                                 })}
-                            </p>
+                            </div>
                         </div>
                         <div className="reservationDetailsCard-payment">
                             <br />

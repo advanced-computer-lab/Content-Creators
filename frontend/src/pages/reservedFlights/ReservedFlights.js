@@ -44,6 +44,7 @@ export default function ReservedFlight() {
         },
     ]);
 
+    console.log(data, "TRIP DATA");
     const getReservationAxios = async () => {
         try {
             const response = await axios.get("http://localhost:8000/trips/all-trips");
