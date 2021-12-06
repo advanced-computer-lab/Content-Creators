@@ -103,3 +103,19 @@
 
   /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
 }
+
+.btn-confirm {
+  height: 70px;
+  width: 25%;
+  background-color: #453a2e;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.5px;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.2s ease-out, color 0.2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}

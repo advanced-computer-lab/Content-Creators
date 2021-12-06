@@ -53,7 +53,7 @@ export default function FlightDetails() {
     }, []);
 
     const submitHandler = (flightNumber) => {
-        routeChange(`../book-flight/${flightNumber}`);
+        routeChange(`/booking`);
     };
 
     const history = useHistory();
@@ -132,15 +132,15 @@ export default function FlightDetails() {
                 </div>
                 <br />
                 <br />
-                <button
-                    className="flightdetailsbutton"
-                    value="submit"
-                    type="button"
-                    onClick={submitHandler}
-                >
-                    {" "}
-                    Book this Flight{" "}
-                </button>
+                <br />
+                <br />
+                <br />
+
+                <div style={{ textAlign: "center" }}>
+                    <button type="button" class="btn-confirm" onClick={submitHandler}>
+                        Book this Flight{" "}
+                    </button>
+                </div>
             </div>
         </div>
     );
