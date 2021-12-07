@@ -12,11 +12,11 @@ export default function BookingCard() {
 
     const [airportFrom, setAirportFrom] = useState("");
     const [airportTo, setAirportTo] = useState("");
-    const [departureDate, setDepartureDate] = useState("");
-    const [returnDate, setReturnDate] = useState("");
-    const [childrenNumber, setChildrenNumber] = useState("");
-    const [adultsNumber, setAdultsNumber] = useState(0);
-    const [cabinClass, setCabinClass] = useState(0);
+    const [departureDate, setDepartureDate] = useState("Any Date");
+    const [returnDate, setReturnDate] = useState("Any Date");
+    const [childrenNumber, setChildrenNumber] = useState(0);
+    const [adultsNumber, setAdultsNumber] = useState(1);
+    const [cabinClass, setCabinClass] = useState("economy");
 
     const currentDate = new Date();
     const [minDate, setMinDate] = useState(currentDate);
@@ -37,7 +37,6 @@ export default function BookingCard() {
             airportTo &&
             departureDate &&
             returnDate &&
-            childrenNumber &&
             adultsNumber &&
             cabinClass;
 
@@ -143,7 +142,10 @@ export default function BookingCard() {
                     data-style="btn-info"
                     name="selectpicker"
                     value={cabinClass}
-                    onChange={(e) => setCabinClass(e.target.value)}
+                    onChange={(e) => {
+                        console.log("CABIN CLASS", e.target.value);
+                        setCabinClass(e.target.value);
+                    }}
                 >
                     <option name="" value="0">
                         {" "}
