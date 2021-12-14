@@ -2,13 +2,14 @@ import React, { useReducer, useState } from "react";
 import "../../App.css";
 import axios from "axios";
 import "./CreateFlight.css";
+import Flatpickr from "react-flatpickr";
 
 function CreateFlight() {
     const emptyFlight = {
         flight_number: "",
         trip_date: "",
         price: "",
-        baggage_allowance:"",
+        baggage_allowance: "",
     };
     const emptySeatNumber = {
         economy: "",
@@ -27,9 +28,16 @@ function CreateFlight() {
     const [airport, setAirport] = useState(emptyAirport);
 
     const handleChangeFlight = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setFlight({ ...flight, [name]: value });
+        if (typeof e.target === "object") {
+            const name = e.target.name;
+            const value = e.target.value;
+            setFlight({ ...flight, [name]: value });
+        } else {
+            setFlight({
+                ...flight,
+                ["trip_date"]: new Date(e).toISOString().slice(0, 10),
+            });
+        }
     };
 
     const handleChangeTripTime = (e) => {
@@ -60,7 +68,7 @@ function CreateFlight() {
             cabin_classes.first &&
             airport.from &&
             airport.to &&
-            flight.price&& 
+            flight.price &&
             flight.baggage_allowance;
 
         if (nonEmpty) {
@@ -130,33 +138,38 @@ function CreateFlight() {
                     <div className="form-control">
                         <p className="display-4 text-center">Departure Time:</p>
                         <input
-                            type="text"
+                            type="time"
                             id="departure_time"
                             name="departure_time"
                             value={tripTime.departure_time}
                             onChange={handleChangeTripTime}
+                            required
                         />
                     </div>
                     <br />
                     <div className="form-control">
                         <p className="display-4 text-center">Arrival Time:</p>
                         <input
-                            type="text"
+                            type="time"
                             id="arrival_time"
                             name="arrival_time"
                             value={tripTime.arrival_time}
                             onChange={handleChangeTripTime}
+                            required
                         />
                     </div>
                     <br />
-                    <div className="form-control">
+
+                    <div class="form-group">
                         <p className="display-4 text-center">Trip Date:</p>
-                        <input
-                            type="text"
-                            id="trip_date"
+                        <Flatpickr
+                            data-disable-time
                             name="trip_date"
-                            value={flight.trip_date}
+                            className="form-control"
+                            placeholder={flight.trip_date}
+                            value={tripTime.trip_date}
                             onChange={handleChangeFlight}
+                            required
                         />
                     </div>
                     <br />
@@ -168,6 +181,7 @@ function CreateFlight() {
                             name="economy"
                             value={cabin_classes.economy}
                             onChange={handleChangeSeatNumber}
+                            required
                         />
                     </div>
                     <br />
@@ -179,6 +193,7 @@ function CreateFlight() {
                             name="business"
                             value={cabin_classes.business}
                             onChange={handleChangeSeatNumber}
+                            required
                         />
                     </div>
                     <br />
@@ -190,6 +205,7 @@ function CreateFlight() {
                             name="first"
                             value={cabin_classes.first}
                             onChange={handleChangeSeatNumber}
+                            required
                         />
                     </div>
                     <br />
@@ -197,10 +213,12 @@ function CreateFlight() {
                         <p className="display-4 text-center">Departure Airport:</p>
                         <input
                             type="text"
+                            maxlength="3"
                             id="airport_from"
                             name="from"
                             value={airport.from}
                             onChange={handleChangeAirport}
+                            required
                         />
                     </div>
                     <br />
@@ -208,10 +226,12 @@ function CreateFlight() {
                         <p className="display-4 text-center">Arrival Airport:</p>
                         <input
                             type="text"
+                            maxlength="3"
                             id="airport_to"
                             name="to"
                             value={airport.to}
                             onChange={handleChangeAirport}
+                            required
                         />
                     </div>
                     <br />
@@ -223,6 +243,7 @@ function CreateFlight() {
                             name="price"
                             value={flight.price}
                             onChange={handleChangeFlight}
+                            required
                         />
                     </div>
                     <br />
