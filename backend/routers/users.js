@@ -1,82 +1,71 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userSchema");
+const bcrypt = require("bcrypt");
+// const jwt = require("jsonwebtoken");
 
+router.post("/sign-up", async (req, res) => {
+    try {
+        const {
+            username,
+            password,
+            first_name,
+            last_name,
+            address,
+            country_code,
+            telephone,
+            email,
+            passport_number,
+            admin,
+        } = req.body.user;
 
+        const validUser =
+            username &&
+            password &&
+            first_name &&
+            last_name &&
+            address &&
+            country_code &&
+            telephone &&
+            email &&
+            passport_number;
 
+        if (!validUser) {
+            console.log("not valid");
+            return res.status(400).send("All inputs of user are required");
+        }
 
-//should fetch all users from DB and send json data
-router.get("/all-users", async (req, res) => {
-  const searchUser =await User.find();
-  await res.send(searchUser)
+        const oldUser = await User.findOne({ email });
+        if (oldUser) {
+            console.log("user exists!");
+            return res.status(409).send("User Already Exists!");
+        }
 
-});
-//MOSTAFA 3amal de <3 
-router.put('/update-user/:username' , async(req , res) => {
-  const { username } = req.params;
-  try {
-    const updateUsername = req.body.users;
-    const filter = { username : username };
-    const updated = await User.findOneAndUpdate(filter, updateUsername, {
-        rawResult: true,
-    });
-
-    if (updated.lastErrorObject.updatedExisting) {
-      console.log(`updating ${username} is successful`);
-      res.status(201).send({ success: true });
-  } else {
-      res.status(400).send({
-          success: false,
-          message: `updating ${username} is unsuccessful`,
-          error: err,
-      });
-  }
-
-} catch (err) {
-  console.log(err);
-  res.status(500).send({
-      success: false,
-      message: `updating ${username} is unsuccessful`,
-      error: err,
-  });
-}
-
-});
-//check if user is in the database
-//and authenticate it (password)
-//no encryption used
-router.post("/login", async (req, res) => {
-  const searchUser = req.body;
-
-  if (req.body != null) {
-    
-        const user = await User.findOne({username:searchUser.username});
-  if(user != null) {
-      if(searchUser.password == user.password) {
-        await  res.status(200).send({ success : true, message :'Login successful'}).sendStatus;
-      }else {
-        await res.status(406).send({ success : false, message :'User/Password do not match'}).sendStatus;
+        const encryptedPassword = await bcrypt.hash(password, 10);
+        console.log(`hashed password is ${password}`);
+        const newUser = new User({
+            username,
+            password: encryptedPassword,
+            first_name,
+            last_name,
+            address,
+            country_code,
+            telephone,
+            email: email.toLowerCase(),
+            passport_number,
+            admin,
+        });
+        await newUser.save();
+        console.log(`creating user ${username} is successful!`);
+        res.status(201).send({ success: true });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            success: false,
+            message: "creating new user is unsuccessful",
+            error: err,
+        });
     }
-  }else{
-    await res.status(406).send({ success : false, message :'User not found'}).sendStatus;
-  } 
-    } else {
-     await res.status(400).send({ success : false, message :'No information available'}).sendStatus;
-  
-}
 });
-
-router.put('/sign-up', async (req, res) => {
-  const newUser = req.body;
-  
-  if(req.body ==null){
-    await  await res.status(400).send({ success : false, message :'No information available'}).sendStatus;
-  }else{
-    const addedUser = await User.create(newUser);
-
-  }
-
-});
-
 
 module.exports = router;
