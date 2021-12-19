@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/userSchema");
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+// console.log("PROCESS IS: ", process);
+// console.log("PROCESS.ENV IS: ", process.env);
 
 router.post("/sign-up", async (req, res) => {
     try {
@@ -63,6 +67,44 @@ router.post("/sign-up", async (req, res) => {
         res.status(500).send({
             success: false,
             message: "creating new user is unsuccessful",
+            error: err,
+        });
+    }
+});
+
+router.post("/login", async (req, res) => {
+    try {
+        let { username, password } = req.body.user;
+        if (!(username && password)) {
+            return res.status(400).send("All input is required");
+        }
+
+        const filter = { username };
+        const user = await User.findOne(filter);
+        if (!user) {
+            return res.status(400).send("User does not exist!");
+        }
+
+        const comparison = await bcrypt.compare(password, user.password);
+        console.log("comparison is: ", comparison);
+
+        if (comparison) {
+            const token = jwt.sign(
+                { user_id: user._id, username },
+                process.env.TOKEN_SECRET,
+                {
+                    expiresIn: "2h",
+                }
+            );
+            const finalUser = { username, token };
+            return res.status(200).json(finalUser);
+        }
+        res.status(400).send("Invalid Credentials");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            success: false,
+            message: "login is unsuccessful",
             error: err,
         });
     }
