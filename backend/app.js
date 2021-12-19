@@ -9,12 +9,18 @@ const flights = require("./routers/flights");
 const users = require("./routers/users");
 const reservations = require("./routers/reservations");
 const trips = require("./routers/trips");
+const auth = require("./middleware/auth");
 
 //add routers here
 
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
+app.use(auth);
+
+app.post("/welcome", auth, (req, res) => {
+    res.status(200).send("Welcome 🙌 ");
+});
 
 app.use("/flights", flights);
 app.use("/users", users);
