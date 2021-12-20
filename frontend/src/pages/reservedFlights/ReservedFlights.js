@@ -80,58 +80,96 @@ export default function ReservedFlight() {
 
     return (
         <div>
-            {data.map((data, index) => {
-                {
-                    /* <div> User of this trip: {data.username}</div>; */
-                }
-                console.log(`data ${index}`, data);
-                return (
-                    <div styles={{ alignContent: "center" }}>
-                        <br />
-                        <br />
-                        <h1>Trip {index + 1}</h1>
+            <table className="table">
+                <thead>
+                        <tr>
+                            <th>Trip Number</th>
+                            <th>Trip ID</th>
+                            <th>Flight Number</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Departure/Return</th>
+                            <th>Cabin Class</th>
+                            <th>Trip Date</th>
+                            <th>Departure Time</th>
+                            <th>Arrival Time</th>
+                            <th>Actions</th>
+                            
+                        </tr>
+                </thead>
+                <tbody>
+                {data?.length
+                ? data.map((data, index) => (
+                    <tr key={data._id}>
+                        <td>{index + 1}</td>
+                        <td>{data._id}</td>
+                        <td>{data.departure_reservation_id.flight_id.flight_number}</td>
+                        <td>{data.departure_reservation_id.flight_id.airport.from}</td>
+                        <td>{data.departure_reservation_id.flight_id.airport.to}</td>
+                        <td>Departure</td>
+                        <td>{data.departure_reservation_id.cabin_class}</td>
+                        <td>{data.departure_reservation_id.flight_id.trip_date}</td>
+                        <td>{data.departure_reservation_id.flight_id.trip_time.departure_time}</td>
+                        <td>{data.departure_reservation_id.flight_id.trip_time.arrival_time}</td>
+                        <td>
                         <button
                             className="FlightBtns"
                             id={data._id}
                             type="button"
                             onClick={() => deleteHandler(data._id)}
-                        >
-                            Cancel Trip
+                            >
+                                Cancel Trip
                         </button>
-
-                        <h2>
-                            <Icon icon="tabler:brand-booking" />
-                            Trip ID: {data._id}
-                        </h2>
-                        <h2>
-                            <Icon icon="tabler:brand-booking" />
-                            Cabin Class: {data.departure_reservation_id.cabin_class}
-                        </h2>
-                        <h2>
-                            <Icon icon="el:adult" />
-                            Number of Adults: {data.departure_reservation_id.no_of_adults}
-                        </h2>
-                        <h2>
-                            <Icon icon="mdi:human-male-child" />
-                            Number of Children: {data.departure_reservation_id.no_of_children}
-                        </h2>
-                        <h1>
-                            {" "}
-                            Departure Flight:{" "}
-                            {data.departure_reservation_id.flight_id.flight_number}
-                        </h1>
-                        <ReservedFlightCard
-                            data={data.departure_reservation_id.flight_id}
-                        />
-                        <h1>
-                            {" "}
-                            Return Flight:{" "}
-                            {data.return_reservation_id.flight_id.flight_number}
-                        </h1>
-                        <ReservedFlightCard data={data.return_reservation_id.flight_id} />
-                    </div>
-                );
-            })}
+                        </td>
+                    </tr>
+                    
+                ))
+                
+                :
+                <tr>
+                    <td colSpan="5"> 
+                        No flights found.
+                    </td>
+                        </tr>
+                }  
+                </tbody>
+                <tbody>
+                {data?.length
+                ? data.map((data, index) => (
+                    <tr key={data._id}>
+                        <td>{index + 1}</td>
+                        <td>{data._id}</td>
+                        <td>{data.return_reservation_id.flight_id.flight_number}</td>
+                        <td>{data.return_reservation_id.flight_id.airport.from}</td>
+                        <td>{data.return_reservation_id.flight_id.airport.to}</td>
+                        <td>Return</td>
+                        <td>{data.return_reservation_id.cabin_class}</td>
+                        <td>{data.return_reservation_id.flight_id.trip_date}</td>
+                        <td>{data.return_reservation_id.flight_id.trip_time.departure_time}</td>
+                        <td>{data.return_reservation_id.flight_id.trip_time.arrival_time}</td>
+                        <td>
+                        <button
+                            className="FlightBtns"
+                            id={data._id}
+                            type="button"
+                            onClick={() => deleteHandler(data._id)}
+                            >
+                                Cancel Trip
+                        </button>
+                        </td>
+                    </tr>
+                    
+                ))
+                
+                :
+                <tr>
+                    <td colSpan="5"> 
+                        No flights found.
+                    </td>
+                        </tr>
+                }  
+                </tbody>
+            </table>
         </div>
     );
 }
