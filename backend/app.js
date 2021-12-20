@@ -16,7 +16,7 @@ const auth = require("./middleware/auth");
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
-app.use(auth);
+// app.use(auth);
 
 app.post("/welcome", auth, (req, res) => {
     res.status(200).send("Welcome 🙌 ");

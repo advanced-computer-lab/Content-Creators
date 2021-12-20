@@ -3,7 +3,7 @@ import { FlatButton, RaisedButton } from "material-ui";
 import TextField from "material-ui/TextField";
 import PasswordStr from "./PasswordStr";
 import "./style.css";
-import "./index.css";
+// import "./index.css";
 
 const SignUpForm = () => {
     const [user, setUser] = useState({
