@@ -77,8 +77,8 @@ class SignIn extends Component {
                                 </div>
 
                                 <input type="submit" value="LOG IN" className="button" />
-
-                                {/* </form> */}
+                                <br />
+                                <input type="submit" value="Sign Up" className="button" />
                             </div>
                         </div>
                     </div>
