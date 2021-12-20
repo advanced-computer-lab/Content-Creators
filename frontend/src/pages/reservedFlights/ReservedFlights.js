@@ -100,6 +100,18 @@ export default function ReservedFlight() {
                     {data?.length ? (
                         data.map((data, index) => (
                             <>
+                                <tr>
+                                    <td>
+                                        <button
+                                            className="FlightBtns"
+                                            id={data._id}
+                                            type="button"
+                                            onClick={() => deleteHandler(data._id)}
+                                        >
+                                            Cancel Trip {index + 1}
+                                        </button>
+                                    </td>
+                                </tr>
                                 <tr key={data._id}>
                                     <td>{index + 1}</td>
                                     <td>{data.departure_reservation_id._id}</td>
@@ -124,16 +136,6 @@ export default function ReservedFlight() {
                                             data.departure_reservation_id.flight_id.trip_time
                                                 .arrival_time
                                         }
-                                    </td>
-                                    <td>
-                                        <button
-                                            className="FlightBtns"
-                                            id={data._id}
-                                            type="button"
-                                            onClick={() => deleteHandler(data._id)}
-                                        >
-                                            Cancel Trip
-                                        </button>
                                     </td>
                                 </tr>
                                 <tr key={data._id}>
