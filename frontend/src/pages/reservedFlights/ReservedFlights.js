@@ -82,92 +82,102 @@ export default function ReservedFlight() {
         <div>
             <table className="table">
                 <thead>
-                        <tr>
-                            <th>Trip Number</th>
-                            <th>Trip ID</th>
-                            <th>Flight Number</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Departure/Return</th>
-                            <th>Cabin Class</th>
-                            <th>Trip Date</th>
-                            <th>Departure Time</th>
-                            <th>Arrival Time</th>
-                            <th>Actions</th>
-                            
-                        </tr>
+                    <tr>
+                        <th>Trip Number</th>
+                        <th>Reservation ID</th>
+                        <th>Flight Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Departure/Return</th>
+                        <th>Cabin Class</th>
+                        <th>Trip Date</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Time</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {data?.length
-                ? data.map((data, index) => (
-                    <tr key={data._id}>
-                        <td>{index + 1}</td>
-                        <td>{data._id}</td>
-                        <td>{data.departure_reservation_id.flight_id.flight_number}</td>
-                        <td>{data.departure_reservation_id.flight_id.airport.from}</td>
-                        <td>{data.departure_reservation_id.flight_id.airport.to}</td>
-                        <td>Departure</td>
-                        <td>{data.departure_reservation_id.cabin_class}</td>
-                        <td>{data.departure_reservation_id.flight_id.trip_date}</td>
-                        <td>{data.departure_reservation_id.flight_id.trip_time.departure_time}</td>
-                        <td>{data.departure_reservation_id.flight_id.trip_time.arrival_time}</td>
-                        <td>
-                        <button
-                            className="FlightBtns"
-                            id={data._id}
-                            type="button"
-                            onClick={() => deleteHandler(data._id)}
-                            >
-                                Cancel Trip
-                        </button>
-                        </td>
-                    </tr>
-                    
-                ))
-                
-                :
-                <tr>
-                    <td colSpan="5"> 
-                        No flights found.
-                    </td>
+                    {data?.length ? (
+                        data.map((data, index) => (
+                            <>
+                                <tr key={data._id}>
+                                    <td>{index + 1}</td>
+                                    <td>{data.departure_reservation_id._id}</td>
+                                    <td>
+                                        {data.departure_reservation_id.flight_id.flight_number}
+                                    </td>
+                                    <td>
+                                        {data.departure_reservation_id.flight_id.airport.from}
+                                    </td>
+                                    <td>{data.departure_reservation_id.flight_id.airport.to}</td>
+                                    <td>Departure</td>
+                                    <td>{data.departure_reservation_id.cabin_class}</td>
+                                    <td>{data.departure_reservation_id.flight_id.trip_date}</td>
+                                    <td>
+                                        {
+                                            data.departure_reservation_id.flight_id.trip_time
+                                                .departure_time
+                                        }
+                                    </td>
+                                    <td>
+                                        {
+                                            data.departure_reservation_id.flight_id.trip_time
+                                                .arrival_time
+                                        }
+                                    </td>
+                                    <td>
+                                        <button
+                                            className="FlightBtns"
+                                            id={data._id}
+                                            type="button"
+                                            onClick={() => deleteHandler(data._id)}
+                                        >
+                                            Cancel Trip
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr key={data._id}>
+                                    <td>{index + 1}</td>
+                                    <td>{data.return_reservation_id._id}</td>
+                                    <td>{data.return_reservation_id.flight_id.flight_number}</td>
+                                    <td>{data.return_reservation_id.flight_id.airport.from}</td>
+                                    <td>{data.return_reservation_id.flight_id.airport.to}</td>
+                                    <td>Return</td>
+                                    <td>{data.return_reservation_id.cabin_class}</td>
+                                    <td>{data.return_reservation_id.flight_id.trip_date}</td>
+                                    <td>
+                                        {
+                                            data.return_reservation_id.flight_id.trip_time
+                                                .departure_time
+                                        }
+                                    </td>
+                                    <td>
+                                        {
+                                            data.return_reservation_id.flight_id.trip_time
+                                                .arrival_time
+                                        }
+                                    </td>
+                                    {/* <td> */}
+                                    {/*     <button */}
+                                    {/*         className="FlightBtns" */}
+                                    {/*         id={data._id} */}
+                                    {/*         type="button" */}
+                                    {/*         onClick={() => deleteHandler(data._id)} */}
+                                    {/*     > */}
+                                    {/*         Cancel Trip */}
+                                    {/*     </button> */}
+                                    {/* </td> */}
+                                </tr>
+                                <tr>
+                                    <td colSpan={11}>-</td>
+                                </tr>
+                            </>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="5">No flights found.</td>
                         </tr>
-                }  
-                </tbody>
-                <tbody>
-                {data?.length
-                ? data.map((data, index) => (
-                    <tr key={data._id}>
-                        <td>{index + 1}</td>
-                        <td>{data._id}</td>
-                        <td>{data.return_reservation_id.flight_id.flight_number}</td>
-                        <td>{data.return_reservation_id.flight_id.airport.from}</td>
-                        <td>{data.return_reservation_id.flight_id.airport.to}</td>
-                        <td>Return</td>
-                        <td>{data.return_reservation_id.cabin_class}</td>
-                        <td>{data.return_reservation_id.flight_id.trip_date}</td>
-                        <td>{data.return_reservation_id.flight_id.trip_time.departure_time}</td>
-                        <td>{data.return_reservation_id.flight_id.trip_time.arrival_time}</td>
-                        <td>
-                        <button
-                            className="FlightBtns"
-                            id={data._id}
-                            type="button"
-                            onClick={() => deleteHandler(data._id)}
-                            >
-                                Cancel Trip
-                        </button>
-                        </td>
-                    </tr>
-                    
-                ))
-                
-                :
-                <tr>
-                    <td colSpan="5"> 
-                        No flights found.
-                    </td>
-                        </tr>
-                }  
+                    )}
                 </tbody>
             </table>
         </div>
