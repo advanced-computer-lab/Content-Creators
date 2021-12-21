@@ -6,13 +6,18 @@ import createRows from "./createRows";
 import createRowsChanging from "./createRowsChanging";
 import { useHistory } from "react-router-dom";
 
-export default function ChangeSeats({ chosenSeats, allSeats }) {
+export default function ChangeSeats({
+    chosenSeats,
+    allSeats,
+    setEnough,
+    selected,
+    setSelected,
+}) {
     const [rows, setRows] = useState(createRowsChanging(allSeats, chosenSeats));
-    console.log("CHOSEN____SEATS ARE YASTAAAA, ", chosenSeats);
     const [requestedSeats, setRequestedSeats] = useState(chosenSeats.length);
-    const [selected, setSelected] = useState(chosenSeats);
     console.log("rows are: ", rows);
     console.log("chosenSeats are: ", chosenSeats);
+    console.log("Selected SEATS: ", selected);
 
     const addSeatCallback = ({ row, number, id }, addCb) => {
         setSelected((prevState) => {
@@ -21,6 +26,7 @@ export default function ChangeSeats({ chosenSeats, allSeats }) {
             return newState;
         });
         addCb(row, number, id);
+        selected.length < requestedSeats ? setEnough(true) : setEnough(false);
     };
 
     const removeSeatCallback = ({ row, number, id }, removeCb) => {
@@ -30,8 +36,8 @@ export default function ChangeSeats({ chosenSeats, allSeats }) {
             return newState;
         });
         removeCb(row, number, id);
+        selected.length < requestedSeats ? setEnough(true) : setEnough(false);
     };
-
     return (
         <div>
             <div style={{ marginTop: "10px" }}>

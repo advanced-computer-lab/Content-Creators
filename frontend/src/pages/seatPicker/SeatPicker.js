@@ -40,9 +40,6 @@ export default function SeatPicker() {
     }
 
     const pickSeatsHandler = () => {
-        //more conditioons have to be added checking whether a correct amount of seats have
-        //been chosen using departureSeats and returnSeats state variables that will be set in the child compoonent BookingSeat
-        //probably then length of the array will be checked
         if (choosingDep) {
             if (departureSeats.length >= requestedSeatsLocal) {
                 setButtonText("Continue Booking");
