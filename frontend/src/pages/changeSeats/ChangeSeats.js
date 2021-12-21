@@ -10,10 +10,6 @@ export default function SeatPicker() {
     const history = useHistory();
     let { changeSeatReservation, changeSeatFlightNumber, allSeats, chosenSeats } =
         history;
-    // const seatIndexes = chosenSeats.map((elem) => Number(elem.slice(1)));
-    // seatIndexes.map((seatNumber) => {
-    //     allSeats[seatNumber].reserved = false;
-    // });
     if (changeSeatReservation) {
         return (
             <>

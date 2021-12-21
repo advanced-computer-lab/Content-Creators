@@ -87,22 +87,7 @@ export default function SeatPicker() {
             </>
         );
     } else {
-        return (
-            <div>
-                <h1>PLEASE GO THROUGH BOOKING PROCESS</h1>
-
-                <div style={{ textAlign: "center" }}>
-                    <button
-                        type="button"
-                        class="btn-confirm"
-                        onClick={() => {
-                            history.push("/booking");
-                        }}
-                    >
-                        GO TO BOOKING
-                    </button>
-                </div>
-            </div>
-        );
+        history.push("/booking");
+        return <></>;
     }
 }
