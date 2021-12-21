@@ -4,17 +4,16 @@ import "../../App.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import ChangeSeats from "../../components/changeSeats/ChangeSeats";
+import createRowsChanging from "../../components/changeSeats/createRowsChanging";
+
 export default function SeatPicker() {
     const history = useHistory();
     let { changeSeatReservation, changeSeatFlightNumber, allSeats, chosenSeats } =
         history;
-    const seatIndexes = chosenSeats.map((elem) => Number(elem.slice(1)));
-    seatIndexes.map((seatNumber) => {
-        allSeats[seatNumber].reserved = false;
-    });
-
-    console.log("allSeats", allSeats);
-
+    // const seatIndexes = chosenSeats.map((elem) => Number(elem.slice(1)));
+    // seatIndexes.map((seatNumber) => {
+    //     allSeats[seatNumber].reserved = false;
+    // });
     if (changeSeatReservation) {
         return (
             <>
