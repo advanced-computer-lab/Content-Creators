@@ -1,12 +1,14 @@
 import React from "react";
 import "./ReservedFlights.css";
 import "../../App.css";
+import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import ReservedFlightCard from "../../components/reservedFlights/reservedFlightsCard";
 
 export default function ReservedFlight() {
+    const history = useHistory();
     const [username, setUsername] = useState("husseljo");
     const [data, setData] = useState([]);
 
@@ -43,8 +45,14 @@ export default function ReservedFlight() {
         }
     };
 
-    const changeSeatHandler = (e) => {
+    const changeSeatHandler = (e, flightNumber, allSeats, chosenSeats) => {
+        const changeSeatReservation = e.target.id;
         console.log("reservationId is: ", e.target.id);
+        history.changeSeatFlightNumber = flightNumber;
+        history.changeSeatReservation = changeSeatReservation;
+        history.allSeats = allSeats;
+        history.chosenSeats = chosenSeats;
+        history.push("/change-seats");
         console.log("handle picking new flight in trip!");
     };
 
@@ -123,7 +131,24 @@ export default function ReservedFlight() {
                                             className="FlightBtns"
                                             id={data.departure_reservation_id._id}
                                             type="button"
-                                            onClick={changeSeatHandler}
+                                            onClick={(e) => {
+                                                const cabinClass =
+                                                    data.departure_reservation_id.cabin_class;
+                                                const allSeats =
+                                                    data.departure_reservation_id.flight_id.seats[
+                                                    cabinClass
+                                                    ];
+                                                const chosenSeats =
+                                                    data.departure_reservation_id.seat_numbers;
+                                                const flightNumber =
+                                                    data.departure_reservation_id.flight_id.flight_number;
+                                                changeSeatHandler(
+                                                    e,
+                                                    flightNumber,
+                                                    allSeats,
+                                                    chosenSeats
+                                                );
+                                            }}
                                         >
                                             Change Seats
                                         </button>
@@ -156,7 +181,24 @@ export default function ReservedFlight() {
                                             className="FlightBtns"
                                             id={data.return_reservation_id._id}
                                             type="button"
-                                            onClick={changeSeatHandler}
+                                            onClick={(e) => {
+                                                const cabinClass =
+                                                    data.departure_reservation_id.cabin_class;
+                                                const allSeats =
+                                                    data.departure_reservation_id.flight_id.seats[
+                                                    cabinClass
+                                                    ];
+                                                const chosenSeats =
+                                                    data.return_reservation_id.seat_numbers;
+                                                const flightNumber =
+                                                    data.departure_reservation_id.flight_id.flight_number;
+                                                changeSeatHandler(
+                                                    e,
+                                                    flightNumber,
+                                                    allSeats,
+                                                    chosenSeats
+                                                );
+                                            }}
                                         >
                                             Change Seats
                                         </button>
