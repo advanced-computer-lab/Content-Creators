@@ -1,0 +1,98 @@
+.flightsearchBar {
+  width: 120px;
+  padding: auto;
+  position: relative;
+  margin: middle;
+  left: 500px;
+}
+
+.createButtonViewall {
+  background-color: #705c40;
+  color: rgb(250, 249, 249);
+  padding: 15px 14px 50px 0;
+  margin: middle;
+  border: none;
+  cursor: pointer;
+  width: 240px;
+  height: 60px;
+  text-align: center;
+  /* text-decoration: none; */
+  text-decoration-color: #ffffff;
+  position: relative;
+  left: 1400px;
+}
+.createButtonViewall:hover {
+  background-color: #ffffff; /* Green */
+  color: rgb(2, 2, 2);
+  text-align: center;
+  text-decoration: none;
+}
+.searchButton {
+  border: none;
+  background-color: beige;
+  text-align: center;
+  cursor: pointer;
+  width: 60px;
+  height: 45px;
+  color: black;
+}
+
+.searchButton:hover {
+  background-color: #705c40;
+  color: rgb(2, 2, 2);
+  text-align: center;
+  text-decoration: none;
+}
+
+.searching {
+  position: relative;
+  left: 750px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  display: table;
+  width: 500px;
+}
+
+.searchBar {
+  width: 200px;
+  display: flex;
+  position: relative;
+}
+.searchButton {
+  display: inline-block;
+}
+.advancedSearch {
+  display: inline-block;
+}
+
+.btn-confirm {
+  height: 70px;
+  width: 40%;
+  background-color: #453a2e;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.5px;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.2s ease-out, color 0.2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-cancel {
+  height: 70px;
+  width: 40%;
+  background-color: #453a2e;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.5px;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.2s ease-out, color 0.2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
