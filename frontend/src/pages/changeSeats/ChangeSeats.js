@@ -53,6 +53,10 @@ export default function SeatPicker() {
             history.push("reserved-flights");
         }
     };
+    const cancelHandler = () => {
+        history.push("reserved-flights");
+    };
+
     if (reservationId) {
         return (
             <>
@@ -67,7 +71,13 @@ export default function SeatPicker() {
                 />
                 <div style={{ textAlign: "center" }}>
                     <button type="button" class="btn-confirm" onClick={confirmHandler}>
-                        Confirm
+                        Confirm Changing
+                    </button>
+                </div>
+                <br />
+                <div style={{ textAlign: "center" }}>
+                    <button type="button" class="btn-confirm" onClick={cancelHandler}>
+                        Cancel
                     </button>
                 </div>
                 {!enough && <h1>Not enough seats chosen</h1>}
