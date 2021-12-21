@@ -32,13 +32,11 @@ export default function AvailableFlights({
                         name="parentDiv"
                         className="flightCard"
                         style={{ backgroundColor: bgColor, position: "relative" }}
-                        onClick={(e) => {
-                            if (e.target.id != "cancelButton") {
-                                setFlights([flight]);
-                                setChosenFlightData(flight);
-                                setBgColor("#b89768");
-                                setChosen(true);
-                            }
+                        onClick={() => {
+                            setFlights([flight]);
+                            setChosenFlightData(flight);
+                            setBgColor("#b89768");
+                            setChosen(true);
                         }}
                     >
                         <div className="flightCard-body">

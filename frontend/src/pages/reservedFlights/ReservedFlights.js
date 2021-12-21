@@ -11,6 +11,7 @@ export default function ReservedFlight() {
     const history = useHistory();
     const [username, setUsername] = useState("husseljo");
     const [data, setData] = useState([]);
+    console.log("history.newReturnFlight", history.newReturnFlight);
 
     console.log(data, "TRIP DATA");
     const getReservationAxios = async () => {
@@ -47,9 +48,6 @@ export default function ReservedFlight() {
 
     const changeSeatHandler = (e, flightNumber, allSeats, chosenSeats) => {
         const reservationId = e.target.id;
-        console.log("FLIGHT_NUMBER IS : ", flightNumber);
-        console.log("CHOSENsEATS ARE : ", chosenSeats);
-        console.log("reservationId is: ", e.target.id);
         const changeSeatInfo = {
             flightNumber,
             reservationId,
@@ -61,7 +59,7 @@ export default function ReservedFlight() {
     };
 
     const pickNewHandler = (e) => {
-        history.push("/change-flight");
+        history.push("/change-reservation");
     };
 
     if (data.length == 0) {
