@@ -6,17 +6,14 @@ import { useHistory } from "react-router-dom";
 import ChangeSeats from "../../components/changeSeats/ChangeSeats";
 export default function SeatPicker() {
     const history = useHistory();
-    const {
-        changeSeatReservation,
-        changeSeatFlightNumber,
-        allSeats,
-        chosenSeats,
-    } = history;
+    let { changeSeatReservation, changeSeatFlightNumber, allSeats, chosenSeats } =
+        history;
+    const seatIndexes = chosenSeats.map((elem) => Number(elem.slice(1)));
+    seatIndexes.map((seatNumber) => {
+        allSeats[seatNumber].reserved = false;
+    });
+
     console.log("allSeats", allSeats);
-    // console.log("history", history);
-    // console.log("changeSeatReservation", changeSeatReservation);
-    // console.log("allSeats", allSeats);
-    // console.log("chosenSeats", chosenSeats);
 
     if (changeSeatReservation) {
         return (
