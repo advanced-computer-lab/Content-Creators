@@ -46,16 +46,18 @@ export default function ReservedFlight() {
     };
 
     const changeSeatHandler = (e, flightNumber, allSeats, chosenSeats) => {
-        const changeSeatReservation = e.target.id;
+        const reservationId = e.target.id;
         console.log("FLIGHT_NUMBER IS : ", flightNumber);
         console.log("CHOSENsEATS ARE : ", chosenSeats);
         console.log("reservationId is: ", e.target.id);
-        history.changeSeatFlightNumber = flightNumber;
-        history.changeSeatReservation = changeSeatReservation;
-        history.allSeats = allSeats;
-        history.chosenSeats = chosenSeats;
+        const changeSeatInfo = {
+            flightNumber,
+            reservationId,
+            allSeats,
+            chosenSeats,
+        };
+        history.changeSeatInfo = changeSeatInfo;
         history.push("/change-seats");
-        console.log("handle picking new flight in trip!");
     };
 
     const pickNewHandler = (e) => {
