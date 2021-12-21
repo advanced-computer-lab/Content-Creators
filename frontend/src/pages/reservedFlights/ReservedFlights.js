@@ -47,6 +47,8 @@ export default function ReservedFlight() {
 
     const changeSeatHandler = (e, flightNumber, allSeats, chosenSeats) => {
         const changeSeatReservation = e.target.id;
+        console.log("FLIGHT_NUMBER IS : ", flightNumber);
+        console.log("CHOSENsEATS ARE : ", chosenSeats);
         console.log("reservationId is: ", e.target.id);
         history.changeSeatFlightNumber = flightNumber;
         history.changeSeatReservation = changeSeatReservation;
@@ -183,15 +185,15 @@ export default function ReservedFlight() {
                                             type="button"
                                             onClick={(e) => {
                                                 const cabinClass =
-                                                    data.departure_reservation_id.cabin_class;
+                                                    data.return_reservation_id.cabin_class;
                                                 const allSeats =
-                                                    data.departure_reservation_id.flight_id.seats[
+                                                    data.return_reservation_id.flight_id.seats[
                                                     cabinClass
                                                     ];
                                                 const chosenSeats =
                                                     data.return_reservation_id.seat_numbers;
                                                 const flightNumber =
-                                                    data.departure_reservation_id.flight_id.flight_number;
+                                                    data.return_reservation_id.flight_id.flight_number;
                                                 changeSeatHandler(
                                                     e,
                                                     flightNumber,

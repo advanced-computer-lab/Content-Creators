@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 
 export default function ChangeSeats({ chosenSeats, allSeats }) {
     const [rows, setRows] = useState(createRowsChanging(allSeats, chosenSeats));
+    console.log("CHOSEN____SEATS ARE YASTAAAA, ", chosenSeats);
     const [requestedSeats, setRequestedSeats] = useState(chosenSeats.length);
     const [selected, setSelected] = useState(chosenSeats);
     console.log("rows are: ", rows);

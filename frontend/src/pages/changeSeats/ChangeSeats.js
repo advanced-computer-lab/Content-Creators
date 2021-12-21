@@ -10,6 +10,8 @@ export default function SeatPicker() {
     const history = useHistory();
     let { changeSeatReservation, changeSeatFlightNumber, allSeats, chosenSeats } =
         history;
+    console.log("FLIGHT____NUMBER ARE HUSSLEJOOOOOO, ", changeSeatFlightNumber);
+    console.log("CHOSEN____SEATS ARE HUSSLEJOOOOOO, ", chosenSeats);
     if (changeSeatReservation) {
         return (
             <>

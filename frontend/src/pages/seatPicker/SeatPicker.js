@@ -54,6 +54,8 @@ export default function SeatPicker() {
                 departureSeats: departureSeats,
                 returnSeats: returnSeats,
             };
+            console.log("DEPARTURE_SEATS", departureSeats);
+            console.log("RETURN_SEATS", returnSeats);
             history.trip_info = tripInfo;
             history.push("/reservation-details");
         }

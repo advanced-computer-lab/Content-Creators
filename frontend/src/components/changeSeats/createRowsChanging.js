@@ -30,8 +30,11 @@ export default function createRowsChanging(seatData, chosenSeats) {
     }
 
     chosenSeats.map((elem) => {
+        console.log("ELEM IS", elem);
         const row = String(Math.floor(Number(elem.slice(1)) / 5));
-        const rowSeat = Number(elem.slice(1)) % row;
+        console.log("ROW IS", row);
+        const rowSeat = Number(elem.slice(1)) % 5;
+        console.log("ROW_SEAT IS", rowSeat);
         newArr[row][rowSeat].isReserved = false;
         newArr[row][rowSeat].isSelected = true;
     });
