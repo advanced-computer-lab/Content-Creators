@@ -49,6 +49,9 @@ export default function BookingSeat({ tripInfo, setSelected }) {
     // };
 
     const addSeatCallback = ({ row, number, id }, addCb) => {
+        console.log("row is: ", row);
+        console.log("number is: ", number);
+        console.log("id is: ", id);
         setSelected((prevState) => {
             const newState = Array.from(prevState);
             newState.push(id);

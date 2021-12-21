@@ -40,9 +40,6 @@ export default function SeatPicker() {
     }
 
     const pickSeatsHandler = () => {
-        //more conditioons have to be added checking whether a correct amount of seats have
-        //been chosen using departureSeats and returnSeats state variables that will be set in the child compoonent BookingSeat
-        //probably then length of the array will be checked
         if (choosingDep) {
             if (departureSeats.length >= requestedSeatsLocal) {
                 setButtonText("Continue Booking");
@@ -54,6 +51,8 @@ export default function SeatPicker() {
                 departureSeats: departureSeats,
                 returnSeats: returnSeats,
             };
+            console.log("DEPARTURE_SEATS", departureSeats);
+            console.log("RETURN_SEATS", returnSeats);
             history.trip_info = tripInfo;
             history.push("/reservation-details");
         }
@@ -87,22 +86,7 @@ export default function SeatPicker() {
             </>
         );
     } else {
-        return (
-            <div>
-                <h1>PLEASE GO THROUGH BOOKING PROCESS</h1>
-
-                <div style={{ textAlign: "center" }}>
-                    <button
-                        type="button"
-                        class="btn-confirm"
-                        onClick={() => {
-                            history.push("/booking");
-                        }}
-                    >
-                        GO TO BOOKING
-                    </button>
-                </div>
-            </div>
-        );
+        history.push("/booking");
+        return <></>;
     }
 }

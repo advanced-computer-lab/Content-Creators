@@ -65,7 +65,7 @@ function ReservationDetailsCard({ tripInfo }) {
                 departure_flight_id: departureFlightData._id,
                 departure_seat_numbers: departureSeats,
                 return_flight_id: returnFlightData._id,
-                return_seat_numbers: departureSeats,
+                return_seat_numbers: returnSeats,
                 departure_total_price: departureFlightData.price,
                 return_total_price: returnFlightData.price,
             },
