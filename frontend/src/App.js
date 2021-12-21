@@ -15,6 +15,7 @@ import ReservedFlight from "./pages/reservedFlights/ReservedFlights";
 import FlightDetails from "./pages/flightDetails/FlightDetails";
 import SignUpContainer from "./pages/signUp/SignUpContainer";
 import ChangeSeats from "./pages/changeSeats/ChangeSeats";
+import ChangeFlight from "./pages/changeFlight/ChangeFlight";
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                     <Route path="/flight-details" component={FlightDetails} />
                     <Route path="/sign-up" component={SignUpContainer} />
                     <Route path="/change-seats" component={ChangeSeats} />
+                    <Route path="/change-flight" component={ChangeFlight} />
                 </Switch>
             </Router>
         </>

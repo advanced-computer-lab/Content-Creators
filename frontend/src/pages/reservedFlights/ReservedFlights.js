@@ -61,8 +61,7 @@ export default function ReservedFlight() {
     };
 
     const pickNewHandler = (e) => {
-        console.log("reservationId is: ", e.target.id);
-        console.log("handle changing seat!");
+        history.push("/change-flight");
     };
 
     if (data.length == 0) {
