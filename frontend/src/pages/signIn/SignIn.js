@@ -11,7 +11,7 @@ export default function SignIn() {
     const history = useHistory();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [errorMessage, setErrorMessage] = useState("");
     // console.log("username", username);
     // console.log("password", password);
 
@@ -28,10 +28,13 @@ export default function SignIn() {
                     `successfully logged in user with username ${user.user.username}!`
                 );
             } else {
-                console.log("not able to create user!");
+                setErrorMessage('Please make sure of your username and password combination');
+                console.log("not able to login user!");
             }
             history.push("/");
         } catch (err) {
+            setErrorMessage('wrong username & password combination');
+
             console.log(err);
         }
     };
@@ -43,19 +46,11 @@ export default function SignIn() {
     };
     return (
         <div className="SignIn">
-            <div className="signcontainer">
-                <div className="row">
-                    <div className="col-md-8 m-auto">
-                        <br />
-                    </div>
-                    <div className="col-md-8 m-auto">
-                        <h1 className="display-4 text-center">Sign In</h1>
-                        <br />
-                        <br />
 
+            <div className="signcontainer">
+                  
                         <form action="post" className="SignIn.form" onSubmit={handleSubmit}>
-                            <p className="lead text-center">Username:</p>
-                            <div className="form-group">
+                            <div className="signin-form-group">
                                 <input
                                     type="text"
                                     placeholder="Username"
@@ -63,11 +58,10 @@ export default function SignIn() {
                                     className="form-control"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
+                                    required
                                 />
                             </div>
-                            <br />
-                            <p className="lead text-center">Password:</p>
-                            <div className="form-group">
+                            <div className="signin-form-group">
                                 <input
                                     type="password"
                                     placeholder="password"
@@ -75,16 +69,19 @@ export default function SignIn() {
                                     className="form-control"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    required
                                 />
                             </div>
-
+                            {errorMessage && <div className="signin-form-group"> <p>{errorMessage} </p></div>}
                             <input type="submit" value="LOG IN" className="button" />
-                            <br />
                             {/* <input type="submit" value="Sign Up" className="button" /> */}
                         </form>
-                    </div>
+                    
                 </div>
-            </div>
+                
+            
+            <img src="/images/signin.jpg" alt="" height="100%" width="100%" />
+
         </div>
     );
 }

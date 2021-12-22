@@ -2,7 +2,6 @@
 .SignIn.form {
   border: 3px solid #ffffff;
   padding: 0  580px;
-  
 }
 
 .SignIn{ 
@@ -10,13 +9,20 @@
     text-align: left;    
 }
 /* Full-width inputs */
-input[type=text], input[type=password] {
+.signin-form-group >input[type=text], .signin-form-group >input[type=password] {
   width: 100%;
   padding: 10px 15px;
   margin: 8px 0;
   display: inline-block;
-  border: 0.5px solid rgb(0, 0, 0);
+ background-color: #ba9d5e6b;
+  border: 0.5px solid rgba(0, 0, 0, 0.178);
   box-sizing: border-box;
+  border-radius: 5px;
+  color: #282111;
+  outline-color: #ba9d5e6b;
+}
+.signin-form-group >p {
+  color: #bd0000;
 }
 
 /* Set a style for all buttons */
@@ -36,6 +42,10 @@ input[type=text], input[type=password] {
 
 /* Add padding to containers */
 .signcontainer {
-  padding-left: 750px;
-  display: flex;
-}
+  padding-left: 80%;
+  padding-top: 28.5%;
+  display: grid;
+  position: absolute;
+  grid-template-columns: repeat(1, auto);
+  
+ }
