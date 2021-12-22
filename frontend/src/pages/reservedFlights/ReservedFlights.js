@@ -218,7 +218,7 @@ export default function ReservedFlight() {
                                                 onClick={() => {
                                                     const { to, from } =
                                                         data.return_reservation_id.flight_id.airport;
-                                                    const newFlightInfo = {
+                                                    const newReservation = {
                                                         tripId: data._id,
                                                         reservationId: data.return_reservation_id._id,
                                                         cabinClass: data.return_reservation_id.cabin_class,
@@ -227,7 +227,8 @@ export default function ReservedFlight() {
                                                         from,
                                                         to,
                                                     };
-                                                    history.newFlightInfo = newFlightInfo;
+                                                    console.log("newReservation", newReservation);
+                                                    history.newReservation = newReservation;
                                                     history.push("/change-reservation");
                                                 }}
                                             >

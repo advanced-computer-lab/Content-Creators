@@ -12,6 +12,7 @@ export default function ChangeReservation() {
     if (history.newReservation) {
         ({ tripId, reservationId, to, from, cabinClass, requestedSeats } =
             history.newReservation);
+        console.log("history.newReservation ISSSS: ", history.newReservation);
     }
     const [flights, setFlights] = useState([]);
 
@@ -51,7 +52,7 @@ export default function ChangeReservation() {
             history.push("seat-picker-change");
         }
     };
-    if (history.newFlightInfo) {
+    if (history.newReservation) {
         return (
             <div>
                 <AvailableFlights
