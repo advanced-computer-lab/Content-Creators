@@ -1,16 +1,18 @@
 import React from "react";
-import "../../App.css";
-import Cards from "../../components/cards/Cards";
-import HeroCenter from "../../components/homeCenter/HomeCenter";
+import "./home.css"
+import BookingCard from "../../components/bookingCard/bookingCard";
 import Footer from "../../components/footer/Footer";
-// import BookingSeat from "../../components/bookingSeat/bookingSeat";
+
 function Home() {
     return (
         <>
-            <HeroCenter />
-            <Cards />
-            <Footer />
-           
+        
+        <BookingCard />
+        <div className="hero-container">
+        <img src="/images/home1_bg.jpg" alt="" height="100%" width="100%" />
+        </div>
+
+        <Footer />
         </>
     );
 }

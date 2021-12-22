@@ -14,10 +14,13 @@ import ReservationDetails from "./pages/reservationDetails/ReservationDetails";
 import ReservedFlight from "./pages/reservedFlights/ReservedFlights";
 import FlightDetails from "./pages/flightDetails/FlightDetails";
 import SignUpContainer from "./pages/signUp/SignUpContainer";
+<<<<<<< Updated upstream
 import ChangeSeats from "./pages/changeSeats/ChangeSeats";
 import ChangeReservation from "./pages/changeReservation/ChangeReservation";
 import SeatPickerChange from "./pages/seatPickerChange/SeatPickerChange";
 
+=======
+>>>>>>> Stashed changes
 function App() {
     return (
         <>

@@ -10,10 +10,10 @@ import Flatpickr from "react-flatpickr";
 export default function BookingCard() {
     const history = useHistory();
 
-    const [airportFrom, setAirportFrom] = useState("");
-    const [airportTo, setAirportTo] = useState("");
-    const [departureDate, setDepartureDate] = useState("Any Date");
-    const [returnDate, setReturnDate] = useState("Any Date");
+    const [airportFrom, setAirportFrom] = useState("MUC");
+    const [airportTo, setAirportTo] = useState("CAI");
+    const [departureDate, setDepartureDate] = useState(new Date());
+    const [returnDate, setReturnDate] = useState(new Date().fp_incr(14) );
     const [childrenNumber, setChildrenNumber] = useState(0);
     const [adultsNumber, setAdultsNumber] = useState(1);
     const [cabinClass, setCabinClass] = useState("economy");
@@ -26,6 +26,7 @@ export default function BookingCard() {
             currentDate.getMonth() + 6,
             currentDate.getDate()
         )
+        
     );
 
     //when entire form is filled, add 'history.booking_details' to history object and
@@ -60,32 +61,29 @@ export default function BookingCard() {
 
     return (
         <div>
-            <div className="booking-container">
-                <h1 className="booking-title">Book Your Flight Now!</h1>
-                <br />
-                <div className="form-control">
-                    <p className="display-4 text-center">From:</p>
+            <div className="booking-container1">
+                <div className="form-control1">
                     <input
                         type="text"
                         id="from"
                         name="from"
+                        required
                         value={airportFrom}
                         onChange={(e) => setAirportFrom(e.target.value)}
                     />
                 </div>
-                <div className="form-control">
-                    <p className="display-4 text-center">To:</p>
+                <div className="form-control1">
                     <input
                         type="text"
                         id="to"
                         name="to"
+                        required
                         value={airportTo}
                         onChange={(e) => setAirportTo(e.target.value)}
                     />
                 </div>
 
-                <div className="form-control">
-                    <p className="display-4 text-center"> Select Departure Date:</p>
+                <div className="form-control1">
                     <Flatpickr
                         data-disable-time
                         name="departureDate"
@@ -94,31 +92,33 @@ export default function BookingCard() {
                         className="form-control"
                         placeholder={departureDate}
                         value={departureDate}
+
                         onChange={(e) =>
                             setDepartureDate(new Date(e).toISOString().slice(0, 10))
                         }
                         required
                     />
                 </div>
-                <div className="form-control">
-                    <p className="display-4 text-center"> Select Return Date:</p>
+                <div className="form-control1">
                     <Flatpickr
                         data-disable-time
                         name="returnDate"
-                        minDate={minDate}
+                        minDate={departureDate}
                         maxDate={maxDate}
-                        className="form-control"
+                        className="form-control1"
                         placeholder={returnDate}
                         value={returnDate}
                         onChange={(e) =>
                             setReturnDate(new Date(e).toISOString().slice(0, 10))
                         }
+
                         required
                     />
                 </div>
-
-                <div className="form-control">
-                    <p className="display-4 text-center">Adults:</p>
+                        {/* <div></div>
+                        <div></div> */}
+        
+                <div className="form-control1">
                     <input
                         type="number"
                         id="no_of_adults"
@@ -127,8 +127,7 @@ export default function BookingCard() {
                         onChange={(e) => setAdultsNumber(parseInt(e.target.value))}
                     />
                 </div>
-                <div className="form-control">
-                    <p className="display-4 text-center">Children:</p>
+                <div className="form-control1">
                     <input
                         type="number"
                         id="no_of_children"
@@ -162,7 +161,7 @@ export default function BookingCard() {
                     </option>
                 </select>
                 <button
-                    className="createbutton"
+                    className="continuebutton"
                     type="submit"
                     value="Create"
                     onClick={handleSubmit}
