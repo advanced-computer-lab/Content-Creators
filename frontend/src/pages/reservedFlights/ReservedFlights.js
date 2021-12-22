@@ -11,8 +11,9 @@ export default function ReservedFlight() {
     const history = useHistory();
     const [username, setUsername] = useState("husseljo");
     const [data, setData] = useState([]);
+    console.log("history.newReturnFlight", history.newReturnFlight);
 
-    console.log(data, "TRIP DATA");
+    // console.log(data, "TRIP DATA");
     const getReservationAxios = async () => {
         try {
             const response = await axios.get("http://localhost:8000/trips/all-trips");
@@ -47,9 +48,6 @@ export default function ReservedFlight() {
 
     const changeSeatHandler = (e, flightNumber, allSeats, chosenSeats) => {
         const reservationId = e.target.id;
-        console.log("FLIGHT_NUMBER IS : ", flightNumber);
-        console.log("CHOSENsEATS ARE : ", chosenSeats);
-        console.log("reservationId is: ", e.target.id);
         const changeSeatInfo = {
             flightNumber,
             reservationId,
@@ -61,8 +59,14 @@ export default function ReservedFlight() {
     };
 
     const pickNewHandler = (e) => {
-        console.log("reservationId is: ", e.target.id);
-        console.log("handle changing seat!");
+        const newFlightInfo = {
+            tripId: "wfe",
+            reservationId: "wfe",
+            from: "MUC",
+            to: "CAI",
+        };
+        history.newFlightInfo = newFlightInfo;
+        history.push("/change-reservation");
     };
 
     if (data.length == 0) {
@@ -102,6 +106,7 @@ export default function ReservedFlight() {
                                                 Cancel Trip {index + 1}
                                             </button>
                                         </td>
+                                        <td>{data.username}</td>
                                     </tr>
                                     <tr key={data._id}>
                                         <td>{index + 1}</td>
@@ -211,7 +216,32 @@ export default function ReservedFlight() {
                                                 className="FlightBtns"
                                                 id={data.return_reservation_id._id}
                                                 type="button"
-                                                onClick={pickNewHandler}
+                                                onClick={() => {
+                                                    const { to, from } =
+                                                        data.return_reservation_id.flight_id.airport;
+                                                    const {
+                                                        username,
+                                                        no_of_adults,
+                                                        no_of_children,
+                                                        total_price,
+                                                    } = data.return_reservation_id;
+                                                    const newReservation = {
+                                                        tripId: data._id,
+                                                        reservationId: data.return_reservation_id._id,
+                                                        cabinClass: data.return_reservation_id.cabin_class,
+                                                        requestedSeats:
+                                                            data.return_reservation_id.seat_numbers.length,
+                                                        from,
+                                                        to,
+                                                        username,
+                                                        no_of_adults,
+                                                        no_of_children,
+                                                        total_price,
+                                                    };
+                                                    console.log("newReservation", newReservation);
+                                                    history.newReservation = newReservation;
+                                                    history.push("/change-reservation");
+                                                }}
                                             >
                                                 Pick new flight
                                             </button>
