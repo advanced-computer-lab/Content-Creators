@@ -8,11 +8,12 @@ import AvailableFlights from "../../components/availableFlights/AvailableFlights
 
 export default function ChangeReservation() {
     const history = useHistory();
-    const { tripId, reservationId, to, from, cabinClass, requestedSeats } =
-        history.newFlightInfo;
-    console.log("newFlightInfo", history.newFlightInfo);
+    let tripId, reservationId, to, from, cabinClass, requestedSeats;
+    if (history.newReservation) {
+        ({ tripId, reservationId, to, from, cabinClass, requestedSeats } =
+            history.newReservation);
+    }
     const [flights, setFlights] = useState([]);
-    console.log("FLIGHTS", flights);
 
     const getAllFlights = async () => {
         try {
