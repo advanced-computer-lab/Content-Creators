@@ -10,7 +10,6 @@ const { deleteReservation } = require("../controllers/reservationDelete");
 
 //list all trips
 router.get("/all-trips/", async (req, res) => {
-    //must be wriiten /all-trips/{space} to get all
     const allTrips = await Trip.find()
         .populate({
             path: "departure_reservation_id",
@@ -22,7 +21,7 @@ router.get("/all-trips/", async (req, res) => {
         });
     // console.log("allTrips", allTrips);
 
-    await res.status(200).send(allTrips).sendStatus;
+    res.status(200).send(allTrips).sendStatus;
 });
 
 //adds trips
@@ -173,12 +172,10 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
                     text: "Your reservation has been canceled. You have been refunded and it will take 10 days to process.",
                 };
 
-                transporter.sendMail(mailOptions, function(error, info) {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log("Email sent: " + info.response);
-                    }
+                transporter.sendMail(mailOptions, (error, info) => {
+                    error
+                        ? console.log(error)
+                        : console.log("Email sent: " + info.response);
                 });
             }
         }
@@ -197,8 +194,6 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
 
 router.post("/change-reservation", async (req, res) => {
     try {
-        console.log("BODYYYYYYYYY", req.body.newReservation);
-
         const {
             trip_id,
             reservation_id,
@@ -223,15 +218,13 @@ router.post("/change-reservation", async (req, res) => {
                     no_of_adults,
                     no_of_children,
                     seat_numbers,
-                    total_price,
+                    total_price: total_price + 500,
                 },
             },
         };
 
         //deleting old reservation
-        const deletedReservation = await Reservation.deleteOne({
-            _id: reservation_id,
-        });
+        const deletedReservation = await deleteReservation({ reservation_id }, res);
         console.log("deletedReservation", deletedReservation);
 
         //creating new reservation
@@ -244,6 +237,27 @@ router.post("/change-reservation", async (req, res) => {
             { return_reservation_id: resultAddReservation }
         );
         console.log("reservationUpdate", reservationUpdate);
+
+        var transporter = nodemailer.createTransport({
+            service: "outlook",
+            auth: {
+                user: "ibnfirnas_acl@outlook.com",
+                pass: "firnas123",
+            },
+        });
+
+        const text = `Your return flight reservation on trip ${trip_id} has been canceled and changed to ${reservation_id} on flight_Id ${flight_id}. 
+            Total price has been increased from ${total_price} to ${total_price + 500
+            }!\n Your seats are: ${seat_numbers}!`;
+        var mailOptions = {
+            from: "ibnfirnas_acl@outlook.com",
+            to: "alirmazhar1@gmail.com",
+            subject: "Reservation Cancel Notice ",
+            text,
+        };
+        // transporter.sendMail(mailOptions, (error, info) => {
+        //     error ? console.log(error) : console.log("Email sent: " + info.response);
+        // });
 
         res.status(201).send({ success: true });
     } catch (err) {

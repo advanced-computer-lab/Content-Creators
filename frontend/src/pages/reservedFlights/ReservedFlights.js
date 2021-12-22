@@ -106,6 +106,7 @@ export default function ReservedFlight() {
                                                 Cancel Trip {index + 1}
                                             </button>
                                         </td>
+                                        <td>{data.username}</td>
                                     </tr>
                                     <tr key={data._id}>
                                         <td>{index + 1}</td>

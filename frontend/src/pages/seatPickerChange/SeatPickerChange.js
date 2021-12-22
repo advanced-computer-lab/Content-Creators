@@ -37,20 +37,26 @@ export default function SeatPicker() {
         if (selected.length >= requestedSeats) {
             console.log("ALL DONE");
 
-            const newReservation = {
-                newReservation: {
-                    trip_id: tripId,
-                    reservation_id: reservationId,
-                    username,
-                    flight_id: flightId,
-                    cabin_class: cabinClass,
-                    no_of_adults,
-                    no_of_children,
-                    seat_numbers: selected,
-                    total_price,
-                },
-            };
-            changeReservationAxios(newReservation);
+            let isExecuted = window.confirm(
+                "Are you sure to change your return reservation?"
+            );
+            if (isExecuted) {
+                const newReservation = {
+                    newReservation: {
+                        trip_id: tripId,
+                        reservation_id: reservationId,
+                        username,
+                        flight_id: flightId,
+                        cabin_class: cabinClass,
+                        no_of_adults,
+                        no_of_children,
+                        seat_numbers: selected,
+                        total_price,
+                    },
+                };
+                changeReservationAxios(newReservation);
+                history.push("/reserved-flights");
+            }
         }
     };
 
