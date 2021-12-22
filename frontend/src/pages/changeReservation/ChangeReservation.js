@@ -8,7 +8,10 @@ import AvailableFlights from "../../components/availableFlights/AvailableFlights
 
 export default function ChangeReservation() {
     const history = useHistory();
+    const { tripId, reservationId, to, from } = history.newFlightInfo;
+    console.log("newFlightInfo", history.newFlightInfo);
     const [flights, setFlights] = useState([]);
+    console.log("FLIGHTS", flights);
 
     const getAllFlights = async () => {
         try {
@@ -23,25 +26,47 @@ export default function ChangeReservation() {
         getAllFlights();
     }, []);
 
+    const changeReservationAxios = async (newReservation) => {
+        try {
+            const url = `http://localhost:8000/trips/change-reservation/`;
+            const response = await axios.post(url, newReservation);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const confirmHandler = () => {
         if (flights.length == 1) {
-            history.newReturnFlight = flights[0];
+            const newReservation = {
+                newReservation: {
+                    flightNumber: flights[0].flight_number,
+                    flightId: flights[0]._id,
+                    tripId,
+                    reservationId,
+                },
+            };
+            changeReservationAxios(newReservation);
             history.push("reserved-flights");
         }
     };
-    return (
-        <div>
-            <AvailableFlights
-                flights={flights}
-                setFlights={setFlights}
-                renewFlights={getAllFlights}
-            />
-            <br />
-            <div style={{ textAlign: "center" }}>
-                <button type="button" class="btn-confirm" onClick={confirmHandler}>
-                    Choose Flight
-                </button>
+    if (history.newFlightInfo) {
+        return (
+            <div>
+                <AvailableFlights
+                    flights={flights}
+                    setFlights={setFlights}
+                    renewFlights={getAllFlights}
+                />
+                <br />
+                <div style={{ textAlign: "center" }}>
+                    <button type="button" class="btn-confirm" onClick={confirmHandler}>
+                        Choose Flight
+                    </button>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        history.push("/reserved-flights");
+        return <></>;
+    }
 }

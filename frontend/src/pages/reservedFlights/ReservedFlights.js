@@ -13,7 +13,7 @@ export default function ReservedFlight() {
     const [data, setData] = useState([]);
     console.log("history.newReturnFlight", history.newReturnFlight);
 
-    console.log(data, "TRIP DATA");
+    // console.log(data, "TRIP DATA");
     const getReservationAxios = async () => {
         try {
             const response = await axios.get("http://localhost:8000/trips/all-trips");
@@ -59,6 +59,13 @@ export default function ReservedFlight() {
     };
 
     const pickNewHandler = (e) => {
+        const newFlightInfo = {
+            tripId: "wfe",
+            reservationId: "wfe",
+            from: "MUC",
+            to: "CAI",
+        };
+        history.newFlightInfo = newFlightInfo;
         history.push("/change-reservation");
     };
 
@@ -208,7 +215,18 @@ export default function ReservedFlight() {
                                                 className="FlightBtns"
                                                 id={data.return_reservation_id._id}
                                                 type="button"
-                                                onClick={pickNewHandler}
+                                                onClick={() => {
+                                                    const { to, from } =
+                                                        data.return_reservation_id.flight_id.airport;
+                                                    const newFlightInfo = {
+                                                        tripId: data._id,
+                                                        reservationId: data.return_reservation_id._id,
+                                                        from,
+                                                        to,
+                                                    };
+                                                    history.newFlightInfo = newFlightInfo;
+                                                    history.push("/change-reservation");
+                                                }}
                                             >
                                                 Pick new flight
                                             </button>
