@@ -198,30 +198,52 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
 router.post("/change-reservation", async (req, res) => {
     try {
         console.log("BODYYYYYYYYY", req.body.newReservation);
-        const { tripId, reservationId, flightNumber } = req.body.newReservation;
+
+        const {
+            trip_id,
+            reservation_id,
+            username,
+            flight_id,
+            cabin_class,
+            no_of_adults,
+            no_of_children,
+            seat_numbers,
+            total_price,
+        } = req.body.newReservation;
+
+        console.log("username", username);
+        console.log("no_of_adults", no_of_adults);
+
         const addedReservation = {
             body: {
                 reservation: {
-                    username: "YASTAAA",
-                    flight_id: "61b1cabb48a511fd51c36d28",
-                    cabin_class: "economy",
-                    no_of_adults: 2,
-                    no_of_children: 1,
-                    seat_numbers: ["E0", "E2"],
-                    total_price: 2000,
+                    username,
+                    flight_id,
+                    cabin_class,
+                    no_of_adults,
+                    no_of_children,
+                    seat_numbers,
+                    total_price,
                 },
             },
         };
 
-        const reservation_result = await Reservation.findOne({
-            _id: reservationId,
+        //deleting old reservation
+        const deletedReservation = await Reservation.deleteOne({
+            _id: reservation_id,
         });
-        console.log("reservation_result", reservation_result);
-        const { username, cabin_class, no_of_adults, no_of_children, total_price } =
-            reservation_result;
+        console.log("deletedReservation", deletedReservation);
 
-        // const resultAddReservation = await addReservation(addedReservation, res);
-        // console.log("resultAddReservation", resultAddReservation);
+        //creating new reservation
+        const resultAddReservation = await addReservation(addedReservation, res);
+        console.log("resultAddReservation", resultAddReservation);
+
+        //replacing new reservationi in trip
+        const reservationUpdate = await Trip.updateOne(
+            { _id: trip_id },
+            { return_reservation_id: resultAddReservation }
+        );
+        console.log("reservationUpdate", reservationUpdate);
 
         res.status(201).send({ success: true });
     } catch (err) {

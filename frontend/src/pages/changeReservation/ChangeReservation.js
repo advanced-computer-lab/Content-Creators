@@ -8,10 +8,29 @@ import AvailableFlights from "../../components/availableFlights/AvailableFlights
 
 export default function ChangeReservation() {
     const history = useHistory();
-    let tripId, reservationId, to, from, cabinClass, requestedSeats;
+    let tripId,
+        reservationId,
+        to,
+        from,
+        cabinClass,
+        requestedSeats,
+        username,
+        no_of_adults,
+        no_of_children,
+        total_price;
     if (history.newReservation) {
-        ({ tripId, reservationId, to, from, cabinClass, requestedSeats } =
-            history.newReservation);
+        ({
+            tripId,
+            reservationId,
+            to,
+            from,
+            cabinClass,
+            requestedSeats,
+            username,
+            no_of_adults,
+            no_of_children,
+            total_price,
+        } = history.newReservation);
         console.log("history.newReservation ISSSS: ", history.newReservation);
     }
     const [flights, setFlights] = useState([]);
@@ -47,6 +66,10 @@ export default function ChangeReservation() {
                 reservationId,
                 cabinClass,
                 requestedSeats,
+                username,
+                no_of_adults,
+                no_of_children,
+                total_price,
             };
             history.newReservation = newReservation;
             history.push("seat-picker-change");
