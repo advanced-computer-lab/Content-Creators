@@ -8,7 +8,8 @@ import AvailableFlights from "../../components/availableFlights/AvailableFlights
 
 export default function ChangeReservation() {
     const history = useHistory();
-    const { tripId, reservationId, to, from } = history.newFlightInfo;
+    const { tripId, reservationId, to, from, cabinClass, requestedSeats } =
+        history.newFlightInfo;
     console.log("newFlightInfo", history.newFlightInfo);
     const [flights, setFlights] = useState([]);
     console.log("FLIGHTS", flights);
@@ -38,15 +39,15 @@ export default function ChangeReservation() {
     const confirmHandler = () => {
         if (flights.length == 1) {
             const newReservation = {
-                newReservation: {
-                    flightNumber: flights[0].flight_number,
-                    flightId: flights[0]._id,
-                    tripId,
-                    reservationId,
-                },
+                flightNumber: flights[0].flight_number,
+                flightId: flights[0]._id,
+                tripId,
+                reservationId,
+                cabinClass,
+                requestedSeats,
             };
-            changeReservationAxios(newReservation);
-            history.push("reserved-flights");
+            history.newReservation = newReservation;
+            history.push("seat-picker-change");
         }
     };
     if (history.newFlightInfo) {
@@ -60,7 +61,7 @@ export default function ChangeReservation() {
                 <br />
                 <div style={{ textAlign: "center" }}>
                     <button type="button" class="btn-confirm" onClick={confirmHandler}>
-                        Choose Flight
+                        Choose your Seats
                     </button>
                 </div>
             </div>

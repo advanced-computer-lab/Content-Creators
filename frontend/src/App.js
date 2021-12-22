@@ -16,6 +16,7 @@ import FlightDetails from "./pages/flightDetails/FlightDetails";
 import SignUpContainer from "./pages/signUp/SignUpContainer";
 import ChangeSeats from "./pages/changeSeats/ChangeSeats";
 import ChangeReservation from "./pages/changeReservation/ChangeReservation";
+import SeatPickerChange from "./pages/seatPickerChange/SeatPickerChange";
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/sign-up" component={SignUpContainer} />
                     <Route path="/change-seats" component={ChangeSeats} />
                     <Route path="/change-reservation" component={ChangeReservation} />
+                    <Route path="/seat-picker-change" component={SeatPickerChange} />
                 </Switch>
             </Router>
         </>

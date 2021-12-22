@@ -221,6 +221,9 @@ export default function ReservedFlight() {
                                                     const newFlightInfo = {
                                                         tripId: data._id,
                                                         reservationId: data.return_reservation_id._id,
+                                                        cabinClass: data.return_reservation_id.cabin_class,
+                                                        requestedSeats:
+                                                            data.return_reservation_id.seat_numbers.length,
                                                         from,
                                                         to,
                                                     };

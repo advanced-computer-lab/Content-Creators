@@ -11,10 +11,8 @@ export default function SeatPicker() {
     let flightNumber, reservationId, allSeats, chosenSeats;
 
     if (history.changeSeatInfo) {
-        flightNumber = history.changeSeatInfo.flightNumber;
-        reservationId = history.changeSeatInfo.reservationId;
-        allSeats = history.changeSeatInfo.allSeats;
-        chosenSeats = history.changeSeatInfo.chosenSeats;
+        ({ flightNumber, reservationId, allSeats, chosenSeats } =
+            history.changeSeatInfo);
     }
 
     const [enough, setEnough] = useState(true);
