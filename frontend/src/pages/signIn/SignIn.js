@@ -75,6 +75,7 @@ export default function SignIn() {
                             {errorMessage && <div className="signin-form-group"> <p>{errorMessage} </p></div>}
                             <input type="submit" value="LOG IN" className="button" />
                             {/* <input type="submit" value="Sign Up" className="button" /> */}
+                            <Link to='/sign-up'>You still have no account?Sign Up</Link>
                         </form>
                     
                 </div>
