@@ -50,7 +50,7 @@ const userSchema = new Schema(
             unique: true,
         },
         passport_number: {
-            type: Number,
+            type: String,
             required: true,
         },
         admin: {

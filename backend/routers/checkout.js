@@ -2,12 +2,12 @@ const cors = require("cors");
 const express = require("express");
 const stripe = require("stripe")("STRIPE_SECRET_KEY");
 const uuid = require("uuid/v4");
-
+const verifyToken = require("../middleware/auth");
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
 app.get("/", (req, res) => {
   res.send("Add your Stripe Secret Key to the .require('stripe') statement!");
 });

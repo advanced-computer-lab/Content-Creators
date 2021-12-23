@@ -11,7 +11,6 @@ router.get("/all-users", async (req, res) => {
   await res.send(searchUser)
 
 });
-//MOSTAFA 3amal de <3 
 router.put('/update-user/:username' , async(req , res) => {
   const { username } = req.params;
   try {

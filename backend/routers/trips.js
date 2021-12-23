@@ -8,6 +8,8 @@ const flights = require("../models/flightSchema");
 const { addReservation } = require("../controllers/reservationController");
 const { deleteReservation } = require("../controllers/reservationDelete");
 
+//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
+
 //list all trips
 router.get("/all-trips/", async (req, res) => {
     const allTrips = await Trip.find()

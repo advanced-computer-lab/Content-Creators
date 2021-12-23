@@ -4,6 +4,14 @@ const Flight = require("../models/flightSchema");
 const bp = require("body-parser");
 const User = require("../models/userSchema"); //for confirmation purposes later dont know how to use session
 
+router.get("/search", async (req, res) => {
+    const filter = req.query;
+    const allFlights = await Flight.find(filter);
+    await res.status(200).send(allFlights);
+});
+
+//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
+//should make sure that the user is admin after the first step;
 //list all
 router.get("/all-flights", async (req, res) => {
     const allFlights = await Flight.find();
@@ -11,11 +19,7 @@ router.get("/all-flights", async (req, res) => {
 });
 
 //search flights by flight_number only for now
-router.get("/search", async (req, res) => {
-    const filter = req.query;
-    const allFlights = await Flight.find(filter);
-    await res.status(200).send(allFlights);
-});
+
 
 //Creating new flight object and saving it to the database.
 router.post("/create-flight", async (req, res) => {

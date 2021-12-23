@@ -7,6 +7,7 @@ require("dotenv").config();
 
 // console.log("PROCESS IS: ", process);
 // console.log("PROCESS.ENV IS: ", process.env);
+//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
 
 router.post("/sign-up", async (req, res) => {
     try {

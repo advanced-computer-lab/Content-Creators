@@ -1,3 +1,5 @@
+//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
+
 function updateSeatStatus(allSeats, seatNumbers, cabinClass, type) {
     seatNumbers = seatNumbers.map((z) => parseInt(z.slice(1)));
     if (type == "add") {

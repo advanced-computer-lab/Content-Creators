@@ -8,6 +8,7 @@ const updateSeatStatus = require("./updateSeatStatus");
 const { addReservation } = require("../controllers/reservationController");
 
 router.use("/users", users);
+//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
 
 //list all reservations
 router.get("/all-reservations", async (req, res) => {
