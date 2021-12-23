@@ -9,7 +9,7 @@ const { addReservation } = require("../controllers/reservationController");
 const { deleteReservation } = require("../controllers/reservationDelete");
 
 //app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
-
+router.use(users);
 //list all trips
 router.get("/all-trips/", async (req, res) => {
     const allTrips = await Trip.find()
@@ -106,10 +106,13 @@ router.post("/add-trip/", async (req, res) => {
                 pass: "firnas123",
             },
         });
-
+        console.log("USER ROUTER HERE", users.get("/getuser",username));
+        const user = users.get("/getuser",username);
+        const usermail =username.email;
+        console.log("Email of user HERE", usermail);
         var mailOptions = {
             from: "ibnfirnas_acl@outlook.com",
-            to: "mohamedams14@gmail.com",
+            to: usermail,
             subject: "Reservation Confirmation Notice ",
             text: "Your reservation has been made!",
         };
@@ -166,10 +169,12 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
                         pass: "firnas123",
                     },
                 });
-
+                console.log("USER ROUTER HERE", users.get("/getuser",username));
+                const user = users.get("/getuser",username);
+                const usermail =username.email;
                 var mailOptions = {
                     from: "ibnfirnas_acl@outlook.com",
-                    to: "alirmazhar1@gmail.com",
+                    to: usermail,
                     subject: "Reservation Cancel Notice ",
                     text: "Your reservation has been canceled. You have been refunded and it will take 10 days to process.",
                 };

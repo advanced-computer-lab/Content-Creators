@@ -50,13 +50,14 @@
       }
 
       .searching{
-        position: relative;
+        position: absolute;
         left: 750px;
         white-space: nowrap;
         overflow-x: hidden;
         display: table;
         width: 500px;
     }
+    
 
 .searchBar{
     width: 200px;
@@ -72,4 +73,10 @@
 
 
 
-      
+.flightcontainer {
+
+    background-image: url("/images/signup.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+    
+   }

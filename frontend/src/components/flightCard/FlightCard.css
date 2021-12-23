@@ -1,6 +1,9 @@
 .flightCard{
         border: 0.1rem #c0c0c0 solid;
         background-color: #f8f8f8;
+        background-image: url("/images/flightcard.jpg");
+        background-position: center center;
+        background-size: 150% 180%;
         border-radius: 0.5rem;
         margin: 1rem;  
         font-family: 'Courier New', Courier, monospace;

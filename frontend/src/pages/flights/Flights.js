@@ -41,7 +41,9 @@ export default function Flights() {
     };
 
     return (
-        <div>
+
+        <div className ="flightcontainer">
+
             <div className="searching">
                 <SearchBar data={data} setDataParent={setData} />
                 <button

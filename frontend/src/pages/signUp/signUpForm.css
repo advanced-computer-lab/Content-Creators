@@ -6,28 +6,41 @@
 .container{
     /* background: linear-gradient(90deg, #e8be85 0%, rgb(26, 23, 23) 100%); */
     width: 100%;
-    min-height: 100vh;
+    min-height: 50vh;
     display: flex;
-    justify-content: center;
     align-items: center;
     position: absolute;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5%;
+    
 }
 
 .app-wrapper{
-    background-color: #fff;
-    min-width: 150px;
+
+    background-image: url("/images/signupcomponent.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+    min-width: 70px;
     min-height: 350px;
     /* padding: 100px; */
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
+    
     border-radius: 10px;
     
 }
 
+.signUpform{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  
+}
 
 .title{
     color: black;
     text-align: center;
     margin: 80px 0px 40px 0px;
+    /* position: absolute; */
 }
 
 .username,
@@ -39,7 +52,7 @@
 .passportNumber,
 .email,
 .password{
-    margin: 30px 600px 20px 50px;
+    margin: 30px 100px 20px 50px;
     color: black;
     font-size: 16px;
 }
@@ -63,3 +76,26 @@
 .error{
     color: red;
 }
+/* Set a style for all buttons */
+.Signupbutton {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    margin: middle;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 50px;
+    margin-left: 150px;
+  }
+  .Signupbutton:hover {
+    background-color: #916632a1;
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: middle;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 50px;
+    margin-left: 150px;
+  }

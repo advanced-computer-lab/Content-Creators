@@ -68,11 +68,13 @@ const SignUpForm = ({submitForm}) => {
 <div>
 
         <div className="container">
-            <div className="app-wrapper">
+
+            <div className="app-wrapper" >
+
                 <div>
                     <h2 className="title"> Create Account</h2>
                 </div>
-                <form className="form-wrapper">
+                <form className="signUpform" >
                     <div className="username">
                         <label className="label">Username</label>
                         <input 
@@ -126,11 +128,12 @@ const SignUpForm = ({submitForm}) => {
                         {errors.passport_number && <p className="error">{errors.passport_number}</p>}
                     </div>
                     <div>
-                        <button className="submit" onClick={handleFormSubmit}>Sign up</button>
+                        <button className="Signupbutton" onClick={handleFormSubmit}>Sign up</button>
                     </div>
+
                 </form>
             </div>
-            
+
         </div>
 
 
