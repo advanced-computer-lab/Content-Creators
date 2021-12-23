@@ -7,7 +7,7 @@ require("dotenv").config();
 
 // console.log("PROCESS IS: ", process);
 // console.log("PROCESS.ENV IS: ", process.env);
-//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
+// console.log("TOKEN_SECRET ISSSSSSS: ", process.env.TOKEN_SECRET);
 
 router.post("/sign-up", async (req, res) => {
     try {
@@ -90,15 +90,22 @@ router.post("/login", async (req, res) => {
         console.log("comparison is: ", comparison);
 
         if (comparison) {
-            const token = jwt.sign(
+            const access_token = jwt.sign(
                 { user_id: user._id, username },
                 process.env.TOKEN_SECRET,
                 {
                     expiresIn: "2h",
                 }
             );
-            const finalUser = { username, token };
-            return res.status(200).json(finalUser);
+            const refresh_token = jwt.sign(
+                { user_id: user._id, username },
+                process.env.TOKEN_SECRET,
+                {
+                    expiresIn: "24h",
+                }
+            );
+            const authorization_data = { username, access_token, refresh_token };
+            return res.status(200).json(authorization_data);
         }
         res.status(400).send("Invalid Credentials");
     } catch (err) {
