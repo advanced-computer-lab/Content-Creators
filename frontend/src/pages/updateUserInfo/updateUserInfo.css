@@ -1,0 +1,8 @@
+
+
+export default function updateUserInfo(props){
+    const userId = props.match.params.id;
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+}

@@ -17,6 +17,7 @@ import SignUpContainer from "./pages/signUp/SignUpContainer";
 import ChangeSeats from "./pages/changeSeats/ChangeSeats";
 import ChangeReservation from "./pages/changeReservation/ChangeReservation";
 import SeatPickerChange from "./pages/seatPickerChange/SeatPickerChange";
+import updateUserInfo from "./pages/updateUserInfo/updateUserInfo";
 function App() {
     return (
         <>
@@ -38,6 +39,7 @@ function App() {
                     <Route path="/change-seats" component={ChangeSeats} />
                     <Route path="/change-reservation" component={ChangeReservation} />
                     <Route path="/seat-picker-change" component={SeatPickerChange} />
+                    <Route path="/update-user-info" component={updateUserInfo} />
                 </Switch>
             </Router>
         </>
