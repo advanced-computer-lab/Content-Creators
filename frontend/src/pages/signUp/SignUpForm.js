@@ -136,7 +136,7 @@ const SignUpForm = ({submitForm}) => {
 
         </div>
         <div className="imagesignup">
-            <img src="/images/signup.jpeg" alt="" height="100%" width="100%" />
+            <img src="/images/signup.jpg" alt="" height="100%" width="100%" />
 
         </div>
         </>
