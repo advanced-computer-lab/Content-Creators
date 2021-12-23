@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    /* background: linear-gradient(90deg, #e8be85 0%, rgb(26, 23, 23) 100%); */
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.app-wrapper{
+    background-color: #fff;
+    min-width: 150px;
+    min-height: 350px;
+    /* padding: 100px; */
+    box-sizing: border-box;
+    border-radius: 10px;
+    
+}
+
+
+.title{
+    color: black;
+    text-align: center;
+    margin: 80px 0px 40px 0px;
+}
+
+.username,
+.firstName,
+.lastName,
+.address,
+.countryCode,
+.telephone,
+.passportNumber,
+.email,
+.password{
+    margin: 30px 600px 20px 50px;
+    color: black;
+    font-size: 16px;
+}
+
+.password{
+    margin-bottom: 40px;
+}
+
+.input{
+    height: 32px;
+    width: 10px;
+    font-size: 20px;
+    outline: none;
+    border-top-style: none;
+    border-bottom-style: 2px solid black;
+    border-left-style: none;
+    border-right-style: none;
+    margin-bottom: 5px;
+}
+
+.error{
+    color: red;
+}
