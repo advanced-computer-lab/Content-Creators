@@ -85,20 +85,21 @@ router.post("/login", async (req, res) => {
         if (!user) {
             return res.status(400).send("User does not exist!");
         }
+        console.log("USER is: ", user);
+        console.log("USER.admin is: ", user.admin);
 
         const comparison = await bcrypt.compare(password, user.password);
-        console.log("comparison is: ", comparison);
 
         if (comparison) {
             const access_token = jwt.sign(
-                { user_id: user._id, username },
+                { user_id: user._id, username, admin: user.admin },
                 process.env.TOKEN_SECRET,
                 {
                     expiresIn: "2h",
                 }
             );
             const refresh_token = jwt.sign(
-                { user_id: user._id, username },
+                { user_id: user._id, username, admin: user.admin },
                 process.env.TOKEN_SECRET,
                 {
                     expiresIn: "24h",
