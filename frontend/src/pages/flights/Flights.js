@@ -8,6 +8,7 @@ import "./Flights.css";
 import "../../components/searchFilter/SearchFilter.css";
 import SearchFilter from "../../components/searchFilter/SearchFilter";
 import SearchBar from "../../components/searchBar/SearchBar";
+import axiosInstance from "../../helpers/AxiosInstance";
 
 export default function Flights() {
     const [data, setData] = useState([]);
@@ -52,7 +53,7 @@ export default function Flights() {
                     onClick={() => toggleAdvancedSearch()}
                 >
                     Advanced Search
-        </button>
+                </button>
 
                 {advancedSearch && <SearchFilter data={data} setDataParent={setData} />}
             </div>

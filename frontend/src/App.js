@@ -17,29 +17,35 @@ import SignUpContainer from "./pages/signUp/SignUpContainer";
 import ChangeSeats from "./pages/changeSeats/ChangeSeats";
 import ChangeReservation from "./pages/changeReservation/ChangeReservation";
 import SeatPickerChange from "./pages/seatPickerChange/SeatPickerChange";
+import { UserContext, UserContextProvider } from "./helpers/UserContext";
+import { useState } from "react";
+
 function App() {
+    const [authenticated, setAuthenticated] = useState(false);
     return (
         <>
-            <Router>
-                <Navbar />
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/flights" component={Flights} />
-                    <Route path="/aboutus" component={AboutUs} />
-                    <Route path="/login" component={SignIn} />
-                    <Route path="/create-flight" component={CreateFlight} />
-                    <Route path="/update-flight" component={UpdateFlight} />
-                    <Route path="/booking" component={Booking} />
-                    <Route path="/reservation-details" component={ReservationDetails} />
-                    <Route path="/seat-picker" component={SeatPicker} />
-                    <Route path="/reserved-flights" component={ReservedFlight} />
-                    <Route path="/flight-details" component={FlightDetails} />
-                    <Route path="/sign-up" component={SignUpContainer} />
-                    <Route path="/change-seats" component={ChangeSeats} />
-                    <Route path="/change-reservation" component={ChangeReservation} />
-                    <Route path="/seat-picker-change" component={SeatPickerChange} />
-                </Switch>
-            </Router>
+            <UserContextProvider value={{ authenticated, setAuthenticated }}>
+                <Router>
+                    <Navbar />
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/flights" component={Flights} />
+                        <Route path="/aboutus" component={AboutUs} />
+                        <Route path="/login" component={SignIn} />
+                        <Route path="/create-flight" component={CreateFlight} />
+                        <Route path="/update-flight" component={UpdateFlight} />
+                        <Route path="/booking" component={Booking} />
+                        <Route path="/reservation-details" component={ReservationDetails} />
+                        <Route path="/seat-picker" component={SeatPicker} />
+                        <Route path="/reserved-flights" component={ReservedFlight} />
+                        <Route path="/flight-details" component={FlightDetails} />
+                        <Route path="/sign-up" component={SignUpContainer} />
+                        <Route path="/change-seats" component={ChangeSeats} />
+                        <Route path="/change-reservation" component={ChangeReservation} />
+                        <Route path="/seat-picker-change" component={SeatPickerChange} />
+                    </Switch>
+                </Router>
+            </UserContextProvider>
         </>
     );
 }

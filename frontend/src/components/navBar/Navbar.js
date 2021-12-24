@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button } from "../button/Button";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { UserContext } from "../../helpers/UserContext";
 
 function Navbar() {
+    const [user, setUser] = useContext(UserContext);
+    const { authenticated, admin } = user;
+    console.log("USERRRRRR ISSSSS", user);
+    // {"user_id":"61bf9f936209fc466c127b8b","username":"husseljo","admin":false,"iat":1640366085,"exp":1640373285}
+
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -21,6 +27,10 @@ function Navbar() {
     useEffect(() => {
         showButton();
     }, []);
+
+    useEffect(() => {
+        showButton();
+    }, [useContext(UserContext)]);
 
     window.addEventListener("resize", showButton);
 
@@ -41,24 +51,28 @@ function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/reserved-flights"
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                            >
-                                Reserved Flights
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/flights"
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                            >
-                                Flights
-                            </Link>
-                        </li>
+                        {!admin && authenticated && (
+                            <li className="nav-item">
+                                <Link
+                                    to="/reserved-flights"
+                                    className="nav-links"
+                                    onClick={closeMobileMenu}
+                                >
+                                    Reserved Flights
+                                </Link>
+                            </li>
+                        )}
+                        {admin && authenticated && (
+                            <li className="nav-item">
+                                <Link
+                                    to="/flights"
+                                    className="nav-links"
+                                    onClick={closeMobileMenu}
+                                >
+                                    Flights
+                                </Link>
+                            </li>
+                        )}
                         <li className="nav-item">
                             <Link
                                 to="/aboutus"
@@ -75,11 +89,25 @@ function Navbar() {
                                 className="nav-links-mobile"
                                 onClick={closeMobileMenu}
                             >
-                                Sign In
+                                SIGN IN
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle="btn--outline">SIGN IN</Button>}
+                    {authenticated && button && (
+                        <Button
+                            buttonStyle="btn--outline"
+                            onClick={() => {
+                                localStorage.removeItem("access_token");
+                                localStorage.removeItem("refresh_token");
+                                setUser({ admin: false, authenticated: false });
+                            }}
+                        >
+                            SIGN OUT
+                        </Button>
+                    )}
+                    {!authenticated && button && (
+                        <Button buttonStyle="btn--outline">SIGN IN</Button>
+                    )}
                 </div>
             </nav>
         </>

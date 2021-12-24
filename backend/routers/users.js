@@ -10,9 +10,9 @@ require("dotenv").config();
 //app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
 router.get("/getuser", (req, res) => {
     const username = req.body.username;
-    const found = User.findOne({username:username});
+    const found = User.findOne({ username: username });
     res.status(201).send(found);
-})
+});
 router.post("/sign-up", async (req, res) => {
     try {
         const {
@@ -81,30 +81,40 @@ router.post("/login", async (req, res) => {
     try {
         let { username, password } = req.body.user;
         if (!(username && password)) {
-            return res.status(400).send("All input is required");
+            return res.status(401).send("All input is required");
         }
 
         const filter = { username };
         const user = await User.findOne(filter);
         if (!user) {
-            return res.status(400).send("User does not exist!");
+            return res.status(401).send("User does not exist!");
         }
+        console.log("USER is: ", user);
+        console.log("USER.admin is: ", user.admin);
 
         const comparison = await bcrypt.compare(password, user.password);
-        console.log("comparison is: ", comparison);
 
+        console.log("comparison is", comparison);
         if (comparison) {
-            const token = jwt.sign(
-                { user_id: user._id, username },
+            const access_token = jwt.sign(
+                { user_id: user._id, username, admin: user.admin },
                 process.env.TOKEN_SECRET,
                 {
                     expiresIn: "2h",
                 }
             );
-            const finalUser = { username, token };
-            return res.status(200).json(finalUser);
+            const refresh_token = jwt.sign(
+                { user_id: user._id, username, admin: user.admin },
+                process.env.TOKEN_SECRET,
+                {
+                    expiresIn: "24h",
+                }
+            );
+            const authorization_data = { username, access_token, refresh_token };
+            return res.status(200).json(authorization_data);
+        } else {
+            return res.status(401).send("Invalid Credentials");
         }
-        res.status(400).send("Invalid Credentials");
     } catch (err) {
         console.log(err);
         res.status(500).send({
