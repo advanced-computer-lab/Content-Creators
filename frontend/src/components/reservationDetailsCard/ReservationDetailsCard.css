@@ -1,40 +1,88 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.reservationDetailsContainer{
+  justify-content: center;
+  border-color: rgba(0, 0, 255, 0);
+}
 .reservationDetailsCard {
-  border: 1rem #c0c0c0 solid;
-  background-color: #e8be99;
-  border-radius: 1rem;
-  margin: 1rem;
   font-family: "Courier New", Courier, monospace;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  height: 1000px;
-  width: 1300px;
-  position: relative;
-  left: 25%;
-  top: 25%;
+  min-width: 950px;
+  min-height: 650px;
+  position: absolute;
+  border-color: rgba(0, 0, 255, 0);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/images/reservationDetails.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
 }
 
 .reservationDetailsCard-body {
-  padding: 1rem;
-  position: relative;
-  left: 0px;
-  top: 40px;
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .reservationDetailsCard-header {
-  width: 600px;
-  font-size: 30px;
+    color: black;
+    text-align: center;
+    margin: 80px 0px 40px 0px;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
-.reservationDetailsCard-details {
-  width: 600px;
+.underline{
+  font-weight: bold;
+  text-decoration: underline;
 }
 
-.createbutton {
-  position: relative;
-  top: 20px;
+.reservationdetails{
+  position: absolute;
+  display: flex;
+  justify-content: center;
 }
 
-.btn-confirm {
+.confirmReservationbutton {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 14px 20px;
+  margin: middle;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  margin-top: 50px;
+  margin-left: 150px;
+}
+.confirmReservationbutton:hover {
+  background-color: #916632a1;
+  color: rgb(0, 0, 0);
+  padding: 14px 20px;
+  margin: middle;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  margin-top: 50px;
+  margin-left: 150px;
+}
+/* .btn-confirm {
+  height: 70px;
+  width: 40%;
+  background-color: #453a2e;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.5px;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.2s ease-out, color 0.2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+} */
+/* .btn-confirm {
   height: 70px;
   width: 40%;
   background-color: #453a2e;
@@ -63,19 +111,4 @@
   cursor: pointer;
   font-weight: 400;
   font-family: "Poppins", sans-serif;
-}
-.btn-confirm {
-  height: 70px;
-  width: 40%;
-  background-color: #453a2e;
-  text-align: center;
-  white-space: nowrap;
-  border-radius: 0.5px;
-  font-size: 20px;
-  color: #fff;
-  transition: all 0.2s ease-out, color 0.2s ease-out;
-  border: 0;
-  cursor: pointer;
-  font-weight: 400;
-  font-family: "Poppins", sans-serif;
-}
+} */

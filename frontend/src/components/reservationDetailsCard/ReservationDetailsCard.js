@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import "./ReservationDetailsCard.css";
+import StripeCheckout from 'react-stripe-checkout';
 
 function ReservationDetailsCard({ tripInfo }) {
     const history = useHistory();
@@ -30,6 +31,10 @@ function ReservationDetailsCard({ tripInfo }) {
             console.log(err);
         }
     };
+
+    function handleToken(token,userData){
+        console.log({token,userData});
+    }
 
     useEffect(() => {
         if (departureFlightNumber) {
@@ -78,7 +83,9 @@ function ReservationDetailsCard({ tripInfo }) {
     if (departureFlightData && cabinClass) {
         return (
             <div>
-                <div>
+            <div className="reservationDetailsContainer">
+            
+                {/* <div>
                     <p>Enter different username for developement purposes:</p>
                     <input
                         type="text"
@@ -89,9 +96,8 @@ function ReservationDetailsCard({ tripInfo }) {
                             setUsername(e.target.value);
                         }}
                     />
-                </div>
+                </div> */}
                 <div className="reservationDetailsCard">
-                    <div className="reservationDetailsCard-body">
                         <div className="reservationDetailsCard-header">
                             <p>
                                 Your reservation request for is almost done!
@@ -100,39 +106,45 @@ function ReservationDetailsCard({ tripInfo }) {
                         </div>
                         <br />
                         <div className="reservationDetailsCard-details">
-                            <p>Cabin Class: {cabinClass}</p>
+                            <p className="underline">Cabin Class: {cabinClass}</p>
                             <br />
-                            <p>Requested Seats: {requestedSeats}</p>
+                            <p className="underline">Amount of Seats: {requestedSeats}</p>
                             <br />
-                            <p>Departure Flight</p>
+                            <p className="underline">Departure Flight</p>
                             <p>Flight Number: {departureFlightData.flight_number}</p>
                             <p>Date: {departureFlightData.trip_date}</p>
                             <p>Price: {departureFlightData.price}</p>
                             <p>Baggage: {departureFlightData.baggage_allowance}</p>
-                            <p>Departure Seats:</p>
-                            <p>
-                                {departureSeats.map((seat) => {
+                            <p>Departure Seats: {departureSeats.map((seat) => {
                                     return <p key={seat}>{seat}</p>;
                                 })}
                             </p>
                             <br />
                             <br />
-                            <p>Return Flight</p>
+                            <p className="underline">Return Flight</p>
                             <p>Flight Number: {returnFlightData.flight_number}</p>
                             <p>Date: {returnFlightData.trip_date}</p>
                             <p>Price: {returnFlightData.price}</p>
                             <p>Baggage: {returnFlightData.baggage_allowance}</p>
-                            <p>Return Seats:</p>
+                            <p>Return Seats:
                             <div>
                                 {returnSeats.map((seat) => {
                                     return <p key={seat}>{seat}</p>;
                                 })}
-                            </div>
                         </div>
+                        </p>
+                        <br/>
+                        <div className='checkout-Payment'>
+            <StripeCheckout
+            stripeKey='pk_test_51K6ummAH3TKYLKO9t0PwhJDgQV0a60KFpBcJnzR4cLFTD1LLrcpdVVQbfvBokzslevCEtbM3vqPqbbnz59Yd9LIN00HFAmNWfF'
+            token={handleToken}
+            amount={returnFlightData.price+departureFlightData.price}
+            />
+        </div>
                         <div className="reservationDetailsCard-payment">
                             <br />
                             <button
-                                className="createbutton"
+                                className="confirmReservationbutton"
                                 type="submit"
                                 value="Create"
                                 onClick={confirmHandler}
@@ -142,6 +154,11 @@ function ReservationDetailsCard({ tripInfo }) {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="imagesignup">
+                    <img src="/images/signup.jpg" alt="" height="100%" width="100%" />
+
+                 </div>
             </div>
         );
     } else {
