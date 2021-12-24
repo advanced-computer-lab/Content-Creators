@@ -41,8 +41,8 @@ export default function SignIn() {
             history.push("/");
         } catch (err) {
             setErrorMessage("wrong username & password combination");
-            localStorage.removeItem("access_token");
-            localStorage.removeItem("refresh_token");
+            // localStorage.removeItem("access_token");
+            // localStorage.removeItem("refresh_token");
             console.log(err);
         }
     };

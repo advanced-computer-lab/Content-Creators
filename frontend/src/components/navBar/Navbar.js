@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button } from "../button/Button";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { UserContext } from "../../helpers/UserContext";
 
 function Navbar() {
+    const user = useContext(UserContext);
+    console.log("USERRRRRR ISSSSS", user);
+    // {"user_id":"61bf9f936209fc466c127b8b","username":"husseljo","admin":false,"iat":1640366085,"exp":1640373285}
+
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
