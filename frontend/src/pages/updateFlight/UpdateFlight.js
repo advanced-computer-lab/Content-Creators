@@ -144,17 +144,20 @@ function UpdateFlight() {
         <div className="UpdateFlight">
             <div className="updateContainer container">
                 <div className="row">
+
                     <div className="col-md-8 m-auto">
-                        <h1 className="display-4 text-center">
-                            Update Flight: {flightNumber}
-                        </h1>
+
                         <div
                             action="put"
                             className="UpdateFlight form"
                             onSubmit={handleSubmit}
                         >
-                            <br />
+                            
                             {/* </div> */}
+                            <h1 className="display-4 text-center">Update Flight: {flightNumber}</h1>
+<p />
+<p />
+<br />
 
                             <div class="form-group">
                                 <p className="display-4 text-center">Departure Time:</p>
@@ -306,6 +309,16 @@ function UpdateFlight() {
 
                             {/* <button type="submit">create flight</button> */}
                             <br />
+                            <button
+                                type="submit"
+                                value="Cancel"
+                                className="cancelButton"
+                                onClick={cancel}
+                            >
+                                Cancel
+                            </button>
+                            <br />
+                            <br />
 
                             <button
                                 className="updatebutton"
@@ -315,17 +328,7 @@ function UpdateFlight() {
                             >
                                 Update
                             </button>
-                            <br />
-                            <br />
 
-                            <button
-                                type="submit"
-                                value="Cancel"
-                                className="cancelButton"
-                                onClick={cancel}
-                            >
-                                Cancel
-                            </button>
 
                             <br />
                             {/* </form> */}

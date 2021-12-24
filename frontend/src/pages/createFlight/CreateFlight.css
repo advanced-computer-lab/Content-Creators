@@ -12,7 +12,11 @@
     position: relative; 
     text-align: left;  
     display: flex; 
- 
+    background-image: url("/images/signupcomponent.jpg");
+    background-position: center center;
+    background-size: 70% 110%;
+    background-color: #9166327e;
+    
 }
 
 .flight_number{
@@ -46,7 +50,7 @@
 
   }
   .createbutton:hover {
-    background-color: #ffffff; 
+    background-color: #9166327e; 
     color: rgb(2, 2, 2);
     text-align: center;
     text-decoration: none;

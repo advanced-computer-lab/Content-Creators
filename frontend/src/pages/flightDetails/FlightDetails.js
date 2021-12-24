@@ -66,21 +66,20 @@ export default function FlightDetails() {
             {/* <div styles = {{alignContent: 'center', objectFit: 'contain'}}> */}
             <div className="detailsContainer">
                 <div key={data.flight_number} className="flightDetailsCard6">
-                    <p />
-                    <p />
-                    <p />
-                    <Icon
+                <Icon
                         icon="icon-park-outline:round-trip"
                         color="#111"
                         width="48"
                         height="48"
                     />
-                    <h1>{data.flight_number}</h1>
+                <h2>Flight Number:</h2> 
+                    {/* <p /> */}
+                    <h2>{data.flight_number}</h2>
                 </div>
                 <br />
                 <div key={data.flight_number} className="flightDetailsCard">
-                    <p />
-                    <Icon icon="ic:twotone-date-range" width="24" height="24" />
+                <Icon icon="ic:twotone-date-range" width="24" height="24" />
+                    <h2>Date:</h2>
                     <h2>{data.trip_date}</h2>
                 </div>
                 <br />
@@ -95,7 +94,7 @@ export default function FlightDetails() {
                 <br />
 
                 <div key={data.flight_number} className="flightDetailsCard5">
-                    <p />
+                    <h3>Price:</h3> 
                     <h3>{data.price} </h3>
                     <Icon
                         icon="si-glyph:tag-price"
@@ -107,7 +106,7 @@ export default function FlightDetails() {
                     <p />
                     <p />
                     <p />
-                    <p />
+                    <h3>Baggage:</h3> 
                     <h3>{data.baggage_allowance}</h3>
                     <Icon icon="noto-v1:baggage-claim" hFlip={true} />
                 </div>
@@ -116,8 +115,10 @@ export default function FlightDetails() {
 
                 <div key={data.flight_number} className="flightDetailsCard2">
                     <Icon icon="emojione-monotone:airplane-departure"></Icon>
+                    <h3>From:</h3> 
                     <h2>{airport.from}</h2>
                     <Icon icon="emojione-monotone:airplane-arrival" />
+                    <h3>To:</h3> 
                     <h2>{airport.to}</h2>
                 </div>
                 <br />

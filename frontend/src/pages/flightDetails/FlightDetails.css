@@ -4,6 +4,11 @@
   height: 100%;
   align-items: center;
   position: fixed;
+  padding-top: 200px;
+  background-image: url("/images/signupcomponent.jpg");
+  background-position: center center;
+  background-size: 70% 110%;
+  background-color: #1d1b197e;
 }
 .flightdetailsbutton {
   background-color: #000000;
@@ -38,7 +43,7 @@
 }
 .flightDetailsCard2 {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(6 , auto);
   grid-gap: 12px;
   border: 0.1rem #c0c0c000 solid;
   /* background-color: #f8f8f8; */
@@ -91,7 +96,7 @@
 }
 .flightDetailsCard6 {
   display: grid;
-  grid-template-columns: repeat(15, auto);
+  grid-template-columns: repeat(3, auto);
   grid-gap: 12px;
   border: 0.1rem #c0c0c000 solid;
   /* background-color: #f8f8f8; */

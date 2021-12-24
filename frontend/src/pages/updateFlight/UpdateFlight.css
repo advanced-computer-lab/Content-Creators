@@ -1,10 +1,10 @@
 /* Bordered form */
 .UpdateFlight.form {
-  border: 3px solid #ffffff;
+  border: 3px solid #ffffff00;
   padding: 0  450px;
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-gap: 30px;
+  grid-template-columns: repeat(4, 35%);
+  grid-gap: 10px;
 }
 
 
@@ -80,6 +80,10 @@ input[type=text], input[type=password],input[type=number] {
   display : flex;
   justify-content: center;
   align-items: center;
-  height: 750px;
-
+  height: 1160px;
+  background-image: url("/images/signupcomponent.jpg");
+  background-position: center center;
+  background-size: 70% 110%;
+  background-color: #9166327e;
+  border: transparent solid;
 }
