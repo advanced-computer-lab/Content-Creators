@@ -51,24 +51,28 @@ function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/reserved-flights"
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                            >
-                                Reserved Flights
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/flights"
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                            >
-                                Flights
-                            </Link>
-                        </li>
+                        {!admin && authenticated && (
+                            <li className="nav-item">
+                                <Link
+                                    to="/reserved-flights"
+                                    className="nav-links"
+                                    onClick={closeMobileMenu}
+                                >
+                                    Reserved Flights
+                                </Link>
+                            </li>
+                        )}
+                        {admin && authenticated && (
+                            <li className="nav-item">
+                                <Link
+                                    to="/flights"
+                                    className="nav-links"
+                                    onClick={closeMobileMenu}
+                                >
+                                    Flights
+                                </Link>
+                            </li>
+                        )}
                         <li className="nav-item">
                             <Link
                                 to="/aboutus"
@@ -88,30 +92,21 @@ function Navbar() {
                                 SIGN IN
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                to="/login"
-                                className="nav-links"
-                                onClick={() => {
-                                    // setUser({ username: "DONGOL" });
-                                    setUser((prevState) => {
-                                        console.log("prevState was: ", prevState);
-                                        const newUser = {
-                                            ...prevState,
-                                            authenticated: !prevState.authenticated,
-                                        };
-                                        return newUser;
-                                    });
-                                }}
-                            >
-                                WHATEVER
-                            </Link>
-                        </li>
                     </ul>
-                    {button && (
-                        <Button buttonStyle="btn--outline">
-                            {authenticated ? "SIGN OUT" : "SIGN IN"}
+                    {authenticated && button && (
+                        <Button
+                            buttonStyle="btn--outline"
+                            onClick={() => {
+                                localStorage.removeItem("access_token");
+                                localStorage.removeItem("refresh_token");
+                                setUser({ admin: false, authenticated: false });
+                            }}
+                        >
+                            SIGN OUT
                         </Button>
+                    )}
+                    {!authenticated && button && (
+                        <Button buttonStyle="btn--outline">SIGN IN</Button>
                     )}
                 </div>
             </nav>
