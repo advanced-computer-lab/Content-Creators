@@ -5,13 +5,16 @@ const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     // the value that will be given to the context
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({ authenticated: false, admin: false });
 
     const fetchUser = () => {
         const access_token = localStorage.getItem("access_token");
         if (access_token) {
             const token = access_token.split(".")[1];
-            const userData = { ...JSON.parse(atob(token)), authenticated: true };
+            const userData = {
+                ...JSON.parse(atob(token)),
+                authenticated: true,
+            };
             setUser(userData);
         }
     };
@@ -23,7 +26,9 @@ const UserContextProvider = ({ children }) => {
 
     return (
         // the Provider gives access to the context to its children
-        <UserContext.Provider value={user}>{children}</UserContext.Provider>
+        <UserContext.Provider value={[user, setUser]}>
+            {children}
+        </UserContext.Provider>
     );
 };
 

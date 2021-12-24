@@ -5,7 +5,8 @@ import "./Navbar.css";
 import { UserContext } from "../../helpers/UserContext";
 
 function Navbar() {
-    const user = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
+    const { authenticated, admin } = user;
     console.log("USERRRRRR ISSSSS", user);
     // {"user_id":"61bf9f936209fc466c127b8b","username":"husseljo","admin":false,"iat":1640366085,"exp":1640373285}
 
@@ -26,6 +27,10 @@ function Navbar() {
     useEffect(() => {
         showButton();
     }, []);
+
+    useEffect(() => {
+        showButton();
+    }, [useContext(UserContext)]);
 
     window.addEventListener("resize", showButton);
 
@@ -80,11 +85,34 @@ function Navbar() {
                                 className="nav-links-mobile"
                                 onClick={closeMobileMenu}
                             >
-                                Sign In
+                                SIGN IN
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/login"
+                                className="nav-links"
+                                onClick={() => {
+                                    // setUser({ username: "DONGOL" });
+                                    setUser((prevState) => {
+                                        console.log("prevState was: ", prevState);
+                                        const newUser = {
+                                            ...prevState,
+                                            authenticated: !prevState.authenticated,
+                                        };
+                                        return newUser;
+                                    });
+                                }}
+                            >
+                                WHATEVER
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle="btn--outline">SIGN IN</Button>}
+                    {button && (
+                        <Button buttonStyle="btn--outline">
+                            {authenticated ? "SIGN OUT" : "SIGN IN"}
+                        </Button>
+                    )}
                 </div>
             </nav>
         </>

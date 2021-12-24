@@ -18,11 +18,13 @@ import ChangeSeats from "./pages/changeSeats/ChangeSeats";
 import ChangeReservation from "./pages/changeReservation/ChangeReservation";
 import SeatPickerChange from "./pages/seatPickerChange/SeatPickerChange";
 import { UserContext, UserContextProvider } from "./helpers/UserContext";
+import { useState } from "react";
 
 function App() {
+    const [authenticated, setAuthenticated] = useState(false);
     return (
         <>
-            <UserContextProvider>
+            <UserContextProvider value={{ authenticated, setAuthenticated }}>
                 <Router>
                     <Navbar />
                     <Switch>

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import { Button } from "../../components/button/Button";
 import "../../App.css";
 import "./SignIn.css";
+import { UserContext } from "../../helpers/UserContext";
 
 export default function SignIn() {
     const history = useHistory();
+    const [user, setUser] = useContext(UserContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -30,6 +32,12 @@ export default function SignIn() {
                 );
                 localStorage.setItem("access_token", access_token);
                 localStorage.setItem("refresh_token", refresh_token);
+                const token = access_token.split(".")[1];
+                const userData = {
+                    ...JSON.parse(atob(token)),
+                    authenticated: true,
+                };
+                setUser(userData);
             } else {
                 setErrorMessage(
                     "Please make sure of your username and password combination"
