@@ -1,31 +1,120 @@
-import React, {useEffect, useState} from 'react'
-import ReactDOM from 'react-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory, useLocation } from "react-router-dom";
 
-export default function updateUserInfo(props){
-    const userId = props.match.params.id;
+function updateUserInfo(){
+    let location = useLocation();
+    const history = useHistory();
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [passport, setPassport] = useState('');
+    const [data, setData] = useState([]);
+    const flightNumber = location.pathname.split("/").at(-1);
+
+    const getFlightAxios = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:8000/users/${flightNumber}`
+            );
+            setData(response.data[0]);
+            const {
+                username,
+                password,
+                first_name,
+                last_name,
+                address,
+                country_code,
+                telephone,
+                email,
+                passport_number,
+            } = response.data[0];
+
+            const originalUserInfo = {
+                username: username,
+                address: address,
+                country_code: country_code,
+                telephone: telephone,
+            };
+            setInfo(originalUserInfo);
+            setFirstName(first_name);
+            setLastName(last_name);
+            setPassport(passport_number);
+            setEmail(email);
+            setPassword(password);
+            console.log("Data is: ", data);
+            console.log("Response Data is: ", response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const [info, setInfo] = useState('');
+
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [passport_number, setPassport] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-    const userSignin =useSelector(state => state.userSignin);
-    const {userInfo} = userSignin;
-    const dispatch = useDispatch()
+    const handleChangeFirstName = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setFirstName({ ...tripTime, [name]: value });
+    };
+    const handleChangeLastName = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setLastName({ ...tripTime, [name]: value });
+    };
+    const handleChangeEmail = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setEmail({ ...cabinClasses, [name]: value });
+    };
+    const handleChangePassword = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setPassword({ ...airport, [name]: value });
+    };
+    const handleChangePassport = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setPassport({ ...airport, [name]: value });
+    };
+    const cancel = (e) => {
+        window.location.replace("/");
+    };
 
-    useEffect(() =>{
-        if(!user){
-            dispatch(detailsUser(userInfo._id))
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const nonEmpty =
+            (user.username && user.password) ||
+            user.first_name ||
+            user.last_name ||
+            user.passport_number ||
+            user.address ||
+            user.country_code ||
+            user.telephone ||
+            user.email ||
+            flight.price;
+
+        if (nonEmpty) {
+            console.log("Data fully submitted!!");
+
+            const fullInfo = {
+                users: {
+                    ...user,
+                    first_name: first_name,
+                    last_name: last_name,
+                    passport: passport,
+                    email: email,
+                    password: password,
+                },
+            };
+            createFlightAxios(fullInfo);
         } else {
-            setFirstName(user.firstName);
-            setLastName(user.lastName);
-            setPassport(user.passport);
-            setEmail(user.email);
+            console.log("Not entire form is filled");
         }
-        dispatch(detailsUser(userInfo._id));
-    }, [dispatch, userInfo._id, user]);
+    };
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -33,7 +122,7 @@ export default function updateUserInfo(props){
         if(password !== confirmPassword){
             alert('Password and Confirm Password do not match')
         } else {
-            dispatch(updateUserProfile({firstName, lastName, passport, email, password}));
+            dispatch(updateUserProfile({first_name, last_name, passport_number, email, password}));
         }
     }
     return(
@@ -48,8 +137,8 @@ export default function updateUserInfo(props){
                         id="first name"
                         type="text"
                         placeholder="Enter name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        value={first_name}
+                        onChange={handleChangeFirstName}
                     ></input>
                     </div>
                     <div>
@@ -58,8 +147,8 @@ export default function updateUserInfo(props){
                         id="last name"
                         type="text"
                         placeholder="Change last name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
+                        value={last_name}
+                        onChange={handleChangeLastName}
                     ></input>
                     </div>
                     <div>
@@ -67,8 +156,8 @@ export default function updateUserInfo(props){
                         <input id="passport" 
                         type="text" 
                         placeholder="Change passport" 
-                        value={passport}
-                        onChange={(e) => setPassport(e.target.value)}
+                        value={passport_number}
+                        onChange={handleChangePassport}
                         ></input>
                     </div>
                     <div>
@@ -77,7 +166,7 @@ export default function updateUserInfo(props){
                         type="text" 
                         placeholder="Enter email" 
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleChangeEmail}
                         ></input>
                     </div>
                     <div>
@@ -86,7 +175,7 @@ export default function updateUserInfo(props){
                         type="text" 
                         placeholder="Change password" 
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handleChangePassword}
                         ></input>
                     </div>
                     <div>
@@ -99,9 +188,11 @@ export default function updateUserInfo(props){
                     </div>
                     <div>
                         <label/>
-                        <button className="primary" type="submit">Update</button>
+                        <button className="updatebutton" type="submit" onClick={handleSubmit}>Update</button>
+                        <button type="submit" value="Cancel" className="cancelButton" onClick={cancel}>Cancel</button>
                     </div>
             </form>
         </div>
     )
 }
+export default updateUserInfo;
