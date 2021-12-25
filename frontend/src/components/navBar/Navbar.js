@@ -51,14 +51,14 @@ function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        {!admin && authenticated && (
+                        {authenticated && (
                             <li className="nav-item">
                                 <Link
                                     to="/reserved-flights"
                                     className="nav-links"
                                     onClick={closeMobileMenu}
                                 >
-                                    Reserved Flights
+                                    {admin ? "All Trips" : "Reserved Flights"}
                                 </Link>
                             </li>
                         )}

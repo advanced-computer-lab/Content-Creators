@@ -11,7 +11,17 @@ const { deleteReservation } = require("../controllers/reservationDelete");
 //app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
 //list all trips
 router.get("/all-trips/", async (req, res) => {
-    const allTrips = await Trip.find()
+    const token =
+        req.headers["authorization"] ||
+        req.body.access_token ||
+        req.query.access_token;
+    const { username } = JSON.parse(atob(token.split(".")[1]));
+    console.log("USERNAME OF ALL-TRIPS IS: ", username);
+    let filter = {};
+    if (username != "admin") {
+        filter = { username };
+    }
+    const allTrips = await Trip.find(filter)
         .populate({
             path: "departure_reservation_id",
             populate: "flight_id",
@@ -105,22 +115,38 @@ router.post("/add-trip", async (req, res) => {
                 pass: "firnas123",
             },
         });
-        const user=users.findOne({ username:username });
+        const user = users.findOne({ username: username });
         const usermail = user.email;
         let total_price = departure_reservation_price + return_reservation_price;
         var mailOptions = {
             from: "ibnfirnas_acl@outlook.com",
             to: usermail,
             subject: "Reservation Confirmation Notice ",
-            text: "Your reservation has been made! total price of " + total_price 
-            + " Departure Trip : {} Flight id : "
-            +departureReservation.flight_id+"Cabin:"+departureReservation.cabin_class+" Adults: "+departureReservation.no_of_adults
-            +" Children: "+departureReservation.no_of_children+" Seats: "+departureReservation.seat_numbers+"} "
-            
-            +" Return Trip : {} Flight id : "
-            +returnReservation.flight_id+"Cabin:"+returnReservation.cabin_class+" Adults: "+returnReservation.no_of_adults
-            +" Children: "+returnReservation.no_of_children+" Seats: "+returnReservation.seat_numbers+"} "               
-        
+            text:
+                "Your reservation has been made! total price of " +
+                total_price +
+                " Departure Trip : {} Flight id : " +
+                departureReservation.flight_id +
+                "Cabin:" +
+                departureReservation.cabin_class +
+                " Adults: " +
+                departureReservation.no_of_adults +
+                " Children: " +
+                departureReservation.no_of_children +
+                " Seats: " +
+                departureReservation.seat_numbers +
+                "} " +
+                " Return Trip : {} Flight id : " +
+                returnReservation.flight_id +
+                "Cabin:" +
+                returnReservation.cabin_class +
+                " Adults: " +
+                returnReservation.no_of_adults +
+                " Children: " +
+                returnReservation.no_of_children +
+                " Seats: " +
+                returnReservation.seat_numbers +
+                "} ",
         };
 
         transporter.sendMail(mailOptions, function(error, info) {
@@ -166,9 +192,9 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
                     "deleted second reservation in trip deletion:",
                     secondDeleted
                 );
-                const total_price_refund =  firstDeleted.seat_numbers.length *firstDeleted.total_price 
-                +
-                secondDeleted.seat_numbers.length *secondDeleted.total_price ;
+                const total_price_refund =
+                    firstDeleted.seat_numbers.length * firstDeleted.total_price +
+                    secondDeleted.seat_numbers.length * secondDeleted.total_price;
 
                 await Trip.deleteOne({ _id: trip_id });
                 console.log(`deleting trip:${trip_id} is successful`);
@@ -180,13 +206,15 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
                         pass: "firnas123",
                     },
                 });
-                const user=users.findOne({ username:username });
+                const user = users.findOne({ username: username });
                 const usermail = user.email;
                 var mailOptions = {
                     from: "ibnfirnas_acl@outlook.com",
                     to: usermail,
                     subject: "Reservation Cancel Notice ",
-                    text: "Your reservation has been canceled! total price refund of " + total_price_refund ,
+                    text:
+                        "Your reservation has been canceled! total price refund of " +
+                        total_price_refund,
                 };
 
                 transporter.sendMail(mailOptions, (error, info) => {
