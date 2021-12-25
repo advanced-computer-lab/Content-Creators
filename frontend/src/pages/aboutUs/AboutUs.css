@@ -1,0 +1,49 @@
+.aboutUs-container{
+    background-image: url("/images/signup.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+    height: 1600px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 50px;
+}
+.ourPhoto1-container{
+    border-radius: 150px;
+    border-color: black;
+    /* background-color: black; */
+    height: 500px;
+    padding-top:150px;
+    background-image: url("/images/photo1.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+}
+.ourPhoto2-container{
+    border-radius: 150px;
+    border-color: black;
+    /* background-color: black; */
+    height: 500px;
+    padding-top:150px;
+    background-image: url("/images/photo2.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+}
+.ourPhoto3-container{
+    border-radius: 150px;
+    border-color: black;
+    /* background-color: black; */
+    height: 500px;
+    padding-top:150px;
+    background-image: url("/images/photo3.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+}
+.ourPhoto4-container{
+    border-radius: 150px;
+    border-color: black;
+    /* background-color: black; */
+    height: 500px;
+    padding-top:150px;
+    background-image: url("/images/photo4.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+}
