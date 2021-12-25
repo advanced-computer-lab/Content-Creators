@@ -93,11 +93,7 @@ export default function BookingFlight({
                         }}
                     >
                         {chosen && (
-                            <button
-                                id="cancelButton"
-                                class="btn-cancel"
-                                onClick={cancelHandler}
-                            >
+                            <button id="cancelButton" onClick={cancelHandler}>
                                 Cancel Flight
                             </button>
                         )}

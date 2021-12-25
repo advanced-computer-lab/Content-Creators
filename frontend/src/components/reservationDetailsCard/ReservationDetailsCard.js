@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import "./ReservationDetailsCard.css";
-import StripeCheckout from 'react-stripe-checkout';
+import StripeCheckout from "react-stripe-checkout";
+import { UserContext } from "../../helpers/UserContext";
 
 function ReservationDetailsCard({ tripInfo }) {
     const history = useHistory();
@@ -18,7 +19,7 @@ function ReservationDetailsCard({ tripInfo }) {
     } = tripInfo;
     const [departureFlightData, setDepartureFlightData] = useState({});
     const [returnFlightData, setReturnFlightData] = useState({});
-    const [username, setUsername] = useState("husseljo");
+    const [user, setUser] = useContext(UserContext);
 
     const getFlight = async (flightNumber, bool) => {
         try {
@@ -32,8 +33,8 @@ function ReservationDetailsCard({ tripInfo }) {
         }
     };
 
-    function handleToken(token,userData){
-        console.log({token,userData});
+    function handleToken(token, userData) {
+        console.log({ token, userData });
     }
 
     useEffect(() => {
@@ -63,7 +64,7 @@ function ReservationDetailsCard({ tripInfo }) {
     const confirmHandler = () => {
         const readyTrip = {
             trip: {
-                username: username,
+                username: user.username,
                 cabin_class: cabinClass,
                 no_of_adults: adultsNumber,
                 no_of_children: childrenNumber,
@@ -83,9 +84,8 @@ function ReservationDetailsCard({ tripInfo }) {
     if (departureFlightData && cabinClass) {
         return (
             <div>
-            <div className="reservationDetailsContainer">
-            
-                {/* <div>
+                <div className="reservationDetailsContainer">
+                    {/* <div>
                     <p>Enter different username for developement purposes:</p>
                     <input
                         type="text"
@@ -97,7 +97,7 @@ function ReservationDetailsCard({ tripInfo }) {
                         }}
                     />
                 </div> */}
-                <div className="reservationDetailsCard">
+                    <div className="reservationDetailsCard">
                         <div className="reservationDetailsCard-header">
                             <p>
                                 Your reservation request for is almost done!
@@ -115,7 +115,9 @@ function ReservationDetailsCard({ tripInfo }) {
                             <p>Date: {departureFlightData.trip_date}</p>
                             <p>Price: {departureFlightData.price}</p>
                             <p>Baggage: {departureFlightData.baggage_allowance}</p>
-                            <p>Departure Seats: {departureSeats.map((seat) => {
+                            <p>
+                                Departure Seats:{" "}
+                                {departureSeats.map((seat) => {
                                     return <p key={seat}>{seat}</p>;
                                 })}
                             </p>
@@ -126,39 +128,39 @@ function ReservationDetailsCard({ tripInfo }) {
                             <p>Date: {returnFlightData.trip_date}</p>
                             <p>Price: {returnFlightData.price}</p>
                             <p>Baggage: {returnFlightData.baggage_allowance}</p>
-                            <p>Return Seats:
-                            <div>
-                                {returnSeats.map((seat) => {
-                                    return <p key={seat}>{seat}</p>;
-                                })}
-                        </div>
-                        </p>
-                        <br/>
-                        <div className='checkout-Payment'>
-            <StripeCheckout
-            stripeKey='pk_test_51K6ummAH3TKYLKO9t0PwhJDgQV0a60KFpBcJnzR4cLFTD1LLrcpdVVQbfvBokzslevCEtbM3vqPqbbnz59Yd9LIN00HFAmNWfF'
-            token={handleToken}
-            amount={returnFlightData.price+departureFlightData.price}
-            />
-        </div>
-                        <div className="reservationDetailsCard-payment">
+                            <p>
+                                Return Seats:
+                                <div>
+                                    {returnSeats.map((seat) => {
+                                        return <p key={seat}>{seat}</p>;
+                                    })}
+                                </div>
+                            </p>
                             <br />
-                            <button
-                                className="confirmReservationbutton"
-                                type="submit"
-                                value="Create"
-                                onClick={confirmHandler}
-                            >
-                                Confirm Reservation
-                            </button>
+                            <div className="checkout-Payment">
+                                <StripeCheckout
+                                    stripeKey="pk_test_51K6ummAH3TKYLKO9t0PwhJDgQV0a60KFpBcJnzR4cLFTD1LLrcpdVVQbfvBokzslevCEtbM3vqPqbbnz59Yd9LIN00HFAmNWfF"
+                                    token={handleToken}
+                                    amount={returnFlightData.price + departureFlightData.price}
+                                />
+                            </div>
+                            <div className="reservationDetailsCard-payment">
+                                <br />
+                                <button
+                                    className="confirmReservationbutton"
+                                    type="submit"
+                                    value="Create"
+                                    onClick={confirmHandler}
+                                >
+                                    Confirm Reservation
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="imagesignup">
+                <div className="imagesignup">
                     <img src="/images/signup.jpg" alt="" height="100%" width="100%" />
-
-                 </div>
+                </div>
             </div>
         );
     } else {

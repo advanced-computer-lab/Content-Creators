@@ -9,7 +9,6 @@ import ReservedFlightCard from "../../components/reservedFlights/reservedFlights
 
 export default function ReservedFlight() {
     const history = useHistory();
-    const [username, setUsername] = useState("husseljo");
     const [data, setData] = useState([]);
     console.log("history.newReturnFlight", history.newReturnFlight);
 
@@ -18,7 +17,6 @@ export default function ReservedFlight() {
         try {
             const response = await axios.get("http://localhost:8000/trips/all-trips");
             setData(response.data);
-            setUsername(response.data[0].username);
         } catch (err) {
             console.log(err);
         }
