@@ -249,6 +249,7 @@ router.post("/change-reservation", async (req, res) => {
             no_of_children,
             seat_numbers,
             total_price,
+            flight_type,
         } = req.body.newReservation;
 
         console.log("username", username);
@@ -276,11 +277,15 @@ router.post("/change-reservation", async (req, res) => {
         const resultAddReservation = await addReservation(addedReservation, res);
         console.log("resultAddReservation", resultAddReservation);
 
+        let filter;
+        if (flight_type == "return") {
+            filter = { return_reservation_id: resultAddReservation };
+        } else {
+            filter = { departure_reservation_id: resultAddReservation };
+        }
+
         //replacing new reservationi in trip
-        const reservationUpdate = await Trip.updateOne(
-            { _id: trip_id },
-            { return_reservation_id: resultAddReservation }
-        );
+        const reservationUpdate = await Trip.updateOne({ _id: trip_id }, filter);
         console.log("reservationUpdate", reservationUpdate);
 
         var transporter = nodemailer.createTransport({
