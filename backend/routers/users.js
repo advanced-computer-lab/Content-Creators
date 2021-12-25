@@ -5,21 +5,34 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// console.log("PROCESS IS: ", process);
-// console.log("PROCESS.ENV IS: ", process.env);
-//app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
-router.get("/get-user", (req, res) => {
-    const token =
-    req.headers["authorization"] ||
-    req.body.access_token ||
-    req.query.access_token;
-    const { username } = JSON.parse(atob(token.split(".")[1]));
-    let filter = {};
-    if (username != "admin") {
-        filter = { username };
+router.get("/get-user", async (req, res) => {
+    try {
+        const token =
+            req.headers["authorization"] ||
+            req.body.access_token ||
+            req.query.access_token;
+        const { username } = JSON.parse(atob(token.split(".")[1]));
+        let filter = {};
+        if (username != "admin") {
+            filter = { username };
+        }
+        const found = await User.find(filter);
+        if (found.length == 0) {
+            return res
+                .status(404)
+                .send({ success: false, message: "user not found" });
+        }
+        const user = found[0];
+        console.log("found user is:", user);
+        res.status(200).send(user);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            success: false,
+            message: "getting user info is unsuccessful",
+            error: err,
+        });
     }
-    const found = User.findOne(filter);
-    res.status(201).send(found);
 });
 router.post("/sign-up", async (req, res) => {
     try {

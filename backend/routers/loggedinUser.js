@@ -5,17 +5,17 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-router.get("/get-user", (req, res) => {
+router.get("/get-user", async (req, res) => {
     const token =
-    req.headers["authorization"] ||
-    req.body.access_token ||
-    req.query.access_token;
+        req.headers["authorization"] ||
+        req.body.access_token ||
+        req.query.access_token;
     const { username } = JSON.parse(atob(token.split(".")[1]));
     let filter = {};
     if (username != "admin") {
         filter = { username };
     }
-    const found = User.findOne(filter);
+    const found = await User.findOne(filter);
     res.status(201).send(found);
 });
 
