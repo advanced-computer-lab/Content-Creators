@@ -17,7 +17,8 @@ export default function ChangeReservation() {
         username,
         no_of_adults,
         no_of_children,
-        total_price;
+        total_price,
+        flight_type;
     if (history.newReservation) {
         ({
             tripId,
@@ -30,6 +31,7 @@ export default function ChangeReservation() {
             no_of_adults,
             no_of_children,
             total_price,
+            flight_type,
         } = history.newReservation);
         console.log("history.newReservation ISSSS: ", history.newReservation);
     }
@@ -45,6 +47,7 @@ export default function ChangeReservation() {
         }
     };
     useEffect(() => {
+        console.log("history.newReservation", history.newReservation);
         getAllFlights();
     }, []);
 
@@ -70,6 +73,7 @@ export default function ChangeReservation() {
                 no_of_adults,
                 no_of_children,
                 total_price,
+                flight_type,
             };
             history.newReservation = newReservation;
             history.push("seat-picker-change");

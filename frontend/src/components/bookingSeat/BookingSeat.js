@@ -6,6 +6,7 @@ import createRows from "./createRows";
 import { useHistory } from "react-router-dom";
 
 export default function BookingSeat({ tripInfo, setSelected }) {
+    const history = useHistory();
     const [rows, setRows] = useState([[]]);
     console.log("TRIP INFO", tripInfo);
 
@@ -22,6 +23,10 @@ export default function BookingSeat({ tripInfo, setSelected }) {
     }
 
     useEffect(() => {
+        console.log(
+            "history.newReservation in seat picker change: ",
+            history.newReservation
+        );
         getSeats(flightNumber);
     }, []);
 

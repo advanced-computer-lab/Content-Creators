@@ -106,6 +106,7 @@ export default function ReservedFlight() {
                                             </button>
                                         </td>
                                         <td>{data.username}</td>
+                                        <td>{data._id}</td>
                                     </tr>
                                     <tr key={data._id}>
                                         <td>{index + 1}</td>
@@ -163,6 +164,44 @@ export default function ReservedFlight() {
                                         >
                                             Change Seats
                                         </button>
+                                        <td>
+                                            <button
+                                                className="FlightBtns"
+                                                id={data.departure_reservation_id?._id}
+                                                type="button"
+                                                onClick={() => {
+                                                    const { to, from } =
+                                                        data.departure_reservation_id?.flight_id?.airport;
+                                                    const {
+                                                        username,
+                                                        no_of_adults,
+                                                        no_of_children,
+                                                        total_price,
+                                                    } = data.departure_reservation_id;
+                                                    const newReservation = {
+                                                        tripId: data?._id,
+                                                        reservationId: data?.departure_reservation_id?._id,
+                                                        cabinClass:
+                                                            data?.departure_reservation_id?.cabin_class,
+                                                        requestedSeats:
+                                                            data?.departure_reservation_id?.seat_numbers
+                                                                ?.length,
+                                                        from,
+                                                        to,
+                                                        username,
+                                                        no_of_adults,
+                                                        no_of_children,
+                                                        total_price,
+                                                        flight_type: "departure",
+                                                    };
+                                                    console.log("newReservation", newReservation);
+                                                    history.newReservation = newReservation;
+                                                    history.push("/change-reservation");
+                                                }}
+                                            >
+                                                Pick new flight
+                                            </button>
+                                        </td>
                                     </tr>
 
                                     <tr key={data._id}>
@@ -244,6 +283,7 @@ export default function ReservedFlight() {
                                                         no_of_adults,
                                                         no_of_children,
                                                         total_price,
+                                                        flight_type: "return",
                                                     };
                                                     console.log("newReservation", newReservation);
                                                     history.newReservation = newReservation;

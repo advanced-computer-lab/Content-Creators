@@ -17,7 +17,8 @@ export default function SeatPicker() {
         username,
         no_of_adults,
         no_of_children,
-        total_price;
+        total_price,
+        flight_type;
 
     if (history.newReservation)
         ({
@@ -31,6 +32,7 @@ export default function SeatPicker() {
             no_of_adults,
             no_of_children,
             total_price,
+            flight_type,
         } = history.newReservation);
 
     const pickSeatsHandler = () => {
@@ -52,6 +54,7 @@ export default function SeatPicker() {
                         no_of_children,
                         seat_numbers: selected,
                         total_price,
+                        flight_type,
                     },
                 };
                 changeReservationAxios(newReservation);
@@ -62,6 +65,7 @@ export default function SeatPicker() {
 
     const changeReservationAxios = async (newReservation) => {
         try {
+            console.log("CREATED RESERVATION IN SEATPICEKR CHANGE", newReservation);
             const url = `http://localhost:8000/trips/change-reservation/`;
             const response = await axios.post(url, newReservation);
         } catch (err) {
