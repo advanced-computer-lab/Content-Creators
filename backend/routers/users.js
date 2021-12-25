@@ -146,4 +146,69 @@ router.post("/login", async (req, res) => {
     }
 });
 
+//Edit User
+router.put("/edit-user", async (req, res) => {
+    try {
+        const {
+            username,
+            password,
+            confirm_password,
+            first_name,
+            last_name,
+            address,
+            country_code,
+            telephone,
+            email,
+            passport_number,
+        } = req.body.user;
+        const token =
+            req.headers["authorization"] ||
+            req.body.access_token ||
+            req.query.access_token;
+        const user = JSON.parse(atob(token.split(".")[1]));
+
+        if (user.username != username) {
+            return res.status(400).send({
+                success: false,
+                message: "You can not change username of another user!",
+            });
+        }
+        let filter = req.body.user;
+        if (password && confirm_password) {
+            if (password != confirm_password) {
+                return res.status(403).send({
+                    success: false,
+                    message: "changing password unsuccessful!",
+                });
+            } else {
+                const encryptedPassword = await bcrypt.hash(password, 10);
+                filter.password = encryptedPassword;
+            }
+        }
+
+        console.log("password", password);
+        console.log("confirm_password", confirm_password);
+        console.log("username in edit-profile is: ", user.username);
+        console.log("req.body.user in edit profile: ", req.body.user);
+        console.log("Filter is: ", filter);
+        const userUpdate = await User.updateOne({ username }, req.body.user);
+        console.log("USER UPDATE RESULT IS: ", userUpdate);
+        const { acknowledged, modifiedCount } = userUpdate;
+        if (acknowledged && modifiedCount == 0) {
+            //no changes happened not even if same passowrd entered it will count as modified to counter this;
+            //use bcrypt.compare
+            return res.status(201).send({ success: true });
+        }
+
+        res.status(201).send({ success: true });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            success: false,
+            message: `updating user is unsuccessful`,
+            error: err,
+        });
+    }
+});
+
 module.exports = router;
