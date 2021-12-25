@@ -22,11 +22,11 @@
 
 ## API Reference
     After running the website, the following references are available: 
-    [Home page] (localhost:3000/)
-    [About Us] (localhost:3000/aboutus)
-    [Flights] (localhost:3000/flights)
-    [Sign Up] (localhost:3000/sign-up)
-    [Login] (localhost:3000/login)
+[Home page] (http://localhost:3000/)
+    [About Us] (http://localhost:3000/aboutus)
+    [Flights] (http://localhost:3000/flights)
+    [Sign Up] (http://localhost:3000/sign-up)
+    [Login] (http://localhost:3000/login)
 
 ## How to use
     After downloading the code, the reader should follow the following steps:
