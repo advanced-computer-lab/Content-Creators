@@ -7,8 +7,10 @@ import PasswordStr from "./PasswordStr";
 import "../../pages/signUp/signUpForm.css";
 import validation from "./validation";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const SignUpForm = () => {
+    const history = useHistory();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [first_name, setFirstName] = useState("");
@@ -42,6 +44,7 @@ const SignUpForm = () => {
                 console.log(
                     `successfully created user with username ${user.user.username}!`
                 );
+                history.push("/login");
             } else {
                 console.log("not able to create user!");
             }

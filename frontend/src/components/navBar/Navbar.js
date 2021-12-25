@@ -84,7 +84,7 @@ function Navbar() {
                                 About us
                             </Link>
                         </li>
-                        {authenticated && (
+                        {authenticated && !admin && (
                             <li className="nav-item">
                                 <Link
                                     to="/profile"
