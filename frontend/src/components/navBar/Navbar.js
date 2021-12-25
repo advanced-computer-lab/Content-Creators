@@ -3,10 +3,12 @@ import { Button } from "../button/Button";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { UserContext } from "../../helpers/UserContext";
+import { useHistory } from "react-router-dom";
 
 function Navbar() {
+    const history = useHistory();
     const [user, setUser] = useContext(UserContext);
-    const { authenticated, admin } = user;
+    const { authenticated, admin, username } = user;
     console.log("USERRRRRR ISSSSS", user);
     // {"user_id":"61bf9f936209fc466c127b8b","username":"husseljo","admin":false,"iat":1640366085,"exp":1640373285}
 
@@ -82,6 +84,17 @@ function Navbar() {
                                 About us
                             </Link>
                         </li>
+                        {authenticated && (
+                            <li className="nav-item">
+                                <Link
+                                    to="/profile"
+                                    className="nav-links"
+                                    onClick={closeMobileMenu}
+                                >
+                                    {username}
+                                </Link>
+                            </li>
+                        )}
 
                         <li>
                             <Link
