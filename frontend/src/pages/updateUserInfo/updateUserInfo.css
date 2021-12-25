@@ -1,0 +1,60 @@
+.updatebutton {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    margin: middle;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    /* text-decoration: none; */
+    text-decoration-color: #ffffff;
+  
+  }
+  .updatebutton:hover {
+    background-color: #916632a1; /* Green */
+    color: rgb(2, 2, 2);
+    text-align: center;
+    text-decoration: none;
+    
+  }
+  .cancelButton {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: middle;
+    border: 0.5px solid rgb(0, 0, 0);
+    cursor: pointer;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  
+  }
+  .cancelButton:hover {
+    background-color: #490000; /* Green */
+    color: rgb(255, 255, 255);
+  }
+  .updateUserContainer{
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    background-image: url("/images/signupcomponent.jpg");
+    background-position: center center;
+    background-size: 100% 110%;
+    height:1160px;
+  }
+  .updateUserContainer >h1{
+      padding-left: 850px;
+  }
+  .updateUserForm{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 100px;
+    /* background-image: url("/images/signupcomponent.jpg");
+    background-position: center center;
+    background-size: 120% 110%; */
+    padding-top:100px;
+    height:1100px;
+    padding-left: 700px;
+    padding-right: 650px;
+  }
