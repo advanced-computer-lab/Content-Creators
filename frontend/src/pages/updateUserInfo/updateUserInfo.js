@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import "./updateUserInfo.css";
+import { UserContext } from "../../helpers/UserContext";
 
 function UpdateUserInfo() {
     const history = useHistory();
+    const [user, setUser] = useContext(UserContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [passportNumber, setPassportNumber] = useState("");
@@ -51,28 +53,22 @@ function UpdateUserInfo() {
         findProfile();
     }, []);
 
-    const updateUserAxios = async () => {
+    const updateUserAxios = async (user) => {
         try {
-            const response = await axios.get(`http://localhost:8000/users/edit-user`);
-            console.log("response.data in editing is: ", response.data);
-
-            // setData(response.data[0]);
-            // const { first_name, last_name, email, passport_number } =
-            //     response.data[0];
-            //             const originalUserInfo = {
-            //                 first_name: first_name,
-            //                 last_name: last_name,
-            //                 email: email,
-            //                 passport_number: passport_number,
-            //             };
-            //             setFirstName(first_name);
-            //             setLastName(last_name);
-            //             setPassportNumber(passport_number);
-            //             setEmail(email);
-            //             setPassword(password);
-            //             console.log("Data is: ", data);
-            //             console.log("Response Data is: ", response.data);
+            const response = await axios.put(
+                `http://localhost:8000/users/edit-user`,
+                user
+            );
+            console.log("response", response);
+            console.log("response.data", response.data);
+            if (response.data?.success) {
+                console.log("successfully updated user data!");
+                history.push("/profile");
+            } else {
+                console.log("not able to updated user data!");
+            }
         } catch (err) {
+            console.log("not able to updated user data!");
             console.log(err);
         }
     };
@@ -84,18 +80,19 @@ function UpdateUserInfo() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const nonEmpty =
-            password &&
-            confirmPassword &&
             firstName &&
             lastName &&
             passportNumber &&
+            countryCode &&
+            telephone &&
+            address &&
             email;
 
         if (nonEmpty) {
             console.log("User data Data fully submitted!!");
-            const fullInfo = {
+            let newUser = {
                 user: {
-                    password,
+                    username: user.username,
                     first_name: firstName,
                     last_name: lastName,
                     address,
@@ -105,8 +102,26 @@ function UpdateUserInfo() {
                     passport_number: passportNumber,
                 },
             };
-            console.log("User full info is", fullInfo);
-            // updateUserAxios(fullInfo);
+            if (password == confirmPassword) {
+                newUser.user.password = password;
+                newUser.user.confirm_password = confirmPassword;
+            }
+            const testingUser = {
+                user: {
+                    username: "husseljo",
+                    password: "1234",
+                    confirm_password: "12344",
+                    first_name: "husseljo",
+                    last_name: "SOLIMAN",
+                    address: "HELIO",
+                    country_code: 30,
+                    telephone: "01009991212",
+                    email: "husseesin@yashoo.com",
+                    passport_number: 853940453890,
+                },
+            };
+            // updateUserAxios(testingUser);
+            updateUserAxios(newUser);
         } else {
             console.log("Not entire form is filled");
         }
@@ -128,7 +143,7 @@ function UpdateUserInfo() {
     return (
         <div>
             <div className="updateUserContainer">
-                <h1>Update User Details</h1>
+                <h1>Update User Details: {user.username}</h1>
                 <form className="updateUserForm" onSubmit={handleSubmit}>
                     <div>
                         <p className="display-4 text-center">First Name:</p>
