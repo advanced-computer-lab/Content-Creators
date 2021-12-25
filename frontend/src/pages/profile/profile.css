@@ -10,9 +10,10 @@
     display: flex;
     align-items: center;
     position: absolute;
-    padding-left: 25%;
+    padding-left: 35%;
     padding-right: 25%;
     padding-top: 5%;
+    height: 100%;
 }
 
 .app-wrapper{
@@ -20,8 +21,8 @@
     background-image: url("/images/signupcomponent.jpg");
     background-position: center center;
     background-size: 120% 110%;
-    min-width: 70px;
-    min-height: 350px;
+    min-width: 100px;
+    min-height: 700px;
     /* padding: 100px; */
     /* box-sizing: border-box; */
     
@@ -98,3 +99,7 @@
     margin-top: 50px;
     margin-left: 150px;
   }
+
+.labels{
+    color:white;
+}

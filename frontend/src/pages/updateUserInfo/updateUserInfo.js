@@ -3,6 +3,8 @@ import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import "./updateUserInfo.css";
 import { UserContext } from "../../helpers/UserContext";
+import "./updateUserValidation";
+import updateUserValidation from "./updateUserValidation";
 
 function UpdateUserInfo() {
     const history = useHistory();
@@ -17,6 +19,7 @@ function UpdateUserInfo() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [errors, setErrors] = useState({});
     const [data, setData] = useState([]);
 
     const findProfile = async () => {
@@ -86,7 +89,10 @@ function UpdateUserInfo() {
             countryCode &&
             telephone &&
             address &&
-            email;
+            email; 
+            // || (password && confirmPassword);
+
+            
 
         if (nonEmpty) {
             console.log("User data Data fully submitted!!");
@@ -95,17 +101,26 @@ function UpdateUserInfo() {
                     username: user.username,
                     first_name: firstName,
                     last_name: lastName,
-                    address,
+                    address : address,
                     country_code: countryCode,
-                    telephone,
-                    email,
+                    telephone : telephone,
+                    email ,
                     passport_number: passportNumber,
                 },
             };
+            const data = { newUser: { ...user } };
+            const errors = updateUserValidation(USER);
+            setErrors(errors);
+            console.log("SIGN UP ERRORS ARE: ", errors);
+            console.log("SIGN UP USER IS: ", user);
             if (password == confirmPassword) {
                 newUser.user.password = password;
-                newUser.user.confirm_password = confirmPassword;
+                newUser.user.confirm_password = confirmPassword; 
+                if (Object.keys(errors).length == 0) {
+                    updateUserAxios(data);
+                }   
             }
+           
             const testingUser = {
                 user: {
                     username: "husseljo",
@@ -148,8 +163,8 @@ function UpdateUserInfo() {
                     <div>
                         <p className="display-4 text-center">First Name:</p>
                         <input
-                            id="first_name"
-                            name="first_name"
+                            id="firstName"
+                            name="firstName"
                             type="text"
                             placeholder="Enter name"
                             value={firstName}
@@ -157,9 +172,10 @@ function UpdateUserInfo() {
                         ></input>
                     </div>
                     <div>
-                        <label htmlFor="lastname">Last Name</label>
+                        <label htmlFor="lastName">Last Name</label>
                         <input
-                            id="last name"
+                            id="lastName"
+                            name="lastName"
                             type="text"
                             placeholder="Change last name"
                             value={lastName}
@@ -169,7 +185,8 @@ function UpdateUserInfo() {
                     <div>
                         <label htmlFor="passport">Passport Number</label>
                         <input
-                            id="passport"
+                            id="passportNumber"
+                            name="passportNumber"
                             type="text"
                             placeholder="Change passport"
                             value={passportNumber}
@@ -177,31 +194,36 @@ function UpdateUserInfo() {
                         ></input>
                     </div>
                     <div>
-                        <label htmlFor="passport">Country Code</label>
+                        <label htmlFor="countryCode">Country Code</label>
                         <input
-                            id="passport"
+                            id="countryCode"
                             type="text"
-                            placeholder="Change passport"
+                            name="countryCode"
+                            placeholder="Change country code"
                             value={countryCode}
                             onChange={(e) => setCountryCode(e.target.value)}
                         ></input>
+                        {errors.country_code && <p className="error">{errors.country_code}</p>}
                     </div>
                     <div>
-                        <label htmlFor="passport">Telephone</label>
+                        <label htmlFor="telephone">Telephone</label>
                         <input
-                            id="passport"
+                            id="telephone"
                             type="text"
-                            placeholder="Change passport"
+                            name="telephone"
+                            placeholder="Change telephone"
                             value={telephone}
                             onChange={(e) => setTelephone(e.target.value)}
                         ></input>
+                        {errors.telephone && <p className="error">{errors.telephone}</p>}
                     </div>
                     <div>
-                        <label htmlFor="passport">Address</label>
+                        <label htmlFor="address">Address</label>
                         <input
-                            id="passport"
+                            id="address"
                             type="text"
-                            placeholder="Change passport"
+                            name="address"
+                            placeholder="Change address"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                         ></input>
@@ -211,31 +233,38 @@ function UpdateUserInfo() {
                         <input
                             id="email"
                             type="text"
+                            name="email"
                             placeholder="Enter email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         ></input>
+                        {errors.email && <p className="error">{errors.email}</p>}
                     </div>
                     <div>
                         <label htmlFor="password">New Password</label>
                         <input
                             id="password"
                             type="password"
+                            name="password"
                             placeholder="Change password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         ></input>
+                        {errors.password && <p className="error">{errors.password}</p>}
                     </div>
                     <div>
                         <label htmlFor="confirmPassword">Confirm New Password</label>
                         <input
                             id="confirmPassword"
+                            name="confirmPassword"
                             type="password"
                             placeholder="Enter Confirm Password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         ></input>
+                        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
                     </div>
+                    <br />
                     <button
                         type="submit"
                         value="Cancel"
