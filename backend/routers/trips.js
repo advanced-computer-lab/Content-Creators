@@ -192,36 +192,36 @@ router.delete("/delete-trip/:trip_id", async (req, res) => {
                     "deleted second reservation in trip deletion:",
                     secondDeleted
                 );
-                const total_price_refund =
-                    firstDeleted.seat_numbers.length * firstDeleted.total_price +
-                    secondDeleted.seat_numbers.length * secondDeleted.total_price;
+                // const total_price_refund =
+                //     firstDeleted.seat_numbers.length * firstDeleted.total_price +
+                //     secondDeleted.seat_numbers.length * secondDeleted.total_price;
 
                 await Trip.deleteOne({ _id: trip_id });
                 console.log(`deleting trip:${trip_id} is successful`);
 
-                var transporter = nodemailer.createTransport({
-                    service: "outlook",
-                    auth: {
-                        user: "ibnfirnas_acl@outlook.com",
-                        pass: "firnas123",
-                    },
-                });
-                const user = users.findOne({ username: username });
-                const usermail = user.email;
-                var mailOptions = {
-                    from: "ibnfirnas_acl@outlook.com",
-                    to: usermail,
-                    subject: "Reservation Cancel Notice ",
-                    text:
-                        "Your reservation has been canceled! total price refund of " +
-                        total_price_refund,
-                };
+                // var transporter = nodemailer.createTransport({
+                //     service: "outlook",
+                //     auth: {
+                //         user: "ibnfirnas_acl@outlook.com",
+                //         pass: "firnas123",
+                //     },
+                // });
+                // const user = users.findOne({ username: username });
+                // const usermail = user.email;
+                // var mailOptions = {
+                //     from: "ibnfirnas_acl@outlook.com",
+                //     to: usermail,
+                //     subject: "Reservation Cancel Notice ",
+                //     text:
+                //         "Your reservation has been canceled! total price refund of " +
+                //         total_price_refund,
+                // };
 
-                transporter.sendMail(mailOptions, (error, info) => {
-                    error
-                        ? console.log(error)
-                        : console.log("Email sent: " + info.response);
-                });
+                // transporter.sendMail(mailOptions, (error, info) => {
+                //     error
+                //         ? console.log(error)
+                //         : console.log("Email sent: " + info.response);
+                // });
             }
         }
 
