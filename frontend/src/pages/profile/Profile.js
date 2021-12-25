@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from "react";
-import "../../pages/signUp/signUpForm.css";
+import "../profile/profile.css"
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -67,32 +67,32 @@ function Profile() {
                         </div>
                         <form className="signUpform">
                             <div className="username">
-                                <label className="label">Username: {username}</label>
+                                <label className="label"><p className="labels">Username:</p> {username}</label>
                             </div>
                             {/* <div className="password"> */}
                             {/*     <label className="label">Password: {password}</label> */}
                             {/* </div> */}
                             <div className="firstName">
-                                <label className="label">First Name: {firstName}</label>
+                                <label className="label"><p className="labels">First Name:</p> {firstName}</label>
                             </div>
                             <div className="lastName">
-                                <label className="label">Last Name: {lastName}</label>
+                                <label className="label"><p className="labels">Last Name:</p> {lastName}</label>
                             </div>
                             <div className="address">
-                                <label className="label">Address: {address}</label>
+                                <label className="label"><p className="labels">Address:</p> {address}</label>
                             </div>
                             <div className="countryCode">
-                                <label className="label">Country Code: {countryCode}</label>
+                                <label className="label"><p className="labels">Country Code:</p> {countryCode}</label>
                             </div>
                             <div className="telephone">
-                                <label className="label">Telephone: {telephone}</label>
+                                <label className="label"><p className="labels">Telephone:</p> {telephone}</label>
                             </div>
                             <div className="email">
-                                <label className="label">Email: {email}</label>
+                                <label className="label"><p className="labels">Email:</p> {email}</label>
                             </div>
                             <div className="passportNumber">
                                 <label className="label">
-                                    Passport Number: {passportNumber}
+                                <p className="labels">Passport Number:</p> {passportNumber}
                                 </label>
                             </div>
                             <div>

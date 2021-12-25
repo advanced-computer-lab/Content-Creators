@@ -58,3 +58,7 @@
     padding-left: 700px;
     padding-right: 650px;
   }
+
+  .error{
+    color: red;
+}

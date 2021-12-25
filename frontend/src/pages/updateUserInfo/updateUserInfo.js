@@ -3,6 +3,8 @@ import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import "./updateUserInfo.css";
 import { UserContext } from "../../helpers/UserContext";
+import "./updateUserValidation";
+import updateUserValidation from "./updateUserValidation";
 
 function UpdateUserInfo() {
     const history = useHistory();
@@ -17,6 +19,7 @@ function UpdateUserInfo() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [errors, setErrors] = useState({});
     const [data, setData] = useState([]);
 
     const findProfile = async () => {
@@ -88,6 +91,8 @@ function UpdateUserInfo() {
             address &&
             email;
 
+            
+
         if (nonEmpty) {
             console.log("User data Data fully submitted!!");
             let newUser = {
@@ -102,9 +107,17 @@ function UpdateUserInfo() {
                     passport_number: passportNumber,
                 },
             };
+            const errors = updateUserValidation(user);
+            setErrors(errors);
+            const data = { newUser: { ...user } };
+            console.log("SIGN UP ERRORS ARE: ", errors);
+            console.log("SIGN UP USER IS: ", user);
             if (password == confirmPassword) {
                 newUser.user.password = password;
-                newUser.user.confirm_password = confirmPassword;
+                newUser.user.confirm_password = confirmPassword; 
+                if (Object.keys(errors).length == 0) {
+                    updateUserAxios(data);
+                }   
             }
             const testingUser = {
                 user: {
@@ -155,6 +168,7 @@ function UpdateUserInfo() {
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         ></input>
+                        {errors.first_name && <p className="error">{errors.first_name}</p>}
                     </div>
                     <div>
                         <label htmlFor="lastname">Last Name</label>
@@ -165,6 +179,7 @@ function UpdateUserInfo() {
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                         ></input>
+                        {errors.last_name && <p className="error">{errors.last_name}</p>}
                     </div>
                     <div>
                         <label htmlFor="passport">Passport Number</label>
@@ -175,6 +190,7 @@ function UpdateUserInfo() {
                             value={passportNumber}
                             onChange={(e) => setPassportNumber(e.target.value)}
                         ></input>
+                        {errors.passport_number && <p className="error">{errors.passport_number}</p>}
                     </div>
                     <div>
                         <label htmlFor="passport">Country Code</label>
@@ -185,6 +201,7 @@ function UpdateUserInfo() {
                             value={countryCode}
                             onChange={(e) => setCountryCode(e.target.value)}
                         ></input>
+                        {errors.country_code && <p className="error">{errors.country_code}</p>}
                     </div>
                     <div>
                         <label htmlFor="passport">Telephone</label>
@@ -195,6 +212,7 @@ function UpdateUserInfo() {
                             value={telephone}
                             onChange={(e) => setTelephone(e.target.value)}
                         ></input>
+                        {errors.telephone && <p className="error">{errors.telephone}</p>}
                     </div>
                     <div>
                         <label htmlFor="passport">Address</label>
@@ -205,6 +223,7 @@ function UpdateUserInfo() {
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                         ></input>
+                        {errors.address && <p className="error">{errors.address}</p>}
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
@@ -215,6 +234,7 @@ function UpdateUserInfo() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         ></input>
+                        {errors.email && <p className="error">{errors.email}</p>}
                     </div>
                     <div>
                         <label htmlFor="password">New Password</label>
@@ -225,6 +245,7 @@ function UpdateUserInfo() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         ></input>
+                        {errors.password && <p className="error">{errors.password}</p>}
                     </div>
                     <div>
                         <label htmlFor="confirmPassword">Confirm New Password</label>
@@ -235,6 +256,7 @@ function UpdateUserInfo() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         ></input>
+                        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
                     </div>
                     <button
                         type="submit"
