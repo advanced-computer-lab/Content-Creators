@@ -10,6 +10,8 @@ const users = require("./routers/users");
 const reservations = require("./routers/reservations");
 const trips = require("./routers/trips");
 const auth = require("./middleware/auth");
+const loggedInUser = require("./routers/loggedinUser");
+
 
 //add routers here
 
@@ -19,6 +21,7 @@ app.use(cors());
 
 app.use("/users", users);
 app.use(auth);
+app.use("/loggedInUser",loggedInUser)
 app.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });

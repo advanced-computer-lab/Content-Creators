@@ -20,6 +20,7 @@ import SeatPickerChange from "./pages/seatPickerChange/SeatPickerChange";
 import { UserContext, UserContextProvider } from "./helpers/UserContext";
 import { useState } from "react";
 import UpdateUserInfo from "./pages/updateUserInfo/updateUserInfo";
+import Profile from "./pages/profile/Profile";
 
 function App() {
     const [authenticated, setAuthenticated] = useState(false);
@@ -44,7 +45,8 @@ function App() {
                         <Route path="/change-seats" component={ChangeSeats} />
                         <Route path="/change-reservation" component={ChangeReservation} />
                         <Route path="/seat-picker-change" component={SeatPickerChange} />
-                        <Route path="/edit-info" component={UpdateUserInfo} />
+                        <Route path="/edit-profile" component={UpdateUserInfo} />
+                        <Route path="/profile" component={Profile} />
                     </Switch>
                 </Router>
             </UserContextProvider>

@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    /* background: linear-gradient(90deg, #e8be85 0%, rgb(26, 23, 23) 100%); */
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5%;
+}
+
+.app-wrapper{
+
+    background-image: url("/images/signupcomponent.jpg");
+    background-position: center center;
+    background-size: 120% 110%;
+    min-width: 70px;
+    min-height: 350px;
+    /* padding: 100px; */
+    /* box-sizing: border-box; */
+    
+    border-radius: 10px;
+    
+}
+
+.signUpform{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  
+}
+
+.title{
+    color: black;
+    text-align: center;
+    margin: 80px 0px 40px 0px;
+    /* position: absolute; */
+}
+
+.username,
+.firstName,
+.lastName,
+.address,
+.countryCode,
+.telephone,
+.passportNumber,
+.email,
+.password{
+    margin: 30px 100px 20px 50px;
+    color: black;
+    font-size: 16px;
+}
+
+.password{
+    margin-bottom: 40px;
+}
+
+.input{
+    height: 32px;
+    width: 10px;
+    font-size: 20px;
+    outline: none;
+    border-top-style: none;
+    border-bottom-style: 2px solid black;
+    border-left-style: none;
+    border-right-style: none;
+    margin-bottom: 5px;
+}
+
+.error{
+    color: red;
+}
+/* Set a style for all buttons */
+.Signupbutton {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    margin: middle;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 50px;
+    margin-left: 150px;
+  }
+  .Signupbutton:hover {
+    background-color: #916632a1;
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: middle;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 50px;
+    margin-left: 150px;
+  }

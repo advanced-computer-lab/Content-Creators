@@ -8,9 +8,17 @@ require("dotenv").config();
 // console.log("PROCESS IS: ", process);
 // console.log("PROCESS.ENV IS: ", process.env);
 //app.use(verifyToken()); will be read first in the middleware before going to any step here hense authentication.
-router.get("/getuser", (req, res) => {
-    const username = req.body.username;
-    const found = User.findOne({ username: username });
+router.get("/get-user", (req, res) => {
+    const token =
+    req.headers["authorization"] ||
+    req.body.access_token ||
+    req.query.access_token;
+    const { username } = JSON.parse(atob(token.split(".")[1]));
+    let filter = {};
+    if (username != "admin") {
+        filter = { username };
+    }
+    const found = User.findOne(filter);
     res.status(201).send(found);
 });
 router.post("/sign-up", async (req, res) => {

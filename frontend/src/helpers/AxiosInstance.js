@@ -41,9 +41,9 @@ axios.interceptors.response.use(
         console.log("error STATUS is:", error.response.status);
         const url = window.location.href.split("/").at(-1);
         console.log("window.location.href", url);
-        if (url != "login") {
-            window.location.href = "/login";
-        }
+        // if (url != "login" ) {
+        //     window.location.href = "/login";
+        // }
         // window.location.href = "/login";
         // // block to handle error case
         // const originalRequest = error.config;
