@@ -19,13 +19,14 @@ export default function Booking() {
 
     if (!data) {
         //generally we will get it from history this is just mock data in case url entered directly
+        const today = new Date();
         const allInfoTemp = {
             airportFrom: "MUC",
             airportTo: "CAI",
-            departureDate: "2021-12-14",
-            returnDate: "2021-12-30",
-            childrenNumber: 3,
-            adultsNumber: 2,
+            departureDate: today,
+            returnDate: today.fp_incr(7),
+            childrenNumber: 0,
+            adultsNumber: 1,
             cabinClass: "economy",
         };
         setData(allInfoTemp);
@@ -55,6 +56,7 @@ export default function Booking() {
         history.push("/seat-picker");
     };
 
+    console.log("DATA IN FILTER:", data);
     return (
         <div>
             <BookingFilter data={data} setData={setData} />

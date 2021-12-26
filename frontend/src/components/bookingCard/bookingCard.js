@@ -13,10 +13,21 @@ export default function BookingCard() {
     const [airportFrom, setAirportFrom] = useState("MUC");
     const [airportTo, setAirportTo] = useState("CAI");
     const [departureDate, setDepartureDate] = useState(new Date());
-    const [returnDate, setReturnDate] = useState(new Date().fp_incr(14) );
+    const [returnDate, setReturnDate] = useState(new Date().fp_incr(7));
     const [childrenNumber, setChildrenNumber] = useState(0);
     const [adultsNumber, setAdultsNumber] = useState(1);
     const [cabinClass, setCabinClass] = useState("economy");
+
+    const BookingObject = {
+        airportFrom,
+        airportTo,
+        departureDate,
+        returnDate,
+        childrenNumber,
+        adultsNumber,
+        cabinClass,
+    };
+    console.log("BOOKINGOBJECT", BookingObject);
 
     const currentDate = new Date();
     const [minDate, setMinDate] = useState(currentDate);
@@ -26,7 +37,6 @@ export default function BookingCard() {
             currentDate.getMonth() + 6,
             currentDate.getDate()
         )
-        
     );
 
     //when entire form is filled, add 'history.booking_details' to history object and
@@ -92,10 +102,12 @@ export default function BookingCard() {
                         className="form-control"
                         placeholder={departureDate}
                         value={departureDate}
-
-                        onChange={(e) =>
-                            setDepartureDate(new Date(e).toISOString().slice(0, 10))
-                        }
+                        onChange={(e) => {
+                            const bool = e[0].getTime() >= new Date();
+                            if (bool) {
+                                setDepartureDate(new Date(e));
+                            }
+                        }}
                         required
                     />
                 </div>
@@ -103,21 +115,23 @@ export default function BookingCard() {
                     <Flatpickr
                         data-disable-time
                         name="returnDate"
-                        minDate={departureDate}
+                        minDate={departureDate + 1}
                         maxDate={maxDate}
                         className="form-control1"
                         placeholder={returnDate}
                         value={returnDate}
-                        onChange={(e) =>
-                            setReturnDate(new Date(e).toISOString().slice(0, 10))
-                        }
-
+                        onChange={(e) => {
+                            const bool = e[0].getTime() > departureDate.getTime();
+                            if (bool) {
+                                setReturnDate(new Date(e[0]));
+                            }
+                        }}
                         required
                     />
                 </div>
-                        {/* <div></div>
+                {/* <div></div>
                         <div></div> */}
-        
+
                 <div className="form-control1">
                     <input
                         type="number"

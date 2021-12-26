@@ -26,14 +26,33 @@ export default function BookingFilter({ data, setData }) {
             returnDate,
             childrenNumber,
             adultsNumber,
-            cabinClass,
+            cabinClass: "economy",
         };
+        if (
+            cabinClass == "business" ||
+            cabinClass == "first" ||
+            cabinClass == "economy"
+        ) {
+            data.cabinClass = cabinClass;
+        } else {
+            setCabinClass("economy");
+        }
         setData(data);
 
         console.log(`submitted filter form`);
         console.log(`data is:`);
         console.log(data);
     };
+    const filterDATA = {
+        returnDate,
+        departureDate,
+        airportFrom,
+        airportTo,
+        childrenNumber,
+        adultsNumber,
+        cabinClass,
+    };
+    console.log("filterDATA", filterDATA);
 
     return (
         <>
@@ -98,9 +117,12 @@ export default function BookingFilter({ data, setData }) {
                                 data-disable-time
                                 placeholder="all"
                                 value={departureDate}
-                                onChange={(e) =>
-                                    setDepartureDate(new Date(e).toISOString().slice(0, 10))
-                                }
+                                onChange={(e) => {
+                                    const bool = e[0].getTime() >= new Date();
+                                    if (bool) {
+                                        setDepartureDate(new Date(e[0]));
+                                    }
+                                }}
                             />
                         </div>
                         <div class="input-field second-wrap">
@@ -119,9 +141,12 @@ export default function BookingFilter({ data, setData }) {
                                 data-disable-time
                                 placeholder="all"
                                 value={returnDate}
-                                onChange={(e) =>
-                                    setReturnDate(new Date(e).toISOString().slice(0, 10))
-                                }
+                                onChange={(e) => {
+                                    const bool = e[0].getTime() > departureDate.getTime();
+                                    if (bool) {
+                                        setReturnDate(new Date(e[0]));
+                                    }
+                                }}
                             />
                         </div>
 
