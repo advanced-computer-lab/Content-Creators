@@ -77,7 +77,12 @@ export default function BookingFilter({ data, setData }) {
                                 name="airport_from"
                                 placeholder="all"
                                 value={airportFrom}
-                                onChange={(e) => setAirportFrom(e.target.value)}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value.length <= 3) {
+                                        setAirportFrom(value.toUpperCase());
+                                    }
+                                }}
                             />
                         </div>
                         <div class="input-field second-wrap">
@@ -98,7 +103,12 @@ export default function BookingFilter({ data, setData }) {
                                 name="airport_to"
                                 placeholder="all"
                                 value={airportTo}
-                                onChange={(e) => setAirportTo(e.target.value)}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value.length <= 3) {
+                                        setAirportTo(value.toUpperCase());
+                                    }
+                                }}
                             />
                         </div>
                         <div class="input-field second-wrap">
@@ -155,7 +165,12 @@ export default function BookingFilter({ data, setData }) {
                             <input
                                 type="number"
                                 value={adultsNumber}
-                                onChange={(e) => setAdultsNumber(parseInt(e.target.value))}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value > 0) {
+                                        setAdultsNumber(parseInt(value));
+                                    }
+                                }}
                                 name="adults_number"
                                 min="09:00"
                                 max="18:00"
@@ -167,7 +182,12 @@ export default function BookingFilter({ data, setData }) {
                             <input
                                 type="number"
                                 value={childrenNumber}
-                                onChange={(e) => setChildrenNumber(parseInt(e.target.value))}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value >= 0) {
+                                        setChildrenNumber(parseInt(value));
+                                    }
+                                }}
                                 name="children_number"
                                 min="09:00"
                                 max="18:00"
@@ -179,7 +199,16 @@ export default function BookingFilter({ data, setData }) {
                             <input
                                 type="text"
                                 value={cabinClass}
-                                onChange={(e) => setCabinClass(e.target.value)}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value == "b") {
+                                        setCabinClass("business");
+                                    } else if (value == "f") {
+                                        setCabinClass("first");
+                                    } else {
+                                        setCabinClass("economy");
+                                    }
+                                }}
                                 name="cabin_class"
                                 min="09:00"
                                 max="18:00"

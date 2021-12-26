@@ -44,6 +44,11 @@ export default function BookingFlight({
             console.log(err);
         }
     };
+
+    useEffect(() => {
+        getAllFlights();
+    }, [data]);
+
     useEffect(() => {
         getAllFlights();
     }, []);

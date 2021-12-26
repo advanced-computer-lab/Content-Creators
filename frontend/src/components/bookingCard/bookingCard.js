@@ -79,7 +79,12 @@ export default function BookingCard() {
                         name="from"
                         required
                         value={airportFrom}
-                        onChange={(e) => setAirportFrom(e.target.value)}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (value.length <= 3) {
+                                setAirportFrom(value.toUpperCase());
+                            }
+                        }}
                     />
                 </div>
                 <div className="form-control1">
@@ -89,7 +94,12 @@ export default function BookingCard() {
                         name="to"
                         required
                         value={airportTo}
-                        onChange={(e) => setAirportTo(e.target.value)}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (value.length <= 3) {
+                                setAirportTo(value.toUpperCase());
+                            }
+                        }}
                     />
                 </div>
 
@@ -138,7 +148,12 @@ export default function BookingCard() {
                         id="no_of_adults"
                         name="adults"
                         value={adultsNumber}
-                        onChange={(e) => setAdultsNumber(parseInt(e.target.value))}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (value > 0) {
+                                setAdultsNumber(parseInt(value));
+                            }
+                        }}
                     />
                 </div>
                 <div className="form-control1">
@@ -147,7 +162,12 @@ export default function BookingCard() {
                         id="no_of_children"
                         name="children"
                         value={childrenNumber}
-                        onChange={(e) => setChildrenNumber(parseInt(e.target.value))}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (value >= 0) {
+                                setChildrenNumber(parseInt(value));
+                            }
+                        }}
                     />
                 </div>
                 <select
