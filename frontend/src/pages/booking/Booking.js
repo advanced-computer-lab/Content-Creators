@@ -56,6 +56,10 @@ export default function Booking() {
         history.push("/seat-picker");
     };
 
+    useEffect(() => {
+        setDepartureChosen(false);
+    }, [data]);
+
     console.log("DATA IN FILTER:", data);
     return (
         <div>

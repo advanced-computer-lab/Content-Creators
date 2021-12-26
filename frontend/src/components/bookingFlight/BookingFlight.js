@@ -46,6 +46,7 @@ export default function BookingFlight({
     };
 
     useEffect(() => {
+        setChosen(false);
         getAllFlights();
     }, [data]);
 
